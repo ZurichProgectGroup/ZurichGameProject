@@ -1,8 +1,11 @@
 :root {
     --font-color: #FFF;
     --main: #FC54FF;
+    --main-rgb: 252, 84, 255;
     --focus: #4EBFFF;
+    --focus-rgb: 78, 191, 255;
     --link: #FEBEFF;
+    --link-rgb: 254, 190, 255;
     --warn: #FFC700;
     --bg-color: #1B172E;
 }
