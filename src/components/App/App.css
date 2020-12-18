@@ -6,12 +6,12 @@
     align-content: center;
     justify-content: center;
 
-h1 {
-    text-align: center;
-    color: var(--main);
-}
+    h1 {
+        text-align: center;
+        color: var(--main);
+    }
 
-img {
-    width: 200px;
-}
+    img {
+        width: 200px;
+    }
 }
