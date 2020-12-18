@@ -4,6 +4,6 @@ import App from 'Components/App';
 import './styles/index.css';
 
 ReactDOM.render(
-  <App />,
-  document.querySelector('.app'),
+    <App />,
+    document.querySelector('.app'),
 );

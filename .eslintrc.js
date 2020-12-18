@@ -6,5 +6,8 @@ module.exports = {
     },
     rules: {
         "no-param-reassign": "off",
+        "react/jsx-indent": ["error", 4],
+        "indent": ["error", 4],
+        "jsx-a11y/label-has-associated-control": "off",
     }
 };
