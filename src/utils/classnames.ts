@@ -15,12 +15,9 @@ function classNames(...args: Types[]): string {
         }
 
         if (typeof (arg) === 'object') {
-            return `${res} ${Object.entries(arg).reduce((carry, [key, value]) => {
-                if (value) {
-                    carry += ` ${key}`;
-                }
-                return carry;
-            }, '').trim()}`;
+            return `${res} ${Object
+                .entries(arg)
+                .reduce((carry, [key, value]) => (value ? `${carry} ${key}` : carry), '').trim()}`;
         }
 
         return `${res} ${arg}`;
