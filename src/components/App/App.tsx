@@ -1,12 +1,18 @@
 import React from 'react';
-import './App.css';
-import logo from 'Images/logo.png';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from 'react-router-dom';
+import Home from 'Pages/Home';
 
 const App = () => (
-    <div className="wrapper">
-        <h1>Hello World</h1>
-        <img src={logo} alt="logo" />
-    </div>
+    <Router>
+        <Switch>
+            <Route exact path="/" component={Home} />
+            <Route component={() => <div>404 placeholder</div>} />
+        </Switch>
+    </Router>
 );
 
 export default App;
