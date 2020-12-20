@@ -23,8 +23,8 @@ module.exports = (env, opt) => {
             alias: {
                 Images: path.resolve(__dirname, 'src/images/'),
                 Components: path.resolve(__dirname, 'src/components/'),
-                Utils: path.resolve(__dirname, 'src/utils/')
-            }
+                Utils: path.resolve(__dirname, 'src/utils/'),
+            },
         },
         module: {
             rules: [
@@ -38,8 +38,8 @@ module.exports = (env, opt) => {
                     use: [
                         MiniCssExtractPlugin.loader,
                         'css-loader',
-                        'postcss-loader'
-                    ]
+                        'postcss-loader',
+                    ],
                 },
                 {
                     test: /\.(png|jpe?g|gif)$/i,
@@ -49,7 +49,7 @@ module.exports = (env, opt) => {
                         },
                     ],
                 },
-            ]
+            ],
         },
         devServer: {
             contentBase: path.join(__dirname, 'dist'),
@@ -71,8 +71,8 @@ module.exports = (env, opt) => {
             minimize: isProduction,
             minimizer: [
                 new CssnanoPlugin(),
-                new TerserPlugin()
-            ]
-        }
+                new TerserPlugin(),
+            ],
+        },
     };
 };
