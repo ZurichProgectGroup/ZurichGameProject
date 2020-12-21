@@ -23,7 +23,9 @@ module.exports = (env, opt) => {
             alias: {
                 Images: path.resolve(__dirname, 'src/images/'),
                 Components: path.resolve(__dirname, 'src/components/'),
-                Utils: path.resolve(__dirname, 'src/utils/')
+                Configs: path.resolve(__dirname, 'src/configs/')
+                Utils: path.resolve(__dirname, 'src/utils/'),
+                Services: path.resolve(__dirname, 'src/services/')
             }
         },
         module: {
