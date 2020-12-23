@@ -1,5 +1,6 @@
 import React from 'react';
 import './LinkButton.css';
+import { Link } from 'react-router-dom';
 import { Props } from 'components/LinkButton/types';
 
 const LinkButton: Props = (props) => {
@@ -9,9 +10,9 @@ const LinkButton: Props = (props) => {
     } = props;
 
     return (
-        <button type="button" className="link-button" {...linkProps}>
+        <Link className="link-button" {...linkProps}>
             {children}
-        </button>
+        </Link>
     );
 };
 

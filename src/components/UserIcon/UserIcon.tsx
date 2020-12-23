@@ -10,8 +10,7 @@ const UserIcon: Props = (props) => {
         url,
         hasChange,
         onChange,
-        small = false,
-        medium = false,
+        size,
     } = props;
 
     const [avatar, setAvatar] = useState(url);
@@ -31,8 +30,8 @@ const UserIcon: Props = (props) => {
 
     return (
         <div className={cn('user-icon', {
-            'user-icon_small': small,
-            'user-icon_medium': medium,
+            'user-icon_small': size === 'small',
+            'user-icon_medium': size === 'medium',
         })}
         >
             <span className="user-icon__letter">{name[0]}</span>

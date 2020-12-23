@@ -4,9 +4,8 @@ export type OwnProps = {
     url?: string,
     name: string,
     hasChange?: boolean,
-    small?: boolean,
-    medium?: boolean,
-    onChange?: (id: string) => {}
+    size?: 'small' | 'medium',
+    onChange?: (id: string) => unknown
 };
 
 export type Props = FC<OwnProps>;

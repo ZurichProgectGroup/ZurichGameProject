@@ -1,21 +1,18 @@
 import React from 'react';
-import './App.css';
-import Input from 'Components/Input';
-import Button from 'Components/Button';
-import LinkButton from 'Components/LinkButton';
-import UserIcon from 'Components/UserIcon';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from 'react-router-dom';
+import Home from 'Pages/Home';
 
 const App = () => (
-    <div className="wrapper">
-        <Input labelText="username" />
-        <Input labelText="Label" description="Description" />
-        <Input labelText="password" errorText="wrong password" />
-        <Button>Sing in</Button>
-        <LinkButton>I DON’T HAVE AN ACCOUNT</LinkButton>
-        <UserIcon name="igor" small url="https://picsum.photos/200" />
-        <UserIcon name="igor" hasChange medium url="https://picsum.photos/200" />
-        <UserIcon name="igor" url="https://picsum.photos/200" hasChange />
-    </div>
+    <Router>
+        <Switch>
+            <Route exact path="/" component={Home} />
+            <Route component={() => <div>404 placeholder</div>} />
+        </Switch>
+    </Router>
 );
 
 export default App;
