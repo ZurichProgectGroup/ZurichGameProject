@@ -1,8 +1,8 @@
 // import {ISongCtx} from "./ISongConfig"
 // пример заведения карты песни, не соотносится ни с какой реальной композицией
 // import song from 'Audio/levelOneSong.mp3';
-export const levelOneSongConfig = {
-  path: /* song */'TODO',
+export default levelOneSongConfig = {
+  path: /* song */ 'TODO',
   notes: [
     {
       keyId: 0,

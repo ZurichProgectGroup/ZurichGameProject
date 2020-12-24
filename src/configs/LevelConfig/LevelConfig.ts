@@ -1,7 +1,7 @@
 import { levelOneSongConfig } from 'Configs/SongConfig/LevelOneSongConfig';
 import { levelOneBoardConfig } from 'Configs/BoardConfig/LevelOneBoardConfig';
 
-export const getConfigForLevel = (level:number) => {
+export const getConfigForLevel = (level: number) => {
   switch (level) {
     // TODO add levels
     default:

@@ -9,10 +9,6 @@ export default class GameStart extends PureComponent {
   render() {
     const { onComplete } = this.props;
 
-    return (
-          <button onClick={onComplete}>
-            Click me to start
-          </button>
-    );
+    return <button onClick={onComplete}>Click me to start</button>;
   }
 }

@@ -5,5 +5,5 @@ export interface ILevelCtx {
   song: ISongCtx;
   board: IBoardCtx;
   minimumPoints: number;
-  speed:number;
+  speed: number;
 }

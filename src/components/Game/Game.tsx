@@ -11,28 +11,27 @@ enum GameState {
 
 export default class Game extends PureComponent {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       gameState: GameState.start,
     };
   }
 
-
   onStart = () => {
-    this.setState({ gameState: GameState.board });
+      this.setState({ gameState: GameState.board });
   };
 
   onComplete = () => {
-    this.setState({ gameState: GameState.complete });
+      this.setState({ gameState: GameState.complete });
   };
 
   onError = () => {
-    this.setState({ gameState: GameState.error });
+      this.setState({ gameState: GameState.error });
   };
 
   render() {
-    const { gameState } = this.state;
-    switch (gameState) {
+      const { gameState } = this.state;
+      switch (gameState) {
       case GameState.start:
         // заглушка
         return (<GameStart onComplete={this.onStart} />);
@@ -44,6 +43,6 @@ export default class Game extends PureComponent {
       case GameState.error:
         // заглушка
         return (<GameStart onComplete={this.onStart} />);
-    }
+      }
   }
 }
