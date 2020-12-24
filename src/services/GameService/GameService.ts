@@ -14,25 +14,25 @@ class GameService {
 
   private levelConfig: ILevelCtx;
 
-  private then: any;
+  private then: number;
 
-  private canvas: any;
+  private canvas: HTMLCanvasElement;
 
   private entities: IGameEntitity[];
 
   private interval: number;
 
-  private correct: any;
+  private correct: number;
 
-  private errors: any;
+  private errors: number;
 
-  private missed: any;
+  private missed: number;
 
-  private requestId: any;
+  private requestId: number;
 
   private board: IBoardCtx;
 
-  private _start: any;
+  private _start: number;//todo - убрать!привязать к аудио
 
   private keyListener;
 
@@ -90,7 +90,7 @@ class GameService {
     }
   }
 
-  updateEntities(milisecondsSinceStart) {
+  updateEntities(milisecondsSinceStart):IGameEntitity[] {
     return this.entities.filter((entity) => {
       const difference = entity.time - milisecondsSinceStart / 1000;
       if (difference > 0 && difference < this.levelConfig.speed) {
