@@ -1,1 +1,1 @@
-export { default } from './GameService';
+export { gameService } from './GameService';

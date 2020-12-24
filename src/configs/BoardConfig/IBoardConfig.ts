@@ -1,5 +1,7 @@
 export interface IKeyCtx {
-  id: number,
-  key: number,
-  color: string
+  id:number;
+  keyCode: number;
+  color: string;
 }
+
+export type IBoardCtx  = IKeyCtx[];
