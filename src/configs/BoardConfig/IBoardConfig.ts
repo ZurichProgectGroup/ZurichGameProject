@@ -1,5 +1,5 @@
 export interface IKeyCtx {
-  id:number;
+  id: number;
   keyCode: number;
   color: string;
 }

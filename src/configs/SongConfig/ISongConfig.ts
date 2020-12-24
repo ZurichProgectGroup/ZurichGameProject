@@ -5,5 +5,5 @@ export interface INoteCtx {
 
 export interface ISongCtx {
   path: string;
-  notes:INoteCtx[];
+  notes: INoteCtx[];
 }
