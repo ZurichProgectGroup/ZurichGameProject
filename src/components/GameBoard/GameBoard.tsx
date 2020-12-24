@@ -1,6 +1,6 @@
 import React, {PureComponent, createRef} from 'react';
 import './GameBoard.css';
-import {gameService} from 'Services/GameService'
+import {gameService} from "../../services/GameService";
 
 export default class GameBoard extends PureComponent {
   private _canvas = createRef<HTMLCanvasElement>();

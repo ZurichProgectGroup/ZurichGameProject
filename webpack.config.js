@@ -21,6 +21,7 @@ module.exports = (env, opt) => {
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             alias: {
+                Audio: path.resolve(__dirname, 'src/audio/'),
                 Images: path.resolve(__dirname, 'src/images/'),
                 Components: path.resolve(__dirname, 'src/components/'),
                 Utils: path.resolve(__dirname, 'src/utils/'),
@@ -47,7 +48,7 @@ module.exports = (env, opt) => {
                     ],
                 },
                 {
-                    test: /\.(png|jpe?g|gif|svg)$/i,
+                    test: /\.(png|jpe?g|gif|svg|mp3)$/i,
                     use: [
                         {
                             loader: 'file-loader',
