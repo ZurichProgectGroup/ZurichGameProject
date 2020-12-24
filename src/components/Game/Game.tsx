@@ -10,9 +10,13 @@ enum GameState {
 }
 
 export default class Game extends PureComponent {
-  state = {
-    gameState: GameState.start,
-  };
+  constructor(props) {
+    super(props)
+    this.state = {
+      gameState: GameState.start,
+    };
+  }
+
 
   onStart = () => {
     this.setState({ gameState: GameState.board });
