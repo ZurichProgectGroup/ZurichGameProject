@@ -4,4 +4,4 @@ export interface IKeyCtx {
   color: string;
 }
 
-export type IBoardCtx  = IKeyCtx[];
+export type IBoardCtx = IKeyCtx[];

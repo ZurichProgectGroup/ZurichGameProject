@@ -1,5 +1,5 @@
-import {ISongCtx} from "Configs/SongConfig/ISongConfig"
-import {IBoardCtx} from "Configs/BoardConfig/IBoardConfig"
+import { ISongCtx } from 'Configs/SongConfig/ISongConfig';
+import { IBoardCtx } from 'Configs/BoardConfig/IBoardConfig';
 
 export interface ILevelCtx {
   song: ISongCtx;
