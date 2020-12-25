@@ -10,7 +10,7 @@
     height: var(--size);
     border-radius: 50%;
     text-align: center;
-    background: var(--bg-color);
+    background: rgb(var(--bg-color));
 
     &::before {
         --position: calc(0px - var(--offset));
