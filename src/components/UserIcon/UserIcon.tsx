@@ -11,6 +11,7 @@ const UserIcon: Props = (props) => {
         hasChange,
         onChange,
         size,
+        hideBorder,
     } = props;
 
     const [avatar, setAvatar] = useState(url);
@@ -32,6 +33,7 @@ const UserIcon: Props = (props) => {
         <div className={cn('user-icon', {
             'user-icon_small': size === 'small',
             'user-icon_medium': size === 'medium',
+            'user-icon_no-border': Boolean(hideBorder),
         })}
         >
             <span className="user-icon__letter">{name[0]}</span>

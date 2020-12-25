@@ -5,6 +5,7 @@ export type OwnProps = {
     name: string,
     hasChange?: boolean,
     size?: 'small' | 'medium',
+    hideBorder?: boolean,
     onChange?: (id: string) => unknown
 };
 

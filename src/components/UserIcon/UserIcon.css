@@ -11,6 +11,7 @@
     border-radius: 50%;
     text-align: center;
     background: var(--bg-color);
+    margin: var(--offset);
 
     &::before {
         --position: calc(0px - var(--offset));
@@ -56,6 +57,12 @@
         .user-icon__image-upload::after {
             width: 32px;
             height: 32px;
+        }
+    }
+
+    &_no-border {
+        &::before {
+            background: transparent;
         }
     }
 }
