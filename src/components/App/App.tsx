@@ -5,12 +5,13 @@ import {
     Route,
 } from 'react-router-dom';
 import Home from 'Pages/Home';
+import ErrorPage from 'Pages/ErrorPage';
 
 const App = () => (
     <Router>
         <Switch>
             <Route exact path="/" component={Home} />
-            <Route component={() => <div>404 placeholder</div>} />
+            <Route component={ErrorPage} />
         </Switch>
     </Router>
 );
