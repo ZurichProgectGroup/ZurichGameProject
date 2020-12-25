@@ -1,8 +1,8 @@
 .link-button {
     font-size: 14px;
-    color: var(--link);
+    color: rgb(var(--link));
     text-transform: uppercase;
-    text-shadow: 0 3px 10px rgba(var(--link-rgb), 0.4);
+    text-shadow: 0 3px 10px rgba(var(--link), 0.4);
     text-decoration: underline;
     background: transparent;
 

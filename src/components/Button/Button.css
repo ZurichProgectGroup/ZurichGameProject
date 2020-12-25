@@ -2,21 +2,21 @@
     background: transparent;
     font-size: 16px;
     text-align: center;
-    border: 1px solid var(--main);
-    box-shadow: 0 5px 14px rgba(var(--main-rgb), 0.4), inset 0 -9px 24px 1px rgba(var(--main-rgb), 0.68);
+    border: 1px solid rgb(var(--main));
+    box-shadow: 0 5px 14px rgba(var(--main), 0.4), inset 0 -9px 24px 1px rgba(var(--main), 0.68);
     text-transform: uppercase;
     border-radius: 8px;
     padding: 14px;
     white-space: normal;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--font-color);
+    color: rgb(var(--font-color));
     transition: all 0.2s;
 
     &:focus,
     &:hover {
         outline: none;
-        border: 1px solid var(--focus);
-        box-shadow: 0 5px 14px rgba(var(--focus-rgb), 0.4), inset 0 -9px 24px 1px rgba(var(--focus-rgb), 0.68);
+        border: 1px solid rgb(var(--focus));
+        box-shadow: 0 5px 14px rgba(var(--focus), 0.4), inset 0 -9px 24px 1px rgba(var(--focus), 0.68);
     }
 }
