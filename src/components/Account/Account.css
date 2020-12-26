@@ -1,0 +1,56 @@
+.account_main {
+    justify-content: space-between;
+    display: flex;
+    width: 680px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account__alert {
+  left: 0;
+  top: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+}
+
+.account__alert_hidden {
+  visibility:hidden;
+}
+
+.account__widjet {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+}
+.account__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  width: 100%;
+}
+
+.account__fields {
+  width: 680px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-gap: 40px 80px;
+}
+
+.account__fields_hidden  {
+  visibility:hidden;
+  height: 0;
+}
+
+.account__password_link  {
+  width: 100%;
+}
+.account__save_button {
+  width:300px;
+}

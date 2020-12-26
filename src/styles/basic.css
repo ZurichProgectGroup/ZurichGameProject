@@ -26,4 +26,5 @@ a {
     width: 100%;
     flex-direction: row;
     overflow: hidden;
+    justify-content: center;
 }
