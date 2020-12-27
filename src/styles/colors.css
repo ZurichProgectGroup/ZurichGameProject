@@ -1,8 +1,11 @@
 :root {
-    --font-color: 255, 255, 255;
-    --main: 252, 84, 255;
-    --focus: 78, 191, 255;
-    --link: 254, 190, 255;
-    --warn: 255, 199, 0;
-    --bg-color: 27, 23, 46;
+    --font-color: #FFF;
+    --main: #FC54FF;
+    --main-rgb: 252, 84, 255;
+    --focus: #4EBFFF;
+    --focus-rgb: 78, 191, 255;
+    --link: #FEBEFF;
+    --link-rgb: 254, 190, 255;
+    --warn: #FFB118;
+    --bg-color: #1B172E;
 }

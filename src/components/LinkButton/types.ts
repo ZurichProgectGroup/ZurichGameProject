@@ -1,6 +1,9 @@
-import { FC } from 'react';
 import { LinkProps } from 'react-router-dom';
+import { ReactNode } from 'react';
 
-export type OwnProps = LinkProps;
+export type OwnProps = {
+    className?: string,
+    children: ReactNode
+} & LinkProps;
 
-export type Props = FC<OwnProps>;
+export type Props = OwnProps;
