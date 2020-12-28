@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { ReactNode } from 'react';
 
 export type OwnPros = {
-    className?: string
+    className?: string,
+    children: ReactNode
 };
 
-export type Props = FC<OwnPros>;
+export type Props = OwnPros;

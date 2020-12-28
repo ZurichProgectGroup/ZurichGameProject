@@ -1,19 +1,15 @@
 import React from 'react';
-import cn from 'Utils/classnames';
-import { Props } from './types';
+import cn from 'classnames';
+import type { Props } from './types';
 import './Card.css';
 
-const Card: Props = (props) => {
-    const {
-        className = '',
-        children,
-    } = props;
-
-    return (
-        <div className={cn('card', className)}>
-            {children}
-        </div>
-    );
-};
+const Card = ({
+    className = '',
+    children,
+}: Props) => (
+    <div className={cn('card', className)}>
+        {children}
+    </div>
+);
 
 export default Card;

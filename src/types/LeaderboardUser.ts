@@ -1,4 +1,5 @@
 type LeaderboardUserType = {
+    id: string,
     name: string,
     url?: string,
     score: number,

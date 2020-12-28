@@ -1,4 +1,4 @@
-import { FC, InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes } from 'react';
 
 export type OwnProps = {
     errorText?: string;
@@ -6,4 +6,4 @@ export type OwnProps = {
     description?: string,
 } & InputHTMLAttributes<HTMLInputElement>;
 
-export type Props = FC<OwnProps>;
+export type Props = OwnProps;

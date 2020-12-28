@@ -1,5 +1,4 @@
 import LeaderboardUserType from 'Types/LeaderboardUser';
-import { FC } from 'react';
 
 export type OwnProps = {
     isLeader?: boolean,
@@ -8,4 +7,4 @@ export type OwnProps = {
     rank: number,
 };
 
-export type Props = FC<OwnProps>;
+export type Props = OwnProps;

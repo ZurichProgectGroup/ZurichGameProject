@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
-import getRandomId from 'Utils/getRandomId';
-import cn from 'Utils/classnames';
-import UserIcon from 'Components/UserIcon';
-import { Props } from './types';
+import cn from 'classnames';
+import Avatar from 'Components/Avatar';
+import type { Props } from './types';
 import './Row.css';
 
-const Row: Props = (props) => {
+const Row = (props: Props) => {
     const {
         isLeader,
         isTop,
@@ -13,16 +12,10 @@ const Row: Props = (props) => {
         rank,
     } = props;
 
-    const avatarSize = useMemo(() => {
-        if (isLeader) {
-            return 'medium';
-        }
-        return 'small';
-    }, [isLeader]);
+    const avatarSize = useMemo(() => (isLeader ? 'medium' : 'small'), [isLeader]);
 
     return (
         <tr
-            key={getRandomId()}
             className={cn('leaderboard__row', {
                 leaderboard__row_leader: Boolean(isLeader),
                 leaderboard__row_top: Boolean(isTop) && !isLeader,
@@ -33,7 +26,7 @@ const Row: Props = (props) => {
                 {`${rank}.`}
             </td>
             <td className="leaderboard__avatar">
-                <UserIcon
+                <Avatar
                     name={leader.name}
                     url={leader.url}
                     size={avatarSize}

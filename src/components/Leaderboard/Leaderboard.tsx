@@ -1,17 +1,16 @@
 import React from 'react';
 import Title from 'Components/Title';
-import getRandomId from 'Utils/getRandomId';
-import { Props } from './types';
+import type { Props } from './types';
 import './Leaderboard.css';
 import Row from './components';
 
 const isTop = (index: number) => index < 3;
 const isLeader = (index: number) => index === 0;
 
-const Leaderboard: Props = ({ leaders }) => (
+const Leaderboard = ({ leaders }: Props) => (
     <div className="leaderboard">
         <div className="leaderboard__header">
-            <Title text="Leaderboard" />
+            <Title text="Leaderboard" tagName="h2" />
         </div>
         <div className="leaderboard__content">
             <table className="leaderboard__table">
@@ -19,7 +18,7 @@ const Leaderboard: Props = ({ leaders }) => (
                     {
                         leaders.map((leader, index) => (
                             <Row
-                                key={getRandomId()}
+                                key={`leaderboard_${leader.id}`}
                                 leader={leader}
                                 rank={index + 1}
                                 isTop={isTop(index)}

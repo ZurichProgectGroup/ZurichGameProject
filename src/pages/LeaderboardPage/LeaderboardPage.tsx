@@ -4,9 +4,8 @@ import LinkButton from 'Components/LinkButton';
 import Card from 'Components/Card';
 import leaderboard from 'Mocks/leaderboard';
 import Leaderboard from 'Components/Leaderboard';
-import { Props } from './types';
 
-const LeaderboardPage: Props = () => (
+const LeaderboardPage = () => (
     <div className="leaderboard-page">
         <header className="leaderboard-page__header">
             <LinkButton to="/">

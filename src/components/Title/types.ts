@@ -1,8 +1,7 @@
-import { FC } from 'react';
-
 export type OwnProps = {
     className?: string,
-    text: string
+    text: string,
+    tagName?: keyof JSX.IntrinsicElements
 };
 
-export type Props = FC<OwnProps>;
+export type Props = OwnProps;

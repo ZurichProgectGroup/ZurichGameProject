@@ -1,15 +1,16 @@
 import React from 'react';
-import cn from 'Utils/classnames';
-import { Props } from './types';
+import cn from 'classnames';
+import type { Props } from './types';
 import './Title.css';
 
-const Title: Props = (
+const Title = (
     {
         text,
         className = '',
-    },
+        tagName: TagName = 'b',
+    } : Props,
 ) => (
-    <h2 className={cn('title', className)}>{text}</h2>
+    <TagName className={cn('title', className)}>{text}</TagName>
 );
 
 export default Title;

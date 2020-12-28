@@ -5,23 +5,23 @@
 
 .input__label {
     margin-bottom: 10px;
-    color: rgb(var(--font-color));
+    color: var(--font-color);
     text-transform: uppercase;
 }
 
 .input__field {
-    color: rgb(var(--font-color));
+    color: var(--font-color);
     background: transparent;
-    border: 1px solid rgb(var(--main));
-    box-shadow: 0 0 5px rgb(var(--main));
+    border: 1px solid var(--main);
+    box-shadow: 0 0 5px var(--main);
     border-radius: 4px;
     padding: 10px;
     transition: all 0.2s;
 
     &:focus {
         outline: none;
-        box-shadow: 0 0 5px rgb(var(--focus));
-        border-color: rgb(var(--focus));
+        box-shadow: 0 0 5px var(--focus);
+        border-color: var(--focus);
     }
 }
 
@@ -33,15 +33,19 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    &_hidden {
+        visibility: hidden;
+    }
 }
 
 .input_warn {
     .input__field {
-        box-shadow: 0 0 5px rgb(var(--warn));
-        border-color: rgb(var(--warn));
+        box-shadow: 0 0 5px var(--warn);
+        border-color: var(--warn);
     }
 
     .input__desc {
-        color: rgb(var(--warn));
+        color: var(--warn);
     }
 }

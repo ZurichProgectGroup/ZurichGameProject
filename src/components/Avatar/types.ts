@@ -1,5 +1,3 @@
-import { FC } from 'react';
-
 export type OwnProps = {
     url?: string,
     name: string,
@@ -9,4 +7,4 @@ export type OwnProps = {
     onChange?: (id: string) => unknown
 };
 
-export type Props = FC<OwnProps>;
+export type Props = OwnProps;

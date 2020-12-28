@@ -11,9 +11,9 @@ html {
 body {
     font-family: var(--font-family);
     font-size: 14px;
-    color: rgb(var(--font-color));
+    color: var(--font-color);
     line-height: 1.2;
-    background: rgb(var(--bg-color));
+    background: var(--bg-color);
 }
 
 a {
