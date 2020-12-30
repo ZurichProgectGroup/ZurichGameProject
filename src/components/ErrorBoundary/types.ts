@@ -1,10 +1,9 @@
-export type OwnProps = {
+import { ReactNode } from 'react';
 
+export type OwnProps = {
+    children: ReactNode
 };
 
 export type OwnState = {
     hasError: boolean
 };
-
-export type Props = OwnProps;
-export type State = OwnState;

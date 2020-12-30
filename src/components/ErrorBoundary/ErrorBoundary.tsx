@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ErrorPage from 'Pages/ErrorPage';
-import { Props, State } from './types';
+import { OwnProps as Props, OwnState as State } from './types';
 
 class ErrorBoundary extends Component<Props, State> {
     constructor(props: Props) {
@@ -17,7 +17,7 @@ class ErrorBoundary extends Component<Props, State> {
         const { children } = this.props;
 
         if (hasError) {
-            return <ErrorPage />;
+            return <ErrorPage error={500} />;
         }
 
         return children;

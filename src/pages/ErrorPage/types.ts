@@ -5,5 +5,3 @@ export type ErrorsCodes = keyof typeof ErrorsStatusCodes;
 export type OwnProps = {
     error: ErrorsCodes
 };
-
-export type Props = OwnProps;
