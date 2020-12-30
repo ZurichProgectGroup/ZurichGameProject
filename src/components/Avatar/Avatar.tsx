@@ -11,6 +11,7 @@ const Avatar = (props: Props) => {
         hasChange,
         onChange,
         size,
+        hideBorder,
     } = props;
 
     const [avatar, setAvatar] = useState(url);
@@ -32,6 +33,7 @@ const Avatar = (props: Props) => {
         <div className={cn('avatar', {
             avatar_small: size === 'small',
             avatar_medium: size === 'medium',
+            'avatar_no-border': Boolean(hideBorder),
         })}
         >
             <span className="avatar__letter">{name[0]}</span>
