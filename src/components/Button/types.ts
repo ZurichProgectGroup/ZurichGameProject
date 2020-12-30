@@ -1,5 +1,9 @@
-import { FC, ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export type OwnProps = ButtonHTMLAttributes<HTMLButtonElement>;
+export type OwnProps = {
+    className?: string,
+    type?: 'button' | 'reset' | 'submit',
+    children: ReactNode,
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export type Props = FC<OwnProps>;
+export type Props = OwnProps;

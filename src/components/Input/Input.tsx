@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import cn from 'Utils/classnames';
+import cn from 'classnames';
 import './Input.css';
-import { Props } from './types';
+import type { Props } from './types';
 
-const Input: Props = (props) => {
+const Input = (props: Props) => {
     const {
         errorText,
         labelText,
@@ -11,7 +11,7 @@ const Input: Props = (props) => {
         ...inputProps
     } = props;
 
-    const noDescription = useMemo(() => !(description || errorText), [description, errorText]);
+    const actualDescription = useMemo(() => description || errorText, [description, errorText]);
 
     return (
         <label className={cn('input', {
@@ -21,10 +21,10 @@ const Input: Props = (props) => {
             <span className="input__label">{labelText}</span>
             <input className="input__field" {...inputProps} />
             <span className={cn('input__desc', {
-                'visibility-hidden': noDescription,
+                input__desc_hidden: !actualDescription,
             })}
             >
-                {errorText || description}
+                {actualDescription}
             </span>
         </label>
     );

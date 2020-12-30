@@ -1,18 +1,21 @@
 import React from 'react';
+import cn from 'classnames';
 import './Button.css';
-import { Props } from './types';
+import type { Props } from './types';
 
-const Button: Props = (props) => {
-    const {
-        children,
-        ...buttonProps
-    } = props;
-
-    return (
-        <button type="button" {...buttonProps} className="button">
-            {children}
-        </button>
-    );
-};
+const Button = ({
+    children,
+    type = 'button',
+    className,
+    ...otherProps
+}: Props) => (
+    <button
+        type={type}
+        className={cn('button', className)}
+        {...otherProps}
+    >
+        {children}
+    </button>
+);
 
 export default Button;

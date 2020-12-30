@@ -3,7 +3,7 @@ import './Home.css';
 import Input from 'Components/Input';
 import Button from 'Components/Button';
 import LinkButton from 'Components/LinkButton';
-import UserIcon from 'Components/UserIcon';
+import Avatar from 'Components/Avatar';
 
 const Home = () => (
     <div className="wrapper">
@@ -12,9 +12,9 @@ const Home = () => (
         <Input labelText="password" errorText="wrong password" />
         <Button>Sing in</Button>
         <LinkButton to="/404">I DON’T HAVE AN ACCOUNT</LinkButton>
-        <UserIcon name="igor" size="small" url="https://picsum.photos/200" />
-        <UserIcon name="igor" size="medium" url="https://picsum.photos/200" />
-        <UserIcon name="igor" url="https://picsum.photos/200" hasChange />
+        <Avatar name="igor" size="small" url="https://picsum.photos/200" />
+        <Avatar name="igor" size="medium" url="https://picsum.photos/200" />
+        <Avatar name="igor" url="https://picsum.photos/200" hasChange />
     </div>
 );
 
