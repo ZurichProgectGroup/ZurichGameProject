@@ -1,16 +1,9 @@
-import { FC } from 'react';
+import ErrorsStatusCodes from './const';
 
-export type ErrorsValuesTypes = '404' | '500';
-
-export type ErrorsDataType = {
-    [error in ErrorsValuesTypes]: {
-        url: string,
-        description: string
-    }
-};
+export type ErrorsCodes = keyof typeof ErrorsStatusCodes;
 
 export type OwnProps = {
-
+    error: ErrorsCodes
 };
 
-export type Prop = FC<OwnProps>;
+export type Props = OwnProps;

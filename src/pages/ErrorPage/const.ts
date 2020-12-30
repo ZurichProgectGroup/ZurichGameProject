@@ -1,8 +1,7 @@
 import Image404 from 'Images/404.svg';
 import Image500 from 'Images/500.svg';
-import { ErrorsDataType } from './types';
 
-const ErrorsData: ErrorsDataType = {
+const ErrorsStatusCodes = {
     404: {
         url: Image404,
         description: 'Wrong way',
@@ -11,6 +10,6 @@ const ErrorsData: ErrorsDataType = {
         url: Image500,
         description: 'WE’LL FIX IT ASAP',
     },
-};
+} as const;
 
-export default ErrorsData;
+export default ErrorsStatusCodes;
