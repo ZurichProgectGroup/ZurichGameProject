@@ -1,0 +1,41 @@
+.toggle-button {
+    --size: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    text-decoration: underline;
+    color: var(--link);
+    text-shadow: 0 3px 10px rgba(var(--link-rgb), 0.4);
+    background: transparent;
+    outline: none;
+
+    &:hover {
+        opacity: 0.4;
+    }
+
+    span {
+        visibility: hidden;
+    }
+
+    &::before {
+        content: '';
+        width: var(--size);
+        height: var(--size);
+        display: block;
+        background: url("Images/toggle-btn.svg") center/contain no-repeat;
+    }
+
+    &_open {
+        span {
+            visibility: visible;
+        }
+
+        &::before {
+            transform: rotate(180deg) translate(0, 5px);
+        }
+    }
+}

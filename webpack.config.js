@@ -64,13 +64,16 @@ module.exports = (env, opt) => {
             port: 9000,
             hot: true,
             open: true,
-            historyApiFallback: true,
+            historyApiFallback: {
+                index: 'index.html',
+            },
         },
         plugins: [
             new HtmlWebpackPlugin({
                 template: './www/index.html',
                 cache: false,
                 title: 'Beat Game',
+                publicPath: '/',
             }),
             new MiniCssExtractPlugin(),
             new CleanWebpackPlugin(),
