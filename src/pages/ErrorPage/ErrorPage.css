@@ -1,0 +1,25 @@
+.error-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: radial-gradient(171% 98.54% at 50.04% 1.46%, rgb(var(--focus)) 4.43%, rgb(var(--bg-color)) 40%);
+    width: 100%;
+    height: 100%;
+}
+
+.error-page__img {
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    color: rgb(var(--focus));
+}
+
+.error-page__desc {
+    margin-bottom: 70px;
+    text-transform: uppercase;
+}
+
+.error-page__link {
+    color: var(--focus);
+    text-shadow: 0 3px 10px rgba(var(--focus), 0.4);
+}

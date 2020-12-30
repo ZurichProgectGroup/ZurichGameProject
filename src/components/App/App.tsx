@@ -5,6 +5,7 @@ import {
     Route,
 } from 'react-router-dom';
 import Home from 'Pages/Home';
+import ErrorPage from 'Pages/ErrorPage';
 import LeaderboardPage from 'Pages/LeaderboardPage';
 import ROUTES from './consts';
 
@@ -13,7 +14,7 @@ const App = () => (
         <Switch>
             <Route exact path={ROUTES.main} component={Home} />
             <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
-            <Route component={() => <div>404 placeholder</div>} />
+            <Route component={ErrorPage} />
         </Switch>
     </Router>
 );
