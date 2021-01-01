@@ -5,7 +5,7 @@ import Button from 'Components/Button';
 import LinkButton from 'Components/LinkButton';
 import UserIcon from 'Components/UserIcon';
 import Alert from 'Components/Alert';
-import cn from 'Utils/classnames';
+import cn from 'classnames';
 import successIconPath from 'Images/success-icon.svg';
 import {AccountAlertState as AlertState} from "./types";
 
