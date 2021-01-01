@@ -1,8 +1,8 @@
-import { FC, HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 
 export type OwnProps = {
-    icon?: string;
-    visible?: boolean;
+    icon?: string,
+    className?: string,
 } & HTMLAttributes<HTMLDivElement>;
 
-export type Props = FC<OwnProps>;
+export type Props = OwnProps;

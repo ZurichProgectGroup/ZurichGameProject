@@ -1,33 +1,37 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useCallback, MouseEvent } from 'react';
 import './Account.css';
 import Input from 'Components/Input';
 import Button from 'Components/Button';
 import LinkButton from 'Components/LinkButton';
 import UserIcon from 'Components/UserIcon';
-import Delimiter from 'Components/Delimiter';
 import Alert from 'Components/Alert';
 import cn from 'Utils/classnames';
 import successIconPath from 'Images/success-icon.svg';
 import {AccountAlertState as AlertState} from "./types";
 
-export default class App extends PureComponent {
-  state = {
-      showPassword: false,
-      alertState: AlertState.none
-    };
+const Account = () => {
+    const [showPassword, setShowPassword] = useState(false);
+    const [alertState, setAlertState] = useState(AlertState.None);
 
-  render() {
-      const { showPassword, alertState } = this.state;
+    const handlePasswordClick = useCallback((_event: MouseEvent<HTMLElement>)=>{
+        setShowPassword(!showPassword);
+    },[showPassword]);
+    const handleSaveClick = useCallback((_event: MouseEvent<HTMLButtonElement>)=>{
+        setAlertState(AlertState.Success);
+    },[alertState]);
+    const handleAlertClick = useCallback((_event: MouseEvent<HTMLElement>)=>{
+      setAlertState(AlertState.None);
+    },[alertState]);
 
-      return (
+    return (
         <div className="account__widjet">
           <aside className={cn('account__alert', {
-            account__alert_hidden: alertState === AlertState.none,
+            account__alert_hidden: alertState === AlertState.None,
             })}>
             <Alert
               icon = {successIconPath}
-              onClick={this.handleAlertClick}>
-              {alertState === AlertState.success? "Saved": "Error" }
+              onClick={handleAlertClick}>
+              {alertState === AlertState.Success? "Saved": "Error" }
             </Alert>
           </aside>
           <div className="account__header">
@@ -44,7 +48,7 @@ export default class App extends PureComponent {
               <Input labelText="phone #"/>
               <Input labelText="display name"/>
             </div>
-            <Delimiter/>
+            <div className="delimiter"></div>
             <div className={cn('account__fields', {
               account__fields_hidden: !showPassword,
               })}>
@@ -52,28 +56,16 @@ export default class App extends PureComponent {
               <Input labelText="new password" />
             </div>
             <div  className="account__password_link">
-              <LinkButton onClick={this.handlePasswordClick}>
+              <LinkButton onClick={handlePasswordClick}>
                 {showPassword? "Do not change password": "Change password"}
               </LinkButton>
             </div>
             <div className="account__save_button">
-              <Button  onClick={this.handleSaveClick} >Save changes</Button>
+              <Button  onClick={handleSaveClick} >Save changes</Button>
             </div>
           </form>
         </div>
     );
-  }
-
-  handlePasswordClick = ()=>{
-    this.setState({showPassword:!this.state.showPassword});
-  }
-
-  handleSaveClick = ()=>{
-    this.setState({alertState:AlertState.success});
-  }
-
-  handleAlertClick = ()=>{
-    this.setState({alertState:AlertState.none});
-  }
-
 }
+
+export default Account;

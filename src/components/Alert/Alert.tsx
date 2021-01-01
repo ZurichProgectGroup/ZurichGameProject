@@ -1,18 +1,19 @@
 import React from 'react';
 import './Alert.css';
-import { Props } from './types';
+import type { Props } from './types';
 
-const Alert: Props = (props) => {
+const Alert = (props: Props) => {
     const {
         icon,
         onClick,
-        children,
+        children='',
+        className = 'alert',
         ...alertProps
     } = props;
 
     return (
-        <div {...alertProps} className="alert" onClick={onClick}>
-          <img src={icon}></img>
+        <div {...alertProps} className={className} onClick={onClick}>
+          <img src={icon}/>
             {children}
         </div>
     );

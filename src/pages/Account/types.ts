@@ -1,5 +1,5 @@
-export enum AccountAlertState {
-  none,
-  success,
-  error
+export const enum AccountAlertState {
+  Success = 'Success',
+  Error = 'Error',
+  None = 'None'
 }
