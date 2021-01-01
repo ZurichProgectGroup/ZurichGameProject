@@ -1,4 +1,4 @@
-.user-icon {
+.avatar {
     --size: 100px;
     --offset: 2px;
 
@@ -11,6 +11,7 @@
     border-radius: 50%;
     text-align: center;
     background: var(--bg-color);
+    margin: var(--offset);
 
     &::before {
         --position: calc(0px - var(--offset));
@@ -28,7 +29,7 @@
     }
 
     &:hover {
-        .user-icon__image-upload {
+        .avatar__image-upload {
             visibility: visible;
         }
     }
@@ -36,11 +37,11 @@
     &_small {
         --size: 48px;
 
-        .user-icon__letter {
+        .avatar__letter {
             font-size: 16px;
         }
 
-        .user-icon__image-upload::after {
+        .avatar__image-upload::after {
             width: 26px;
             height: 26px;
         }
@@ -49,25 +50,31 @@
     &_medium {
         --size: 56px;
 
-        .user-icon__letter {
+        .avatar__letter {
             font-size: 20px;
         }
 
-        .user-icon__image-upload::after {
+        .avatar__image-upload::after {
             width: 32px;
             height: 32px;
         }
     }
+
+    &_no-border {
+        &::before {
+            background: transparent;
+        }
+    }
 }
 
-.user-icon__letter {
+.avatar__letter {
     display: flex;
     text-transform: uppercase;
     font-size: 30px;
     line-height: 1;
 }
 
-.user-icon__image-wrapper {
+.avatar__image-wrapper {
     position: absolute;
     top: 0;
     left: 0;
@@ -80,13 +87,13 @@
     justify-content: center;
 }
 
-.user-icon__image {
+.avatar__image {
     width: 110%;
     height: 110%;
     object-fit: cover;
 }
 
-.user-icon__image-upload {
+.avatar__image-upload {
     position: absolute;
     top: 0;
     left: 0;

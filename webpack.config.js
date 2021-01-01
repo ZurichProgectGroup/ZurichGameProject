@@ -25,6 +25,8 @@ module.exports = (env, opt) => {
                 Components: path.resolve(__dirname, 'src/components/'),
                 Utils: path.resolve(__dirname, 'src/utils/'),
                 Pages: path.resolve(__dirname, 'src/pages/'),
+                Mocks: path.resolve(__dirname, 'src/mocks/'),
+                Types: path.resolve(__dirname, 'src/types/'),
             },
         },
         module: {

@@ -1,22 +1,22 @@
-import React, { ChangeEvent, useState } from 'react';
-import cn from 'Utils/classnames';
+import React, { ChangeEvent, useState, useCallback } from 'react';
+import cn from 'classnames';
 import getInputImgUrl from 'Utils/getInputImageUrl';
-import { Props } from './types';
-import './UserIcon.css';
+import type { Props } from './types';
+import './Avatar.css';
 
-const UserIcon: Props = (props) => {
+const Avatar = (props: Props) => {
     const {
         name,
         url,
         hasChange,
         onChange,
-        small = false,
-        medium = false,
+        size,
+        hideBorder,
     } = props;
 
     const [avatar, setAvatar] = useState(url);
 
-    const handleChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
         const input = event.target;
         try {
             const imageUrl = await getInputImgUrl(input);
@@ -27,25 +27,26 @@ const UserIcon: Props = (props) => {
         } catch (e) {
             throw new Error(e);
         }
-    };
+    }, [onChange]);
 
     return (
-        <div className={cn('user-icon', {
-            'user-icon_small': small,
-            'user-icon_medium': medium,
+        <div className={cn('avatar', {
+            avatar_small: size === 'small',
+            avatar_medium: size === 'medium',
+            'avatar_no-border': Boolean(hideBorder),
         })}
         >
-            <span className="user-icon__letter">{name[0]}</span>
+            <span className="avatar__letter">{name[0]}</span>
             {
                 url && (
-                    <div className="user-icon__image-wrapper">
-                        <img src={avatar} alt={name} className="user-icon__image" />
+                    <div className="avatar__image-wrapper">
+                        <img src={avatar} alt={name} className="avatar__image" />
                     </div>
                 )
             }
             {
                 hasChange && (
-                    <label className="user-icon__image-upload">
+                    <label className="avatar__image-upload">
                         <input type="file" onChange={handleChange} />
                     </label>
                 )
@@ -54,4 +55,4 @@ const UserIcon: Props = (props) => {
     );
 };
 
-export default UserIcon;
+export default Avatar;

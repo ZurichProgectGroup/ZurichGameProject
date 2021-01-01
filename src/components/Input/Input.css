@@ -33,6 +33,10 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    &_hidden {
+        visibility: hidden;
+    }
 }
 
 .input_warn {

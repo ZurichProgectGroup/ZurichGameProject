@@ -6,13 +6,18 @@ import {
 } from 'react-router-dom';
 import Home from 'Pages/Home';
 import Account from 'Pages/Account';
+import ErrorPage from 'Pages/ErrorPage';
+import LeaderboardPage from 'Pages/LeaderboardPage';
+import ROUTES from './consts';
 
 const App = () => (
     <Router>
         <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/account" component={Account} />
-            <Route component={() => <div>404 placeholder</div>} />
+            <Route exact path={ROUTES.main} component={Home} />
+            <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
+            <Route component={ErrorPage} />
         </Switch>
     </Router>
 );

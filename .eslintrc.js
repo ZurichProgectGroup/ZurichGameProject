@@ -7,10 +7,12 @@ module.exports = {
     },
     rules: {
         "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
         "@typescript-eslint/indent": ["error", 4],
         "indent": ["error", 4],
         "jsx-a11y/label-has-associated-control": "off",
         "react/prop-types": "off",
-        "react/jsx-props-no-spreading": "off"
+        "react/jsx-props-no-spreading": "off",
+        "react/button-has-type": "off"
     }
 };
