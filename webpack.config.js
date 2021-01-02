@@ -26,8 +26,11 @@ module.exports = (env, opt) => {
                 Components: path.resolve(__dirname, 'src/components/'),
                 Configs: path.resolve(__dirname, 'src/configs/'),
                 Utils: path.resolve(__dirname, 'src/utils/'),
-                Services: path.resolve(__dirname, 'src/services/')
-            }
+                Pages: path.resolve(__dirname, 'src/pages/'),
+                Mocks: path.resolve(__dirname, 'src/mocks/'),
+                Types: path.resolve(__dirname, 'src/types/'),
+                Services: path.resolve(__dirname, 'src/services/'),
+            },
         },
         module: {
             rules: [
@@ -41,18 +44,18 @@ module.exports = (env, opt) => {
                     use: [
                         MiniCssExtractPlugin.loader,
                         'css-loader',
-                        'postcss-loader'
-                    ]
+                        'postcss-loader',
+                    ],
                 },
                 {
-                    test: /\.(png|jpe?g|gif|mp3)$/i,
+                    test: /\.(png|jpe?g|gif|svg|mp3)$/i,
                     use: [
                         {
                             loader: 'file-loader',
                         },
                     ],
                 },
-            ]
+            ],
         },
         devServer: {
             contentBase: path.join(__dirname, 'dist'),
@@ -74,8 +77,8 @@ module.exports = (env, opt) => {
             minimize: isProduction,
             minimizer: [
                 new CssnanoPlugin(),
-                new TerserPlugin()
-            ]
-        }
+                new TerserPlugin(),
+            ],
+        },
     };
 };
