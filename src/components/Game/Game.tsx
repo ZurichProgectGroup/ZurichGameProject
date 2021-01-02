@@ -1,46 +1,40 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useCallback } from 'react';
 import GameStart from 'Components/GameStart';
 import GameBoard from 'Components/GameBoard';
+import GameState from './types';
 
-enum GameState {
-  start,
-  board,
-  complete,
-  error,
-}
+const Game = () => {
+    const [gameState, setGameState] = useState(GameState.start);
 
-export default class Game extends PureComponent {
-  state = {
-      gameState: GameState.start,
-    };
-  
+    const onStart = useCallback(() => {
+        setGameState(GameState.board);
+    }, [gameState]);
 
-  onStart = () => {
-      this.setState({ gameState: GameState.board });
-  };
+    const onComplete = useCallback(() => {
+        setGameState(GameState.complete);
+    }, [gameState]);
 
-  onComplete = () => {
-      this.setState({ gameState: GameState.complete });
-  };
-
-  onError = () => {
-      this.setState({ gameState: GameState.error });
-  };
-
-  render() {
-      const { gameState } = this.state;
-      switch (gameState) {
-      case GameState.start:
+    /* todo const onError = useCallback(() => {
+        setGameState(GameState.error);
+    }, [gameState]); */
+    let result = (<div />);
+    switch (gameState) {
+        case GameState.board:
+            result = (<GameBoard onComplete={onComplete} />);
+            break;
+        case GameState.complete:
         // заглушка
-        return (<GameStart onComplete={this.onStart} />);
-      case GameState.board:
-        return (<GameBoard onComplete={this.onComplete} />);
-      case GameState.complete:
+            result = (<GameStart onComplete={onStart} />);
+            break;
+        case GameState.error:
         // заглушка
-        return (<GameStart onComplete={this.onStart} />);
-      case GameState.error:
-        // заглушка
-        return (<GameStart onComplete={this.onStart} />);
-      }
-  }
-}
+            result = (<GameStart onComplete={onStart} />);
+            break;
+        default:
+            result = (<GameStart onComplete={onStart} />);
+    }
+
+    return result;
+};
+
+export default Game;

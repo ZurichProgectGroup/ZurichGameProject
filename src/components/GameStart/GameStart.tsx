@@ -1,14 +1,12 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import './GameStart.css';
+import type { Props } from './types';
 
-export default class GameStart extends PureComponent {
-  props = {
-    onComplete: () => {},
-  };
+const GameStart = (props: Props) => {
+    const {
+        onComplete,
+    } = props;
+    return (<button onClick={onComplete}>Click me to start</button>);
+};
 
-  render() {
-    const { onComplete } = this.props;
-
-    return <button onClick={onComplete}>Click me to start</button>;
-  }
-}
+export default GameStart;
