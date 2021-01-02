@@ -24,7 +24,7 @@ const Account = () => {
     setAlertState(AlertState.None);
     },[alertState]);
     const handleLogOutClick = useCallback(()=>{
-        //setShowPassword(!showPassword);
+        //todo
     },[showPassword]);
 
     return (

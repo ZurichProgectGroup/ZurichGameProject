@@ -4,7 +4,7 @@ import type { Props } from './types';
 
 const ActionLink = ({
     className = 'link-button',
-    children,
+    children = '',
     ...linkProps
 }
 : Props) => (
