@@ -5,15 +5,14 @@ import type { Props } from './types';
 const Alert = (props: Props) => {
     const {
         icon,
-        onClick,
-        children='',
+        children = '',
         className = 'alert',
         ...alertProps
     } = props;
 
     return (
-        <div {...alertProps} className={className} onClick={onClick}>
-          <img src={icon}/>
+        <div {...alertProps} className={className}>
+            <img src={icon} alt="" />
             {children}
         </div>
     );

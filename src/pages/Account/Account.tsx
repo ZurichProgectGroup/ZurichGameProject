@@ -1,4 +1,4 @@
-import React, { useState, useCallback, MouseEvent } from 'react';
+import React, { useState, useCallback } from 'react';
 import './Account.css';
 import Input from 'Components/Input';
 import Button from 'Components/Button';
@@ -8,22 +8,22 @@ import Avatar from 'Components/Avatar';
 import Alert from 'Components/Alert';
 import cn from 'classnames';
 import successIconPath from 'Images/success-icon.svg';
-import {AccountAlertState as AlertState} from "./types";
+import AlertState from "./types";
 
 const Account = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [alertState, setAlertState] = useState(AlertState.None);
 
-    const handlePasswordClick = useCallback((event: MouseEvent<HTMLElement>)=>{
+    const handlePasswordClick = useCallback(()=>{
         setShowPassword(!showPassword);
     },[showPassword]);
-    const handleSaveClick = useCallback((_event: MouseEvent<HTMLButtonElement>)=>{
+    const handleSaveClick = useCallback(()=>{
         setAlertState(AlertState.Success);
     },[alertState]);
-    const handleAlertClick = useCallback((_event: MouseEvent<HTMLElement>)=>{
+    const handleAlertClick = useCallback(()=>{
     setAlertState(AlertState.None);
     },[alertState]);
-    const handleLogOutClick = useCallback((event: MouseEvent<HTMLElement>)=>{
+    const handleLogOutClick = useCallback(()=>{
         //setShowPassword(!showPassword);
     },[showPassword]);
 
