@@ -1,12 +1,22 @@
 import React from 'react';
-import './App.css';
-import logo from 'Images/logo.png';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from 'react-router-dom';
+import Home from 'Pages/Home';
+import ErrorPage from 'Pages/ErrorPage';
+import LeaderboardPage from 'Pages/LeaderboardPage';
+import ROUTES from './consts';
 
 const App = () => (
-    <div className="wrapper">
-        <h1>Hello World</h1>
-        <img src={logo} alt="logo" />
-    </div>
+    <Router>
+        <Switch>
+            <Route exact path={ROUTES.main} component={Home} />
+            <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
+            <Route component={ErrorPage} />
+        </Switch>
+    </Router>
 );
 
 export default App;
