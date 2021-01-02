@@ -3,7 +3,8 @@ import './Account.css';
 import Input from 'Components/Input';
 import Button from 'Components/Button';
 import LinkButton from 'Components/LinkButton';
-import UserIcon from 'Components/UserIcon';
+import ActionLink from 'Components/ActionLink';
+import Avatar from 'Components/Avatar';
 import Alert from 'Components/Alert';
 import cn from 'classnames';
 import successIconPath from 'Images/success-icon.svg';
@@ -13,21 +14,24 @@ const Account = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [alertState, setAlertState] = useState(AlertState.None);
 
-    const handlePasswordClick = useCallback((_event: MouseEvent<HTMLElement>)=>{
+    const handlePasswordClick = useCallback((event: MouseEvent<HTMLElement>)=>{
         setShowPassword(!showPassword);
     },[showPassword]);
     const handleSaveClick = useCallback((_event: MouseEvent<HTMLButtonElement>)=>{
         setAlertState(AlertState.Success);
     },[alertState]);
     const handleAlertClick = useCallback((_event: MouseEvent<HTMLElement>)=>{
-      setAlertState(AlertState.None);
+    setAlertState(AlertState.None);
     },[alertState]);
+    const handleLogOutClick = useCallback((event: MouseEvent<HTMLElement>)=>{
+        //setShowPassword(!showPassword);
+    },[showPassword]);
 
     return (
         <div className="account__widjet">
-          <aside className={cn('account__alert', {
-            account__alert_hidden: alertState === AlertState.None,
-            })}>
+          <aside className={ cn('account__alert',
+                alertState === AlertState.None ? 'account__alert_hidden': '')
+            }>
             <Alert
               icon = {successIconPath}
               onClick={handleAlertClick}>
@@ -35,9 +39,11 @@ const Account = () => {
             </Alert>
           </aside>
           <div className="account__header">
-            <LinkButton>{"< Back"}</LinkButton>
-            <UserIcon name="igor" url="https://picsum.photos/200" hasChange />
-            <LinkButton>Log out</LinkButton>
+              <LinkButton to="/">
+                  {'< Back'}
+              </LinkButton>
+            <Avatar name="igor" url="https://picsum.photos/200" hasChange />
+            <ActionLink onClick={handleLogOutClick}>Log out</ActionLink>
           </div>
           <form className="account_main">
             <div className="account__fields">
@@ -49,16 +55,16 @@ const Account = () => {
               <Input labelText="display name"/>
             </div>
             <div className="delimiter"></div>
-            <div className={cn('account__fields', {
-              account__fields_hidden: !showPassword,
-              })}>
+            <div className={cn('account__fields',
+                !showPassword ? 'account__fields_hidden': '')
+            }>
               <Input labelText="old password" />
               <Input labelText="new password" />
             </div>
             <div  className="account__password_link">
-              <LinkButton onClick={handlePasswordClick}>
+              <ActionLink onClick={handlePasswordClick}>
                 {showPassword? "Do not change password": "Change password"}
-              </LinkButton>
+              </ActionLink>
             </div>
             <div className="account__save_button">
               <Button  onClick={handleSaveClick} >Save changes</Button>
@@ -66,6 +72,6 @@ const Account = () => {
           </form>
         </div>
     );
-}
+};
 
 export default Account;
