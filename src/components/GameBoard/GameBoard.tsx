@@ -7,13 +7,13 @@ const GameBoard = (props: Props) => {
     const canvas = createRef<HTMLCanvasElement>();
     const {
         onComplete,
+        onError,
     } = props;
 
     useEffect(() => {
-        gameService.start(canvas.current);
+        gameService.start(canvas.current, onComplete, onError);
         return () => {
             gameService.stop();
-            onComplete();
         };
     });
 

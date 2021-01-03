@@ -1,6 +1,6 @@
 export type OwnProps = {
     onComplete: () => void,
-    onError:()=>void
+    success:boolean
 };
 
 export type Props = OwnProps;

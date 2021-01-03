@@ -38,7 +38,11 @@ class GameService {
 
     private keyListener;
 
-    start(canvas: HTMLCanvasElement) {
+    private onComplete:()=>void;
+
+    private onError:()=>void;
+
+    start(canvas: HTMLCanvasElement, onComplete:()=>void, onError:()=>void) {
         this.levelConfig = getConfigForLevel(this.level);
         this.board = this.levelConfig.board;
         this.then = Date.now();
@@ -49,6 +53,8 @@ class GameService {
         this.correct = 0;
         this.missed = 0;
         this.startTime = Date.now(); // todo: link to song time
+        this.onComplete = onComplete;
+        this.onError = onError;
 
         this.entities = this.levelConfig.song.notes
             .sort((note1, note2) => note1.time - note2.time)
@@ -132,6 +138,11 @@ class GameService {
         console.log(
             `Game Completed: correct = ${this.correct}, errors = ${this.errors}, missed = ${this.missed}`,
         );
+        if (this.correct >= this.levelConfig.minimumPoints) {
+            this.onComplete();
+        } else {
+            this.onError();
+        }
     }
 }
 
