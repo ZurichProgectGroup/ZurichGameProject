@@ -10,17 +10,17 @@ const filesToCache = [
     '/app.css',
 ];
 
-self.addEventListener('install', async e => {
-    console.log('install_');
+self.addEventListener('install', async () => {
+    console.log('install3');
     const cache = await caches.open(SRC_FILES_CACHE_NAME);
     cache.addAll(filesToCache);
 });
 
-function isApiCall(req) {
+function isApiCall(req:Request) {
     return req.url.indexOf("/api/") > 0;
 }
 
-async function getFromCache(req) {
+async function getFromCache(req:Request) {
     const res = await caches.match(req);
 
     if (!res) {
@@ -31,7 +31,7 @@ async function getFromCache(req) {
 }
 
 
-async function getFromNetwork(req) {
+async function getFromNetwork(req:Request) {
     const cache = await caches.open(DATA_FILES_CACHE_NAME);
 
     try {
@@ -41,7 +41,7 @@ async function getFromNetwork(req) {
     } catch (e) {}
 }
 
-self.addEventListener('fetch', async e => {
+self.addEventListener('fetch', async (e:any) => {
     const req = e.request;
     const res = isApiCall(req) ? getFromNetwork(req) : getFromCache(req);
     await e.respondWith(res);
