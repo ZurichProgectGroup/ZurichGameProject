@@ -1,4 +1,5 @@
 const ROUTES = {
+    account: '/account',
     leaderboard: '/leaderboard',
     main: '/',
     login: '/login',

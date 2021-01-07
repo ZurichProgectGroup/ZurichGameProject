@@ -1,4 +1,4 @@
 @import "~normalize.css";
-@import "colors.css";
-@import "reset.css";
-@import "basic.css";
+@import "./colors.css";
+@import "./reset.css";
+@import "./basic.css";
