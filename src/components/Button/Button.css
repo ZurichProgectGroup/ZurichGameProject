@@ -12,7 +12,7 @@
     text-overflow: ellipsis;
     color: var(--font-color);
     transition: all 0.2s;
-
+    min-width: 300px;
     &:focus,
     &:hover {
         outline: none;
