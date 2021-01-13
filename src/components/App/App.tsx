@@ -7,7 +7,6 @@ import {
 import Home from 'Pages/Home';
 import Account from 'Pages/Account';
 import ErrorPage from 'Pages/ErrorPage';
-import LoginPage from 'Pages/LoginPage';
 import LeaderboardPage from 'Pages/LeaderboardPage';
 import Login from 'Pages/Login';
 import Register from 'Pages/Register';
@@ -18,7 +17,6 @@ const App = () => (
         <Switch>
             <Route exact path={ROUTES.main} component={Home} />
             <Route exact path={ROUTES.account} component={Account} />
-            <Route exact path={ROUTES.login} component={LoginPage} />
             <Route exact path={ROUTES.account} component={Account} />
             <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
             <Route exact path={ROUTES.login} component={Login} />
