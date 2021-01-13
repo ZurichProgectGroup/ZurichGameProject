@@ -3,7 +3,7 @@ import css from './GameBoard.css';
 import gameService from '../../services/GameService';
 import type { Props } from './types';
 
-const GameBoard = (props: Props) => {
+const GameBoard = ({onComplete}: Props) => {
     const canvas = createRef<HTMLCanvasElement>();
     const {
         onComplete,
