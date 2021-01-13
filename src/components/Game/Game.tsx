@@ -8,16 +8,16 @@ const Game = () => {
 
     const onStart = useCallback(() => {
         setGameState(GameState.board);
-    }, [gameState]);
+    }, []);
 
     const onComplete = useCallback(() => {
         setGameState(GameState.complete);
-    }, [gameState]);
+    }, []);
 
     /* todo const onError = useCallback(() => {
         setGameState(GameState.error);
     }, [gameState]); */
-    let result = (<div />);
+    let result;
     switch (gameState) {
         case GameState.board:
             result = (<GameBoard onComplete={onComplete} />);

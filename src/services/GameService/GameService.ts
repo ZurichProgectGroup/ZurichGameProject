@@ -14,61 +14,62 @@ class GameService {
     // TODO - load user level via api
     private level: number = 1;
 
-    private levelConfig: ILevelCtx;
+    private levelConfig?: ILevelCtx;
 
-    private then: number;
+    private then: number = 0;
 
-    private canvas: HTMLCanvasElement;
+    private canvas?: HTMLCanvasElement;
 
-    private entities: IGameEntitity[];
+    private entities: IGameEntitity[] = [];
 
-    private interval: number;
+    private interval: number = 0 ;
 
-    private correct: number;
+    private correct: number = 0;
 
-    private errors: number;
+    private errors: number = 0;
 
-    private missed: number;
+    private missed: number = 0;
 
-    private requestId: number;
+    private requestId: number = 0;
 
-    private board: IBoardCtx;
+    private board?: IBoardCtx;
 
-    private startTime: number;// todo - убрать!привязать к аудио
+    private startTime?: number;// todo - убрать!привязать к аудио
 
-    private keyListener;
+    private keyListener?: (event: KeyboardEvent) => void;
 
     start(canvas: HTMLCanvasElement) {
+
         this.levelConfig = getConfigForLevel(this.level);
         this.board = this.levelConfig.board;
         this.then = Date.now();
         this.canvas = canvas;
         this.interval = 1000 / 60; // 60fps
-        this.requestId = undefined;
+        this.requestId = 0;
         this.errors = 0;
         this.correct = 0;
         this.missed = 0;
         this.startTime = Date.now(); // todo: link to song time
 
         this.entities = this.levelConfig.song.notes
-            .sort((note1, note2) => note1.time - note2.time)
-            .map((note: INoteCtx) => Object.assign(note, {
-                visible: false,
-                difference: null,
-                accessible: true,
-                failed: false,
-            }));
+          .sort((note1, note2) => note1.time - note2.time)
+          .map((note: INoteCtx) => Object.assign(note, {
+            visible: false,
+            difference: null,
+            accessible: true,
+            failed: false,
+          })) as unknown  as IGameEntitity[];
 
-        this.keyListener = document.addEventListener('keydown', (event) => {
+        this.keyListener = (event: KeyboardEvent)=> {
             const { keyCode } = event;
-            const keyId = this.board.find((key) => key.keyCode === keyCode).id;
+            const keyId = this.board?.find((key) => key.keyCode === keyCode)?.id;
             if (keyId !== undefined) {
                 const note = this.entities.find(
                     (currentNote) => currentNote.visible
                                      && currentNote.keyId === keyId
                                      && currentNote.accessible,
                 );
-                if (note && isOnFinishLine(note, canvas, this.levelConfig.speed)) {
+                if (note && isOnFinishLine(note, canvas, this.levelConfig?.speed ?? 0)) {
                     this.correct += 1;
                     note.accessible = false;
                     console.log('correct!');
@@ -77,7 +78,8 @@ class GameService {
                     console.log('error!');
                 }
             }
-        });
+        };
+         document.addEventListener('keydown', this.keyListener);
 
         this.loop();
     }
@@ -87,17 +89,17 @@ class GameService {
         const delta = now - this.then;
         if (delta > this.interval) {
             this.then = now - (delta % this.interval);
-            clearCanvas(this.canvas);
-            drawBoard(this.canvas, this.board);
-            this.entities = this.updateEntities(now - this.startTime);
-            drawEntitities(this.canvas, this.levelConfig, this.entities);
+            clearCanvas(this.canvas!);
+            drawBoard(this.canvas!, this.board!);
+            this.entities = this.updateEntities(now - this.startTime!);
+            drawEntitities(this.canvas!, this.levelConfig!, this.entities);
         }
     }
 
     updateEntities(milisecondsSinceStart:number):IGameEntitity[] {
         return this.entities.filter((entity) => {
             const difference = entity.time - milisecondsSinceStart / 1000;
-            if (difference > 0 && difference < this.levelConfig.speed) {
+            if (difference > 0 && difference < this.levelConfig!.speed) {
                 /* eslint-disable no-param-reassign */
                 entity.difference = difference;
                 /* eslint-disable no-param-reassign */
@@ -127,8 +129,8 @@ class GameService {
 
     stop() {
         cancelAnimationFrame(this.requestId);
-        this.requestId = undefined;
-        document.removeEventListener('keydown', this.keyListener);
+        this.requestId = 0;
+        document.removeEventListener('keydown', this.keyListener!);
         console.log(
             `Game Completed: correct = ${this.correct}, errors = ${this.errors}, missed = ${this.missed}`,
         );

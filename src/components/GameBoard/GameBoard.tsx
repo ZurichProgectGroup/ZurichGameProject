@@ -10,7 +10,7 @@ const GameBoard = (props: Props) => {
     } = props;
 
     useEffect(() => {
-        gameService.start(canvas.current);
+        gameService.start(canvas.current!);
         return () => {
             gameService.stop();
             onComplete();

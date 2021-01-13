@@ -1,5 +1,3 @@
-export type OwnProps = {
+export type Props = {
     onComplete: () => void,
 };
-
-export type Props = OwnProps;
