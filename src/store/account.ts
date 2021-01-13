@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const slice = createSlice({
   name: 'account',
@@ -7,8 +7,7 @@ const slice = createSlice({
   },
   reducers: {
     loginSuccess: (state, action) => {
-        console.log("loginSuccess", state, action);
-      state.user = action.payload;
+        state.user = action.payload;
     },
     logoutSuccess: (state, action) =>  {
       state.user = null;
@@ -20,7 +19,7 @@ export default slice.reducer
 
 const { loginSuccess, logoutSuccess } = slice.actions
 
-export const login = (data:unknown) => async dispatch => {
+export const login = (data:unknown) =>  async (dispatch:any):Promise<unknown>  => {
   try {
       //заглушка
       console.log("!login!!!!", data);
@@ -29,9 +28,10 @@ export const login = (data:unknown) => async dispatch => {
   } catch (e) {
     return console.error(e.message);
   }
+
 }
 
-export const logout = () => async dispatch => {
+export const logout = () => async (dispatch:any):Promise<unknown>  => {
   try {
     // await api.post('...logout/')
     return dispatch(logoutSuccess({}))
