@@ -14,32 +14,8 @@ class GameService {
     // TODO - load user level via api
     private level: number = 1;
 
-    private levelConfig?: ILevelCtx;
 
-    private then: number = 0;
-
-    private canvas?: HTMLCanvasElement;
-
-    private entities: IGameEntitity[] = [];
-
-    private interval: number = 0 ;
-
-    private correct: number = 0;
-
-    private errors: number = 0;
-
-    private missed: number = 0;
-
-    private requestId: number = 0;
-
-    private board?: IBoardCtx;
-
-    private startTime?: number;// todo - убрать!привязать к аудио
-
-    private keyListener?: (event: KeyboardEvent) => void;
-
-    start(canvas: HTMLCanvasElement) {
-
+    start(canvas: HTMLCanvasElement, onComplete:()=>void, onError:()=>void) {
         this.levelConfig = getConfigForLevel(this.level);
         this.board = this.levelConfig.board;
         this.then = Date.now();
@@ -50,6 +26,8 @@ class GameService {
         this.correct = 0;
         this.missed = 0;
         this.startTime = Date.now(); // todo: link to song time
+        this.onComplete = onComplete;
+        this.onError = onError;
 
         this.entities = this.levelConfig.song.notes
           .sort((note1, note2) => note1.time - note2.time)
@@ -107,7 +85,7 @@ class GameService {
                 return true;
             }
             if (difference <= -0.1) {
-                if (entity.visible === true && entity.accessible === true) {
+                if (entity.visible && entity.accessible) {
                     // entity.visible = false;
                     this.missed += 1;
                     console.log('missed!');
@@ -129,11 +107,11 @@ class GameService {
 
     stop() {
         cancelAnimationFrame(this.requestId);
-        this.requestId = 0;
-        document.removeEventListener('keydown', this.keyListener!);
-        console.log(
-            `Game Completed: correct = ${this.correct}, errors = ${this.errors}, missed = ${this.missed}`,
-        );
+        if (this.correct >= this.levelConfig.minimumPoints) {
+            this.onComplete();
+        } else {
+            this.onError();
+        }
     }
 }
 

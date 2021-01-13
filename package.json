@@ -61,6 +61,7 @@
     "webpack-dev-server": "3.11.0"
   },
   "dependencies": {
+    "classnames": "2.2.6",
     "normalize.css": "8.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
