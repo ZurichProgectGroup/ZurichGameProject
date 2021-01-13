@@ -1,5 +1,5 @@
 import React, { createRef, useEffect } from 'react';
-import './GameBoard.css';
+import css from './GameBoard.css';
 import gameService from '../../services/GameService';
 import type { Props } from './types';
 
