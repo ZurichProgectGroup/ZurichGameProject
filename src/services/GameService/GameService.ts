@@ -111,7 +111,7 @@ class GameService {
                 return true;
             }
             if (difference <= -0.1) {
-                if (entity.visible === true && entity.accessible === true) {
+                if (entity.visible && entity.accessible) {
                     // entity.visible = false;
                     this.missed += 1;
                     console.log('missed!');
