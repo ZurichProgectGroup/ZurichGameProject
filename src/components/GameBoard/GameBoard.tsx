@@ -1,5 +1,5 @@
 import React, { createRef, useEffect } from 'react';
-import css from './GameBoard.css';
+import  './GameBoard.css';
 import gameService from '../../services/GameService';
 import type { Props } from './types';
 
@@ -7,7 +7,7 @@ const GameBoard = ({onComplete, onError}: Props) => {
     const canvas = createRef<HTMLCanvasElement>();
 
     useEffect(() => {
-        gameService.start(canvas.current, onComplete, onError);
+        gameService.start(canvas!.current!, onComplete, onError);
         return () => {
             gameService.stop();
         };

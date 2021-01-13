@@ -13,7 +13,20 @@ import {
 class GameService {
     // TODO - load user level via api
     private level: number = 1;
-
+    private levelConfig?: ILevelCtx;
+    private then: number = 0;
+    private canvas?: HTMLCanvasElement;
+    private entities: IGameEntitity[] = [];
+    private interval: number = 0 ;
+    private correct: number = 0;
+    //private errors: number = 0;
+    //private missed: number = 0;
+    private requestId: number = 0;
+    private board?: IBoardCtx;
+    private startTime?: number;// todo - убрать!привязать к аудио
+    private keyListener?: (event: KeyboardEvent) => void;
+    private onComplete!: () => void;
+    private onError!: () => void;
 
     start(canvas: HTMLCanvasElement, onComplete:()=>void, onError:()=>void) {
         this.levelConfig = getConfigForLevel(this.level);
@@ -22,9 +35,9 @@ class GameService {
         this.canvas = canvas;
         this.interval = 1000 / 60; // 60fps
         this.requestId = 0;
-        this.errors = 0;
+        //this.errors = 0;
         this.correct = 0;
-        this.missed = 0;
+        //this.missed = 0;
         this.startTime = Date.now(); // todo: link to song time
         this.onComplete = onComplete;
         this.onError = onError;
@@ -52,7 +65,7 @@ class GameService {
                     note.accessible = false;
                     console.log('correct!');
                 } else {
-                    this.errors += 1;
+                    //this.errors += 1;
                     console.log('error!');
                 }
             }
@@ -87,7 +100,7 @@ class GameService {
             if (difference <= -0.1) {
                 if (entity.visible && entity.accessible) {
                     // entity.visible = false;
-                    this.missed += 1;
+                    //this.missed += 1;
                     console.log('missed!');
                 }
                 return false;
@@ -107,7 +120,7 @@ class GameService {
 
     stop() {
         cancelAnimationFrame(this.requestId);
-        if (this.correct >= this.levelConfig.minimumPoints) {
+        if (this.correct >= this.levelConfig!.minimumPoints) {
             this.onComplete();
         } else {
             this.onError();
