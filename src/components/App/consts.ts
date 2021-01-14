@@ -1,8 +1,8 @@
 const ROUTES = {
     account: '/account',
     leaderboard: '/leaderboard',
+    login:'/login',
     main: '/',
-    login: '/login',
     register: '/register',
 };
 
