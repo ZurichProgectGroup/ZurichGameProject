@@ -21,13 +21,17 @@ module.exports = (env, opt) => {
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             alias: {
+                Audio: path.resolve(__dirname, 'src/audio/'),
                 Images: path.resolve(__dirname, 'src/images/'),
                 Components: path.resolve(__dirname, 'src/components/'),
+                Configs: path.resolve(__dirname, 'src/configs/'),
                 Utils: path.resolve(__dirname, 'src/utils/'),
                 Pages: path.resolve(__dirname, 'src/pages/'),
                 Store: path.resolve(__dirname, 'src/store/'),
                 Mocks: path.resolve(__dirname, 'src/mocks/'),
                 Types: path.resolve(__dirname, 'src/types/'),
+                Configs: path.resolve(__dirname, 'src/configs/'),
+                Services: path.resolve(__dirname, 'src/services/'),
             },
         },
         module: {
@@ -46,7 +50,7 @@ module.exports = (env, opt) => {
                     ],
                 },
                 {
-                    test: /\.(png|jpe?g|gif|svg)$/i,
+                    test: /\.(png|jpe?g|gif|svg|mp3)$/i,
                     use: [
                         {
                             loader: 'file-loader',
