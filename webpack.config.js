@@ -30,7 +30,6 @@ module.exports = (env, opt) => {
                 Store: path.resolve(__dirname, 'src/store/'),
                 Mocks: path.resolve(__dirname, 'src/mocks/'),
                 Types: path.resolve(__dirname, 'src/types/'),
-                Configs: path.resolve(__dirname, 'src/configs/'),
                 Services: path.resolve(__dirname, 'src/services/'),
             },
         },
@@ -64,13 +63,16 @@ module.exports = (env, opt) => {
             port: 9000,
             hot: true,
             open: true,
-            historyApiFallback: true,
+            historyApiFallback: {
+                index: 'index.html',
+            },
         },
         plugins: [
             new HtmlWebpackPlugin({
                 template: './www/index.html',
                 cache: false,
                 title: 'Beat Game',
+                publicPath: '/',
             }),
             new MiniCssExtractPlugin(),
             new CleanWebpackPlugin(),

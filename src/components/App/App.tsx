@@ -8,6 +8,7 @@ import Home from 'Pages/Home';
 import Account from 'Pages/Account';
 import ErrorPage from 'Pages/ErrorPage';
 import LeaderboardPage from 'Pages/LeaderboardPage';
+import ForumPage from 'Pages/ForumPage';
 import Login from 'Pages/Login';
 import Register from 'Pages/Register';
 import ROUTES from './consts';
@@ -22,6 +23,7 @@ const App = () => (
             <Route exact path={ROUTES.login} component={Login} />
             <Route exact path={ROUTES.register} component={Register} />
             <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
+            <Route path={ROUTES.forum} component={ForumPage} />
             <Route component={ErrorPage} />
         </Switch>
     </Router>

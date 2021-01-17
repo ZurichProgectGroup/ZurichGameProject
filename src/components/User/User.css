@@ -1,0 +1,15 @@
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.user__avatar {
+    margin-right: 7px;
+}
+
+.user__name {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+}

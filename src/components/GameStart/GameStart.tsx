@@ -1,5 +1,4 @@
 import React from 'react';
-import './GameStart.css';
 import type { Props } from './types';
 
 const GameStart = (props: Props) => {

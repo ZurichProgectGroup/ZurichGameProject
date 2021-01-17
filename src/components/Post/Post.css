@@ -1,0 +1,15 @@
+.post {
+    position: relative;
+}
+
+.post__title {
+    display: block;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.post__description {
+    font-size: 14px;
+    margin-bottom: 20px;
+}

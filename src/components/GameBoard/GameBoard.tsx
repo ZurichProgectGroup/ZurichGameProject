@@ -1,9 +1,9 @@
 import React, { createRef, useEffect } from 'react';
-import  './GameBoard.css';
+import './GameBoard.css';
 import gameService from '../../services/GameService';
 import type { Props } from './types';
 
-const GameBoard = ({onComplete, onError}: Props) => {
+const GameBoard = ({ onComplete, onError }: Props) => {
     const canvas = createRef<HTMLCanvasElement>();
 
     useEffect(() => {

@@ -47,6 +47,14 @@
         }
     }
 
+    &_super-small {
+        --size: 24px;
+
+        .avatar__letter {
+            font-size: 14px;
+        }
+    }
+
     &_medium {
         --size: 56px;
 

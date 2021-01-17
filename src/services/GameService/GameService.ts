@@ -13,19 +13,31 @@ import {
 class GameService {
     // TODO - load user level via api
     private level: number = 1;
+
     private levelConfig?: ILevelCtx;
+
     private then: number = 0;
+
     private canvas?: HTMLCanvasElement;
+
     private entities: IGameEntitity[] = [];
+
     private interval: number = 0 ;
+
     private correct: number = 0;
-    //private errors: number = 0;
-    //private missed: number = 0;
+
+    // private errors: number = 0;
+    // private missed: number = 0;
     private requestId: number = 0;
+
     private board?: IBoardCtx;
+
     private startTime?: number;// todo - убрать!привязать к аудио
+
     private keyListener?: (event: KeyboardEvent) => void;
+
     private onComplete!: () => void;
+
     private onError!: () => void;
 
     start(canvas: HTMLCanvasElement, onComplete:()=>void, onError:()=>void) {
@@ -35,23 +47,23 @@ class GameService {
         this.canvas = canvas;
         this.interval = 1000 / 60; // 60fps
         this.requestId = 0;
-        //this.errors = 0;
+        // this.errors = 0;
         this.correct = 0;
-        //this.missed = 0;
+        // this.missed = 0;
         this.startTime = Date.now(); // todo: link to song time
         this.onComplete = onComplete;
         this.onError = onError;
 
         this.entities = this.levelConfig.song.notes
-          .sort((note1, note2) => note1.time - note2.time)
-          .map((note: INoteCtx) => Object.assign(note, {
-            visible: false,
-            difference: null,
-            accessible: true,
-            failed: false,
-          })) as unknown  as IGameEntitity[];
+            .sort((note1, note2) => note1.time - note2.time)
+            .map((note: INoteCtx) => Object.assign(note, {
+                visible: false,
+                difference: null,
+                accessible: true,
+                failed: false,
+            })) as unknown as IGameEntitity[];
 
-        this.keyListener = (event: KeyboardEvent)=> {
+        this.keyListener = (event: KeyboardEvent) => {
             const { keyCode } = event;
             const keyId = this.board?.find((key) => key.keyCode === keyCode)?.id;
             if (keyId !== undefined) {
@@ -65,12 +77,12 @@ class GameService {
                     note.accessible = false;
                     console.log('correct!');
                 } else {
-                    //this.errors += 1;
+                    // this.errors += 1;
                     console.log('error!');
                 }
             }
         };
-         document.addEventListener('keydown', this.keyListener);
+        document.addEventListener('keydown', this.keyListener);
 
         this.loop();
     }
@@ -100,7 +112,7 @@ class GameService {
             if (difference <= -0.1) {
                 if (entity.visible && entity.accessible) {
                     // entity.visible = false;
-                    //this.missed += 1;
+                    // this.missed += 1;
                     console.log('missed!');
                 }
                 return false;
