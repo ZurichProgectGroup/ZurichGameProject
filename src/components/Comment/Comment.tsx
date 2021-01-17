@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import './Comment.css';
 import InlineDotedList from 'Components/InlineDotedList';
 import cn from 'classnames';
@@ -14,10 +14,13 @@ const Comment = ({ comment }: Props) => {
     const [isAnswerOpen, setIsAnswerOpen] = useState(false);
 
     const isAnswer = useMemo(() => comment.answers === undefined, [comment.answers]);
+    const hasAnswers = useMemo(() => Boolean(comment.answers?.length), [comment.answers]);
 
-    const hasComments = useMemo(() => (
-        comment.answers ? Boolean(comment.answers.length) : false
-    ), [comment.answers]);
+    const handleToggleAnswers = useCallback(() => setIsAnswerOpen(!isAnswerOpen), [isAnswerOpen]);
+    const handleToggleComments = useCallback(
+        () => setIsCommentsOpen(!isCommentsOpen),
+        [isCommentsOpen],
+    );
 
     return (
         <div className="comment">
@@ -40,7 +43,7 @@ const Comment = ({ comment }: Props) => {
                         })}
                         type="button"
                         isButton
-                        onClick={() => setIsAnswerOpen(!isAnswerOpen)}
+                        onClick={handleToggleAnswers}
                     >
                         <span className="material-icons">
                             {isAnswerOpen ? 'close' : 'chat_bubble_outline'}
@@ -53,14 +56,14 @@ const Comment = ({ comment }: Props) => {
                 </p>
             </div>
             <div className={cn('comment__answers', {
-                'comment__answers_has-comment': hasComments,
+                'comment__answers_has-comment': hasAnswers,
             })}
             >
                 {
-                    hasComments && (
+                    hasAnswers && (
                         <ToggleButton
                             isOpen={isCommentsOpen}
-                            onClick={() => setIsCommentsOpen(!isCommentsOpen)}
+                            onClick={handleToggleComments}
                             className="comment__answer-toggle"
                         >
                             {!isAnswerOpen && `${comment.answers?.length} комментариев`}
@@ -70,12 +73,12 @@ const Comment = ({ comment }: Props) => {
                 {
                     isAnswerOpen && (
                         <div className="comment__create">
-                            <CreateComment onSubmit={() => {}} />
+                            <CreateComment />
                         </div>
                     )
                 }
                 {
-                    isCommentsOpen && hasComments && (
+                    isCommentsOpen && hasAnswers && (
                         <div className="comment__answers-list">
                             <CommentList comments={comment.answers || []} hideTitle />
                         </div>

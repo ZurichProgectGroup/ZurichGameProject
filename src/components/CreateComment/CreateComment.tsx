@@ -4,7 +4,7 @@ import Textarea from 'Components/Textarea';
 import Button from 'Components/Button';
 import type { Props } from './types';
 
-const CreateComment = ({ value, onChange, onSubmit }: Props) => {
+const CreateComment = ({ value, onChange, onSubmit = () => {} }: Props) => {
     const handleSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         onSubmit(e);

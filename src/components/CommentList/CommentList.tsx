@@ -7,9 +7,9 @@ const CommentList = ({ comments, hideTitle } : Props) => (
     <div className="comment-list">
         {
             !hideTitle && (
-                <b className="comment-list__title">
+                <h3 className="comment-list__title">
                     {`Комментарии (${comments.length}):`}
-                </b>
+                </h3>
             )
         }
         <div className="comment-list__items">
