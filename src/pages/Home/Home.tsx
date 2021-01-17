@@ -1,20 +1,26 @@
 import React from 'react';
 import './Home.css';
-import Input from 'Components/Input';
-import Button from 'Components/Button';
-import LinkButton from 'Components/LinkButton';
-import Avatar from 'Components/Avatar';
+import logo from 'Images/logo.png';
+import cup from 'Images/cup.png';
+import { Avatar, Button, LinkButton } from 'Components';
+import { ButtonSize, ButtonVariant } from 'Components/Button/types';
 
 const Home = () => (
-    <div className="wrapper">
-        <Input labelText="username" />
-        <Input labelText="Label" description="Description" />
-        <Input labelText="password" errorText="wrong password" />
-        <Button>Sing in</Button>
-        <LinkButton to="/404">I DON’T HAVE AN ACCOUNT</LinkButton>
-        <Avatar name="igor" size="small" url="https://picsum.photos/200" />
-        <Avatar name="igor" size="medium" url="https://picsum.photos/200" />
-        <Avatar name="igor" url="https://picsum.photos/200" hasChange />
+    <div className="home">
+        <div className="home__header">
+            <Avatar size="medium" name="igor" url="https://picsum.photos/200" />
+            <LinkButton to="/leaderboard">
+                <img src={cup} alt="cup" />
+            </LinkButton>
+        </div>
+        <img className="home__logo" src={logo} width={685} height={320} alt="logo" />
+        <Button
+            className="home__button"
+            variant={ButtonVariant.Filled}
+            size={ButtonSize.Large}
+        >
+            Start
+        </Button>
     </div>
 );
 

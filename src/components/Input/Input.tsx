@@ -8,13 +8,14 @@ const Input = (props: Props) => {
         errorText,
         labelText,
         description,
+        className,
         ...inputProps
     } = props;
 
     const actualDescription = useMemo(() => description || errorText, [description, errorText]);
 
     return (
-        <label className={cn('input', {
+        <label className={cn('input', className, {
             input_warn: Boolean(errorText),
         })}
         >
