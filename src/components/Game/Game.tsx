@@ -15,7 +15,7 @@ const Game = () => {
         setGameState(GameState.complete);
     }, []);
 
-     const onError = useCallback(() => {
+    const onError = useCallback(() => {
         setGameState(GameState.error);
     }, []);
 

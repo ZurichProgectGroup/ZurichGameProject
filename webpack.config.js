@@ -30,7 +30,6 @@ module.exports = (env, opt) => {
                 Store: path.resolve(__dirname, 'src/store/'),
                 Mocks: path.resolve(__dirname, 'src/mocks/'),
                 Types: path.resolve(__dirname, 'src/types/'),
-                Configs: path.resolve(__dirname, 'src/configs/'),
                 Services: path.resolve(__dirname, 'src/services/'),
             },
         },
