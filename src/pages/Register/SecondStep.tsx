@@ -7,6 +7,7 @@ import ROUTES from 'Components/App/consts';
 import type { SecondStepProps } from './types';
 
 const SecondStep = ({
+    goNextStep,
     goPrevStep,
     email,
     setEmail,
@@ -15,6 +16,9 @@ const SecondStep = ({
     phone,
     setPhone,
 }: SecondStepProps) => (
+
+
+
     <>
         <Input
             className="register-page__input"
@@ -37,7 +41,7 @@ const SecondStep = ({
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
         />
-        <Button className="register-page__button">Register</Button>
+        <Button  onClick={goNextStep} className="register-page__button">Register</Button>
         <LinkButton onClick={goPrevStep} to={ROUTES.register}>Back</LinkButton>
     </>
 );

@@ -4,19 +4,38 @@ import {
     Card, Button, Title, LinkButton, Input,
 } from 'Components';
 import ROUTES from 'Components/App/consts';
-import {useDispatch} from 'react-redux';
+import {useDispatch,useSelector, connect} from 'react-redux';
 import {login} from 'Store/account';
+import {IStoreCTX} from 'Store';
+import {Redirect}  from 'react-router-dom';
+const selectUser = (state: IStoreCTX) => state.account.user;
 
 const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+
     const dispatch =  useDispatch();
+    const selectUser = (state: IStoreCTX) => state.account.user;
+    const userData = useSelector(selectUser);
+
+    if (userData){
+        return (<Redirect  to = {ROUTES.main} />)
+    }
+
     const handleFormSubmit = useCallback((event)=>{
         event.preventDefault();
-        dispatch(login(event.target))
+        dispatch(login({login:userName, password:password}));
+    },[]);
+    const handleUserName = useCallback((e)=>{
+        setUserName(e.target.value)
+    },[]);
+    const handlePassword = useCallback((e)=>{
+        setPassword(e.target.value)
     },[]);
 
+
     return (
+
         <div className="login-page">
             <Card className="login-page__card">
                 <Title className="login-page__title" text="Log in" tagName="h1" />
@@ -26,15 +45,17 @@ const Login = () => {
                     <Input
                         className="login-page__input"
                         labelText="username"
+                        name="login"
                         value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
+                        onChange={handleUserName}
                     />
                     <Input
                         className="login-page__input"
                         labelText="password"
+                        name="password"
                         type="password"
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={handlePassword}
                     />
                     <Button type="submit" className="login-page__button">Sign in</Button>
                 </form>
@@ -44,4 +65,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default  connect (selectUser)(Login);
