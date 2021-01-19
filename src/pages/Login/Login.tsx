@@ -4,15 +4,18 @@ import {
     Card, Button, Title, LinkButton, Input,
 } from 'Components';
 import ROUTES from 'Components/App/consts';
+
 import {useDispatch,useSelector, connect} from 'react-redux';
 import {login} from 'Store/account';
 import {IStoreCTX} from 'Store';
 import {Redirect}  from 'react-router-dom';
 const selectUser = (state: IStoreCTX) => state.account.user;
 
+
 const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
+
 
     const dispatch =  useDispatch();
     const selectUser = (state: IStoreCTX) => state.account.user;
@@ -41,7 +44,8 @@ const Login = () => {
                 <Title className="login-page__title" text="Log in" tagName="h1" />
                 <form
                     onSubmit={handleFormSubmit}
-                    className="login-page__form">
+                    className="login-page__form"
+                >
                     <Input
                         className="login-page__input"
                         labelText="username"

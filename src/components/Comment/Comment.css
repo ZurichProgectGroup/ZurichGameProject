@@ -1,0 +1,66 @@
+.comment {
+    position: relative;
+}
+
+.comment__block {
+    background: rgba(var(--bg-color-rgb), 0.8);
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.comment__author {
+    position: relative;
+}
+
+.comment__text {
+    font-size: 14px;
+}
+
+.comment__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.comment__answer-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: normal;
+
+    .material-icons {
+        margin-right: 5px;
+        font-size: 18px;
+    }
+
+    &_open {
+        color: var(--warn);
+    }
+
+    &_hide {
+        display: none;
+    }
+}
+
+.comment__answers {
+    position: relative;
+    padding-left: 40px;
+    padding-top: 20px;
+
+    &_has-comment {
+        margin-bottom: 40px;
+    }
+}
+
+.comment__answer-toggle {
+    position: absolute;
+    top: 10px;
+    left: -3px;
+}
+
+.comment__create {
+    margin-bottom: 20px;
+}

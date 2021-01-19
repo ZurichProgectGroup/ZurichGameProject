@@ -22,13 +22,16 @@ module.exports = (env, opt) => {
             extensions: ['.tsx', '.ts', '.js'],
             alias: {
                 Api: path.resolve(__dirname, 'src/api/'),
+                Audio: path.resolve(__dirname, 'src/audio/'),
                 Images: path.resolve(__dirname, 'src/images/'),
                 Components: path.resolve(__dirname, 'src/components/'),
+                Configs: path.resolve(__dirname, 'src/configs/'),
                 Utils: path.resolve(__dirname, 'src/utils/'),
                 Pages: path.resolve(__dirname, 'src/pages/'),
                 Store: path.resolve(__dirname, 'src/store/'),
                 Mocks: path.resolve(__dirname, 'src/mocks/'),
                 Types: path.resolve(__dirname, 'src/types/'),
+                Services: path.resolve(__dirname, 'src/services/'),
             },
         },
         module: {
@@ -47,7 +50,7 @@ module.exports = (env, opt) => {
                     ],
                 },
                 {
-                    test: /\.(png|jpe?g|gif|svg)$/i,
+                    test: /\.(png|jpe?g|gif|svg|mp3)$/i,
                     use: [
                         {
                             loader: 'file-loader',
@@ -61,13 +64,16 @@ module.exports = (env, opt) => {
             port: 9000,
             hot: true,
             open: true,
-            historyApiFallback: true,
+            historyApiFallback: {
+                index: 'index.html',
+            },
         },
         plugins: [
             new HtmlWebpackPlugin({
                 template: './www/index.html',
                 cache: false,
                 title: 'Beat Game',
+                publicPath: '/',
             }),
             new MiniCssExtractPlugin(),
             new CleanWebpackPlugin(),

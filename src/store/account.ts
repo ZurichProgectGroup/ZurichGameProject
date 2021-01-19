@@ -3,24 +3,25 @@ import {authApiInstance} from 'Api/ApiInstances';
 import {stringKeyString} from 'Utils/custom_types';
 
 const slice = createSlice({
-  name: 'account',
-  initialState: {
-    user: null,
-  },
-  reducers: {
-    loginSuccess: (state, action) => {
-        console.log("action.payload", action.payload);
-        state.user = action.payload;
+    name: 'account',
+    initialState: {
+        user: null,
     },
-    logoutSuccess: (state, action) =>  {
-      state.user = null;
+    reducers: {
+        loginSuccess: (state, action) => {
+            // eslint-disable-next-line no-param-reassign
+            state.user = action.payload;
+        },
+        logoutSuccess: (state) => {
+            // eslint-disable-next-line no-param-reassign
+            state.user = null;
+        },
     },
-  },
 });
 
-export default slice.reducer
+export default slice.reducer;
 
-const { loginSuccess, logoutSuccess } = slice.actions
+const { loginSuccess, logoutSuccess } = slice.actions;
 
 export const login = (data:stringKeyString) =>  async (dispatch:any):Promise<unknown>  => {
 

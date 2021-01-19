@@ -33,6 +33,7 @@ const Avatar = (props: Props) => {
         <div className={cn('avatar', {
             avatar_small: size === 'small',
             avatar_medium: size === 'medium',
+            'avatar_super-small': size === 'super-small',
             'avatar_no-border': Boolean(hideBorder),
         })}
         >
