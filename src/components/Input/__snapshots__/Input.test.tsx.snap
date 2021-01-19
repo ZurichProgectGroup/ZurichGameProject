@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<DocumentFragment>
+  <label
+    class="input"
+  >
+    <span
+      class="input__label"
+    >
+      test input
+    </span>
+    <input
+      class="input__field"
+    />
+    <span
+      class="input__desc input__desc_hidden"
+    />
+  </label>
+</DocumentFragment>
+`;
