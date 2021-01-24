@@ -4,6 +4,7 @@ const ROUTES = {
     leaderboard: '/leaderboard',
     forum: '/forum',
     login: '/login',
+    game: '/game',
     register: '/register',
 };
 
