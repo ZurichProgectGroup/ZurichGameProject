@@ -11,6 +11,7 @@ import LeaderboardPage from 'Pages/LeaderboardPage';
 import ForumPage from 'Pages/ForumPage';
 import Login from 'Pages/Login';
 import Register from 'Pages/Register';
+import GamePage from 'Pages/GamePage';
 import ROUTES from './consts';
 
 const App = () => (
@@ -18,7 +19,7 @@ const App = () => (
         <Switch>
             <Route exact path={ROUTES.main} component={Home} />
             <Route exact path={ROUTES.account} component={Account} />
-            <Route exact path={ROUTES.account} component={Account} />
+            <Route exact path={ROUTES.game} component={GamePage} />
             <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
             <Route exact path={ROUTES.login} component={Login} />
             <Route exact path={ROUTES.register} component={Register} />
