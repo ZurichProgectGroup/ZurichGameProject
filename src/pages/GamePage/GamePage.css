@@ -2,4 +2,5 @@
     display: grid;
     grid-template: 1fr / 1fr;
     width: 100%;
+    background: url("Images/game-bg.png") center/ cover no-repeat;
 }

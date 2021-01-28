@@ -1,10 +1,10 @@
-import { IBoardCtx } from 'Configs/BoardConfig/IBoardConfig';
 import { ILevelCtx } from 'Configs/LevelConfig/ILevelConfig';
+import BeatItemRenderer from 'Services/BeatItemRenderer';
+import BoardRenderer from 'Services/BoardRenderer';
+import { ColumnsOrder } from 'Services/BeatItemRenderer/consts';
+import { ACTION_LINE_HEIGHT, ITEM_WIDTH } from 'Services/BoardRenderer/consts';
 import { IGameEntitity } from './IGameService';
 
-export const ELEMENT_SIZE = 20;
-export const FINAL_LINE_HEIGHT = ELEMENT_SIZE;
-export const LATENCY_FAIL_SAFE = 10;
 export const getContext = (canvas: HTMLCanvasElement) => canvas.getContext('2d');
 
 export const clearCanvas = (canvas: HTMLCanvasElement) => {
@@ -12,73 +12,28 @@ export const clearCanvas = (canvas: HTMLCanvasElement) => {
     ctx?.clearRect(0, 0, canvas.width, canvas.height);
 };
 
-export const drawBoardLine = (
-    canvas: HTMLCanvasElement,
-    x: number,
-    height: number,
-) => {
-    const ctx = getContext(canvas)!;
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = 'black';
-
-    ctx.beginPath();
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x, height);
-    ctx.stroke();
-    ctx.closePath();
-};
-
-export const drawFinalLine = (canvas: HTMLCanvasElement) => {
-    const ctx = getContext(canvas)!;
-    ctx.fillStyle = 'purple';
-    ctx.fillRect(
-        0,
-        canvas.height - FINAL_LINE_HEIGHT,
-        canvas.width,
-        FINAL_LINE_HEIGHT,
-    );
-    ctx.fill();
-};
-
-export const getEementOffset = (
-    canvas: HTMLCanvasElement,
-    board: IBoardCtx,
-    position: number,
-): number => {
-    const percentage = 100 / board.length / 100;
-    const offset = canvas.width * 0.1;
-    return canvas.width * position * percentage + offset;
-};
-
-export const drawBoard = (canvas: HTMLCanvasElement, board: IBoardCtx) => {
-    for (let i = 0; i < board.length; i += 1) {
-        drawBoardLine(canvas, getEementOffset(canvas, board, i), canvas.height);
-    }
-    drawFinalLine(canvas);
-};
-
 export const drawEntitity = (
-    canvas: HTMLCanvasElement,
+    board: BoardRenderer,
     entity: IGameEntitity,
     level: ILevelCtx,
+    beatItems: {[key: string] : BeatItemRenderer},
 ) => {
-    const ctx = getContext(canvas)!;
     const entitityBoardKey = level.board.find((key) => key.id === entity.keyId)!;
-    const x = getEementOffset(canvas, level.board, entitityBoardKey.id);
+    const canvas = board.getCanvas();
     const y = canvas.height - canvas.height * (entity.difference / level.speed);
-    ctx.fillStyle = entitityBoardKey.color;
-    ctx.fillRect(x - ELEMENT_SIZE / 2, y, ELEMENT_SIZE, ELEMENT_SIZE);
-    ctx.fill();
+    const beatItem = beatItems[entitityBoardKey.direction];
+    board.renderItem(beatItem, ColumnsOrder.indexOf(entitityBoardKey.direction) + 1, y);
 };
 
 export const drawEntitities = (
-    canvas: HTMLCanvasElement,
+    board: BoardRenderer,
     level: ILevelCtx,
     entities: IGameEntitity[],
+    beatItems: {[key: string] : BeatItemRenderer},
 ) => {
     entities.forEach((entity) => {
         if (entity.visible && entity.accessible) {
-            drawEntitity(canvas, entity, level);
+            drawEntitity(board, entity, level, beatItems);
         }
     });
 };
@@ -89,10 +44,10 @@ export const isOnFinishLine = (
     speed:number,
 ) => {
     const position = canvas.height - canvas.height * (entity.difference / speed);
-
+    const actionLineStart = canvas.height - ACTION_LINE_HEIGHT - 100;
     return (
-        position <= canvas.height + LATENCY_FAIL_SAFE
-    && position >= canvas.height - FINAL_LINE_HEIGHT - LATENCY_FAIL_SAFE
+        position <= actionLineStart + ACTION_LINE_HEIGHT
+        && position >= actionLineStart - ITEM_WIDTH / 2
     );
 };
 
