@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {authApiInstance} from 'Api/ApiInstances';
-import {stringKeyString} from 'Utils/custom_types';
+import { authApiInstance } from 'Api';
+import { StringKeyString } from 'Utils/custom_types';
 
 const slice = createSlice({
     name: 'account',
@@ -16,57 +16,59 @@ const slice = createSlice({
             // eslint-disable-next-line no-param-reassign
             state.user = null;
         },
+        loginError: (state) => {
+            // eslint-disable-next-line no-param-reassign
+            state.user = null;
+        },
     },
 });
 
 export default slice.reducer;
 
-const { loginSuccess, logoutSuccess } = slice.actions;
+const { loginSuccess, logoutSuccess, loginError } = slice.actions;
 
-export const login = (data:stringKeyString) =>  async (dispatch:any):Promise<unknown>  => {
+export const login = (data:StringKeyString) => async (dispatch:any):Promise<unknown> => {
+    try {
+        await authApiInstance.request(data);
+        const user = await authApiInstance.update();
+        dispatch(loginSuccess(user));
+        return user;
+    } catch (e) {
+        dispatch(loginError());
+        return null;
+    }
+};
 
-  try {
+export const register = (data:StringKeyString) => async (dispatch:any):Promise<unknown> => {
+    try {
+        await authApiInstance.create(data);
+        const user = await authApiInstance.update();
+        dispatch(loginSuccess(user));
+        return user;
+    } catch (e) {
+        dispatch(loginError());
+        return null;
+    }
+};
 
-    await authApiInstance.request(data);
-    let user = await authApiInstance.update();
-    dispatch(loginSuccess(user.response));
-  } catch (e) {
-    return console.error(e.message);
-  }
+export const logout = () => async (dispatch:any):Promise<unknown> => {
+    try {
+        const res = await authApiInstance.delete();
+        dispatch(logoutSuccess());
+        return res;
+    } catch (e) {
+        dispatch(loginError());
+        return null;
+    }
+};
 
-}
-
-export const register = (data:stringKeyString) =>  async (dispatch:any):Promise<unknown>  => {
-
- try {
-    await authApiInstance.create(data);
-    let user = await authApiInstance.update();
-    dispatch(loginSuccess(user.response));
-    return user;
-  } catch (e) {
-    return console.error(e.message);
-  }
-
-}
-
-export const logout = () => async (dispatch:any):Promise<unknown>  => {
-  try {
-    await authApiInstance.delete();
-    dispatch(logoutSuccess({}))
-  } catch (e) {
-    return console.error(e.message);
-  }
-}
-
-
-export const getUser = () =>  async (dispatch:any):Promise<unknown>  => {
-
-  try {
-
-    let res = await authApiInstance.update();
-    dispatch(loginSuccess(res.response));
-  } catch (e) {
-    return console.error(e.message);
-  }
-
-}
+export const getUser = () => async (dispatch:any):Promise<unknown> => {
+    try {
+        const res = await authApiInstance.update();
+        dispatch(loginSuccess(res));
+        return res;
+    } catch (e) {
+        dispatch(loginError());
+        return null;
+    }
+};

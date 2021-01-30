@@ -1,7 +1,7 @@
-import {stringKeyString} from 'Utils/custom_types';
+import { StringKeyString } from 'Utils/custom_types';
 
 export interface IHTTPTransportCtx {
-	data?: stringKeyString|FormData;
-	headers?: stringKeyString;
-	timeout?: number;
+    data?: StringKeyString|FormData;
+    headers?: StringKeyString;
+    timeout?: number;
 }

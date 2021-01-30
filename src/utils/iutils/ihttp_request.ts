@@ -1,14 +1,15 @@
-import {stringKeyString} from '../custom_types';
+import { StringKeyString } from '../custom_types';
+
 export enum METHOD {
-	GET = 'GET',
-	PUT = 'PUT',
-	POST = 'POST',
-	DELETE = 'DELETE'
+    GET = 'GET',
+    PUT = 'PUT',
+    POST = 'POST',
+    DELETE = 'DELETE',
 }
 
 export interface IRequestCTX {
-	method: METHOD;
-	data?: unknown;
-	headers?: stringKeyString;
+    method: METHOD;
+    data?: unknown;
+    headers?: StringKeyString;
 
 }

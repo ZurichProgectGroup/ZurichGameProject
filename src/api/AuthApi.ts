@@ -1,20 +1,20 @@
-import {stringKeyString} from 'Utils/custom_types';
-import {authTransportInstance} from './TransportInstances';
-import {BaseAPI} from 'Api/BaseApi';
-export default class AuthAPI extends BaseAPI {
-	async create(data: stringKeyString): Promise<XMLHttpRequest> {
-		return authTransportInstance.post('/signup', {data});
-	}
+import { StringKeyString } from 'Utils/custom_types';
+import { authTransportInstance } from './TransportInstances';
 
-	async request(data: stringKeyString): Promise<XMLHttpRequest> {
-		return authTransportInstance.post('/signin', {data});
-	}
+export default class AuthAPI {
+    static async create(data: StringKeyString): Promise<XMLHttpRequest> {
+        return authTransportInstance.post('/signup', { data });
+    }
 
-	async update(): Promise<XMLHttpRequest> {
-		return authTransportInstance.get('/user');
-	}
+    static async request(data: StringKeyString): Promise<XMLHttpRequest> {
+        return authTransportInstance.post('/signin', { data });
+    }
 
-	async delete(): Promise<XMLHttpRequest> {
-		return authTransportInstance.post('/logout');
-	}
+    static async update(): Promise<XMLHttpRequest> {
+        return authTransportInstance.get('/user');
+    }
+
+    static async delete(): Promise<XMLHttpRequest> {
+        return authTransportInstance.post('/logout');
+    }
 }

@@ -1,16 +1,14 @@
+import { chatUsersTransportInstance } from 'Api/TransportInstances';
+import { StringKeyString } from 'Utils/custom_types';
 
-import {chatUsersTransportInstance} from 'Api/TransportInstances';
-import {BaseAPI} from 'Api/BaseApi';
-import {stringKeyString} from 'Utils/custom_types';
-export default class ChatUsersAPI extends BaseAPI {
+export default class ChatUsersAPI {
+    // Add users to chat
+    static async create(data: StringKeyString): Promise<XMLHttpRequest> {
+        return chatUsersTransportInstance.put('/', { data });
+    }
 
-	// Add users to chat
-	async create(data: stringKeyString): Promise<XMLHttpRequest> {
-		return chatUsersTransportInstance.put('/', {data});
-	}
-
-	// Delete users from chat
-	async request(data: stringKeyString): Promise<XMLHttpRequest> {
-		return chatUsersTransportInstance.delete('/', {data});
-	}
+    // Delete users from chat
+    static async request(data: StringKeyString): Promise<XMLHttpRequest> {
+        return chatUsersTransportInstance.delete('/', { data });
+    }
 }

@@ -1,5 +1,5 @@
-import { stringKeyString } from 'Utils/custom_types';
+import { StringKeyString } from 'Utils/custom_types';
 
 export interface IStoreCTX {
-    account:{user: stringKeyString}
+    account:{user: StringKeyString}
 }

@@ -1,2 +1,2 @@
 export { default } from './Store';
-export {IStoreCTX} from './types'
+export { IStoreCTX } from './types';
