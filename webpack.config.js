@@ -31,6 +31,7 @@ module.exports = (env, opt) => {
                 Mocks: path.resolve(__dirname, 'src/mocks/'),
                 Types: path.resolve(__dirname, 'src/types/'),
                 Services: path.resolve(__dirname, 'src/services/'),
+                Hooks: path.resolve(__dirname, 'src/hooks/'),
             },
         },
         module: {
