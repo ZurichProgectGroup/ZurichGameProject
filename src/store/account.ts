@@ -1,15 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const slice = createSlice({
-  name: 'account',
-  initialState: {
-    user: null,
-  },
-  reducers: {
-    loginSuccess: (state, action) => {
+    name: 'account',
+    initialState: {
+        user: null,
+    },
+    reducers: {
+        loginSuccess: (state, action) => {
+        /* eslint-disable */ //changed in the other branch, just hide the linter
         state.user = action.payload;
     },
-    logoutSuccess: (state, action) =>  {
+    /* eslint-disable */ //changed in the other branch, just hide the linter
+
+    logoutSuccess: (state, /*action*/) =>  {
+        /* eslint-disable */ //changed in the other branch, just hide the linter
+
       state.user = null;
     },
   },

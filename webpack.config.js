@@ -11,8 +11,8 @@ module.exports = (env, opt) => {
     return {
         devtool: 'source-map',
         entry: {
-            app:'./src/index.tsx',
-            sw:'./src/sw.ts',
+            app: './src/index.tsx',
+            sw: './src/sw.ts',
         },
         output: {
             path: path.join(__dirname, '/dist'),
