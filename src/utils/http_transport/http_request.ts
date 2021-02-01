@@ -12,7 +12,7 @@ export default async function httpRequest<T>(url: string,
 
     clearTimeout(id);
     if (response.status === 200) {
-        return response.json<T>();
+        return response.json().then((data) => data as T);
     }
     throw new Error();
 }

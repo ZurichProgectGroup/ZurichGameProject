@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { authApiInstance } from 'Api';
+import { authApiInstance, userApiInstance } from 'Api';
 import { StringKeyString } from 'Utils/custom_types';
+import { mapToUser } from 'Utils/mapUser';
 
 const slice = createSlice({
     name: 'account',
@@ -10,7 +11,7 @@ const slice = createSlice({
     reducers: {
         loginSuccess: (state, action) => {
             // eslint-disable-next-line no-param-reassign
-            state.user = action.payload;
+            state.user = mapToUser(action.payload);
         },
         logoutSuccess: (state) => {
             // eslint-disable-next-line no-param-reassign
@@ -69,6 +70,36 @@ export const getUser = () => async (dispatch:any):Promise<unknown> => {
         return res;
     } catch (e) {
         dispatch(loginError());
+        return null;
+    }
+};
+
+export const updateProfile = (data:StringKeyString) => async (dispatch:any):Promise<unknown> => {
+    try {
+        const {
+            avatarFile,
+            oldPassword,
+            newPassword,
+            ...userData
+        } = data;
+
+        if (oldPassword && newPassword) {
+            await userApiInstance.updatePassword({ oldPassword, newPassword });
+        }
+
+        if (avatarFile) {
+            const avatarData = new FormData();
+
+            avatarData.append('avatar', avatarFile);
+
+            await userApiInstance.updateAvatar(avatarData);
+        }
+
+        const user = await userApiInstance.update(userData);
+
+        dispatch(loginSuccess(user));
+        return user;
+    } catch (e) {
         return null;
     }
 };

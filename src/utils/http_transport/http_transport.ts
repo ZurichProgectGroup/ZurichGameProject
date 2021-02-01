@@ -42,8 +42,10 @@ function prepareRequestCTX(method: METHOD,
         ...getContentType(options?.data),
         ...options.headers,
     };
+
     return {
         method,
+        // @ts-ignore
         headers,
         body: useBody ? getBody(options?.data) : undefined,
 
@@ -69,32 +71,32 @@ export default class HTTPTransport {
         this.url = url;
     }
 
-    async get(path: string, options?: IHTTPTransportCtx) {
-        return httpRequest(
+    async get<T>(path: string, options?: IHTTPTransportCtx) {
+        return httpRequest<T>(
             this.url + path + queryStringify(options?.data as StringKeyString),
             prepareRequestCTX(METHOD.GET, false, options),
             options?.timeout,
         );
     }
 
-    async put(path: string, options?: IHTTPTransportCtx) {
-        return httpRequest(
+    async put<T>(path: string, options?: IHTTPTransportCtx) {
+        return httpRequest<T>(
             this.url + path,
             prepareRequestCTX(METHOD.PUT, true, options),
             options?.timeout,
         );
     }
 
-    async post(path: string, options?: IHTTPTransportCtx) {
-        return httpRequest(
+    async post<T>(path: string, options?: IHTTPTransportCtx) {
+        return httpRequest<T>(
             this.url + path,
             prepareRequestCTX(METHOD.POST, true, options),
             options?.timeout,
         );
     }
 
-    async delete(path: string, options?: IHTTPTransportCtx) {
-        return httpRequest(
+    async delete<T>(path: string, options?: IHTTPTransportCtx) {
+        return httpRequest<T>(
             this.url + path,
             prepareRequestCTX(METHOD.DELETE, false, options),
             options?.timeout,
