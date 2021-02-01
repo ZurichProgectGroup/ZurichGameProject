@@ -48,7 +48,7 @@ const Avatar = (props: Props) => {
             {
                 hasChange && (
                     <label className="avatar__image-upload">
-                        <input type="file" onChange={handleChange} />
+                        <input type="file" onChange={handleChange} accept="image/jpeg,image/png,image/gif" />
                     </label>
                 )
             }
