@@ -1,0 +1,130 @@
+.avatar {
+    --size: 100px;
+    --offset: 2px;
+
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    text-align: center;
+    background: var(--bg-color);
+    margin: var(--offset);
+
+    &::before {
+        --position: calc(0px - var(--offset));
+
+        z-index: -1;
+        content: '';
+        display: block;
+        position: absolute;
+        top: var(--position);
+        left: var(--position);
+        bottom: var(--position);
+        right: var(--position);
+        border-radius: 50%;
+        background: linear-gradient(180deg, #FC54FF 0%, #4EBFFF 100%);
+    }
+
+    &:hover {
+        .avatar__image-upload {
+            visibility: visible;
+        }
+    }
+
+    &_small {
+        --size: 48px;
+
+        .avatar__letter {
+            font-size: 16px;
+        }
+
+        .avatar__image-upload::after {
+            width: 26px;
+            height: 26px;
+        }
+    }
+
+    &_super-small {
+        --size: 24px;
+
+        .avatar__letter {
+            font-size: 14px;
+        }
+    }
+
+    &_medium {
+        --size: 56px;
+
+        .avatar__letter {
+            font-size: 20px;
+        }
+
+        .avatar__image-upload::after {
+            width: 32px;
+            height: 32px;
+        }
+    }
+
+    &_no-border {
+        &::before {
+            background: transparent;
+        }
+    }
+}
+
+.avatar__letter {
+    display: flex;
+    text-transform: uppercase;
+    font-size: 30px;
+    line-height: 1;
+}
+
+.avatar__image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar__image {
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+}
+
+.avatar__image-upload {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    visibility: hidden;
+    background: linear-gradient(180deg, #FC54FF 0%, #4EBFFF 100%);
+    opacity: 0.6;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    input {
+        position: absolute;
+        opacity: 0;
+    }
+
+    &::after {
+        content: '';
+        width: 48px;
+        height: 48px;
+        background: url("Images/photo-icon.svg") center/contain no-repeat;
+    }
+}

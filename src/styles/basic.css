@@ -1,0 +1,38 @@
+:root {
+    --font-family: 'Exo 2', sans-serif;
+}
+
+body,
+html {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: 14px;
+    color: var(--font-color);
+    line-height: 1.2;
+    background: var(--bg-color);
+}
+
+a {
+    text-decoration: none;
+}
+
+.app {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.delimiter {
+    width: 100%;
+    margin: 40px;
+    background: transparent;
+    border: 1px solid var(--focus);
+    box-shadow: 0 5px 14px rgba(var(--focus-rgb), 0.4), inset 0 -9px 24px 1px rgba(var(--focus-rgb), 0.68);
+}

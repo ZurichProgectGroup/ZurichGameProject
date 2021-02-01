@@ -1,0 +1,37 @@
+.forum-create__cancel {
+    grid-column: -1;
+    color: var(--warn);
+    text-shadow: 0 3px 10px rgba(var(--warn), 0.4);
+}
+
+.forum-create {
+    display: flex;
+    flex-direction: column;
+}
+
+.forum-create__fields {
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        height: 1px;
+        width: 100%;
+        border: 1px solid var(--focus);
+        box-shadow: 0 0 5px var(--focus);
+        border-radius: 4px;
+    }
+}
+
+.forum-create__text textarea {
+    height: 200px;
+}
+
+.forum-create__submit {
+    width: 235px;
+    align-self: center;
+}

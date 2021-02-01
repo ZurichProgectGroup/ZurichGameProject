@@ -1,0 +1,9 @@
+.create-comment__text {
+    margin-bottom: 20px;
+}
+
+.create-comment__btn {
+    width: 144px;
+    text-transform: none;
+    padding: 8px;
+}

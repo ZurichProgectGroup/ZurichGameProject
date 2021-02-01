@@ -1,0 +1,28 @@
+.textarea {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.textarea__label {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.textarea__input {
+    color: var(--font-color);
+    background: transparent;
+    border: 1px solid var(--main);
+    box-shadow: 0 0 5px var(--main);
+    border-radius: 4px;
+    padding: 10px;
+    transition: all 0.2s;
+    height: 80px;
+    resize: none;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 5px var(--focus);
+        border-color: var(--focus);
+    }
+}

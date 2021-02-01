@@ -1,0 +1,37 @@
+.alert {
+    --offset: 2px;
+
+    width: 314px;
+    height: 200px;
+    background: rgba(26, 22, 48);
+    box-shadow: 0 0 83px rgba(250, 21, 255, 0.4);
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 43px;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: uppercase;
+
+    &::before {
+        --position: calc(0px - var(--offset));
+
+        padding: 10px;
+        z-index: -1;
+        content: '';
+        display: block;
+        position: absolute;
+        top: var(--position);
+        left: var(--position);
+        bottom: var(--position);
+        right: var(--position);
+        border-radius: 4px;
+        background: linear-gradient(#FC54FF, #72BDFF);
+    }
+}
