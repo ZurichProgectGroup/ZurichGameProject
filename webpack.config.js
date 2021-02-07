@@ -32,6 +32,7 @@ module.exports = (env, opt) => {
                 Mocks: path.resolve(__dirname, 'src/mocks/'),
                 Types: path.resolve(__dirname, 'src/types/'),
                 Services: path.resolve(__dirname, 'src/services/'),
+                Selectors: path.resolve(__dirname, 'src/selectors/'),
             },
         },
         module: {
@@ -62,7 +63,7 @@ module.exports = (env, opt) => {
         devServer: {
             contentBase: path.join(__dirname, 'dist'),
             port: 9000,
-            //hot: true,
+            hot: true,
             open: true,
             historyApiFallback: {
                 index: 'index.html',

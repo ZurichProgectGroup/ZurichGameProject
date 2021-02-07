@@ -6,10 +6,8 @@ import {
 import ROUTES from 'Components/App/consts';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from 'Store/account';
-import { IStoreCTX } from 'Store';
 import { Redirect } from 'react-router-dom';
-
-const selectUser = (state: IStoreCTX) => state.account.user;
+import { selectUser } from 'Selectors';
 
 const Login = () => {
     const [userName, setUserName] = useState('');
