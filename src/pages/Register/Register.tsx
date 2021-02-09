@@ -1,11 +1,18 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import './Register.css';
 import {
     Card,
     Title,
 } from 'Components';
-import FirstStep from './FirstStep';
+import ROUTES from 'Components/App/consts';
+import { register } from 'Store/account';
+import { useDispatch, useSelector } from 'react-redux';
+import { IStoreCTX } from 'Store';
+import { Redirect } from 'react-router-dom';
 import SecondStep from './SecondStep';
+import FirstStep from './FirstStep';
+
+const selectUser = (state: IStoreCTX) => state.account.user;
 
 const Register = () => {
     const [currentStep, setCurrentStep] = useState(1);
@@ -15,6 +22,25 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
+
+    const dispatch = useDispatch();
+    const userData = useSelector(selectUser);
+
+    const handleFormSubmit = useCallback((event: { preventDefault: () => void; }) => {
+        event.preventDefault();
+        dispatch(register({
+            first_name: firstName,
+            second_name: secondName,
+            login,
+            email,
+            password,
+            phone,
+        }));
+    }, [firstName, secondName, login, email, password, phone]);
+
+    if (userData) {
+        return (<Redirect to={ROUTES.main} />);
+    }
 
     const goNextStep = () => setCurrentStep(currentStep + 1);
     const goPrevStep = () => setCurrentStep(currentStep - 1);
@@ -54,7 +80,10 @@ const Register = () => {
         <div className="register-page">
             <Card className="register-page__card">
                 <Title className="register-page__title" text="registration" tagName="h1" />
-                <form className="register-page__form">
+                <form
+                    className="register-page__form"
+                    onSubmit={handleFormSubmit}
+                >
                     {currentStepComponent}
                 </form>
             </Card>
