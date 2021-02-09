@@ -1,3 +1,4 @@
+import { Directions } from 'Services/BeatItemRenderer/consts';
 import { IBoardCtx } from './IBoardConfig';
 
 const ARROW_LEFT_KEY_CODE = 37;
@@ -7,12 +8,12 @@ const levelOneBoardConfig: IBoardCtx = [
     {
         id: 0,
         keyCode: ARROW_LEFT_KEY_CODE,
-        color: 'yellow',
+        direction: Directions.left,
     },
     {
         id: 1,
         keyCode: ARROW_RIGHT_KEY_CODE,
-        color: 'blue',
+        direction: Directions.right,
     },
 ];
 

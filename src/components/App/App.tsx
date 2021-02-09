@@ -31,7 +31,6 @@ const App = () => {
                     <Route exact path={ROUTES.main} component={Home} />
                     <Route exact path={ROUTES.account} component={Account} />
                     <Route exact path={ROUTES.game} component={GamePage} />
-                    <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
                     <Route exact path={ROUTES.login} component={Login} />
                     <Route exact path={ROUTES.register} component={Register} />
                     <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
