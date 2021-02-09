@@ -32,8 +32,6 @@
         }
     }
 
-    min-width: 300px;
-
     &_filled {
         background: linear-gradient(180deg, var(--main) 0%, var(--dark-pink) 100%);
     }

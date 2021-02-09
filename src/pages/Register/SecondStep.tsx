@@ -15,6 +15,7 @@ const SecondStep = ({
     phone,
     setPhone,
 }: SecondStepProps) => (
+
     <>
         <Input
             className="register-page__input"
@@ -37,7 +38,7 @@ const SecondStep = ({
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
         />
-        <Button className="register-page__button">Register</Button>
+        <Button type="submit" className="register-page__button">Register</Button>
         <LinkButton onClick={goPrevStep} to={ROUTES.register}>Back</LinkButton>
     </>
 );
