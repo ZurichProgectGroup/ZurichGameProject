@@ -16,11 +16,12 @@ module.exports = (env, opt) => {
         output: {
             path: path.join(__dirname, '/dist'),
             filename: isProduction ? 'bundle.[contenthash].js' : 'bundle.js',
-            publicPath: './',
+            publicPath: '/',
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             alias: {
+                Api: path.resolve(__dirname, 'src/api/'),
                 Audio: path.resolve(__dirname, 'src/audio/'),
                 Images: path.resolve(__dirname, 'src/images/'),
                 Components: path.resolve(__dirname, 'src/components/'),
@@ -31,6 +32,7 @@ module.exports = (env, opt) => {
                 Mocks: path.resolve(__dirname, 'src/mocks/'),
                 Types: path.resolve(__dirname, 'src/types/'),
                 Services: path.resolve(__dirname, 'src/services/'),
+                Hooks: path.resolve(__dirname, 'src/hooks/'),
             },
         },
         module: {
@@ -63,9 +65,7 @@ module.exports = (env, opt) => {
             port: 9000,
             hot: true,
             open: true,
-            historyApiFallback: {
-                index: 'index.html',
-            },
+            historyApiFallback: true,
         },
         plugins: [
             new HtmlWebpackPlugin({

@@ -2,11 +2,13 @@ import getConfigForLevel from 'Configs/LevelConfig/LevelConfig';
 import { IBoardCtx } from 'Configs/BoardConfig/IBoardConfig';
 import { INoteCtx } from 'Configs/SongConfig/ISongConfig';
 import { ILevelCtx } from 'Configs/LevelConfig/ILevelConfig';
+import { Directions } from 'Services/BeatItemRenderer/consts';
+import BeatItemRenderer from 'Services/BeatItemRenderer';
+import BoardRenderer from 'Services/BoardRenderer';
 import { IGameEntitity } from './IGameService';
 import {
     isOnFinishLine,
     clearCanvas,
-    drawBoard,
     drawEntitities,
 } from './GameServiceUtils';
 
@@ -40,6 +42,10 @@ class GameService {
 
     private onError!: () => void;
 
+    private beatItems: {[key: string] : BeatItemRenderer};
+
+    private boardElement: BoardRenderer;
+
     start(canvas: HTMLCanvasElement, onComplete:()=>void, onError:()=>void) {
         this.levelConfig = getConfigForLevel(this.level);
         this.board = this.levelConfig.board;
@@ -47,12 +53,19 @@ class GameService {
         this.canvas = canvas;
         this.interval = 1000 / 60; // 60fps
         this.requestId = 0;
-        // this.errors = 0;
         this.correct = 0;
-        // this.missed = 0;
         this.startTime = Date.now(); // todo: link to song time
         this.onComplete = onComplete;
         this.onError = onError;
+
+        this.beatItems = {
+            [Directions.left]: new BeatItemRenderer(canvas, Directions.left),
+            [Directions.right]: new BeatItemRenderer(canvas, Directions.right),
+            [Directions.up]: new BeatItemRenderer(canvas, Directions.up),
+            [Directions.down]: new BeatItemRenderer(canvas, Directions.down),
+        };
+
+        this.boardElement = new BoardRenderer(canvas);
 
         this.entities = this.levelConfig.song.notes
             .sort((note1, note2) => note1.time - note2.time)
@@ -92,10 +105,10 @@ class GameService {
         const delta = now - this.then;
         if (delta > this.interval) {
             this.then = now - (delta % this.interval);
-            clearCanvas(this.canvas!);
-            drawBoard(this.canvas!, this.board!);
+            clearCanvas(this.canvas);
+            this.boardElement.render();
             this.entities = this.updateEntities(now - this.startTime!);
-            drawEntitities(this.canvas!, this.levelConfig!, this.entities);
+            drawEntitities(this.boardElement, this.levelConfig!, this.entities, this.beatItems);
         }
     }
 

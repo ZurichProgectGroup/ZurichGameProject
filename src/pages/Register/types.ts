@@ -9,6 +9,7 @@ export type FirstStepProps = {
 };
 
 export type SecondStepProps = {
+    goNextStep?: () => void
     goPrevStep?: () => void
     email: string
     password: string
