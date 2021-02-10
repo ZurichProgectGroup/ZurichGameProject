@@ -34,7 +34,7 @@ class GameService {
 
     private board?: IBoardCtx;
 
-    private startTime?: number;// todo - убрать!привязать к аудио
+    private startTime?: number; // todo - убрать!привязать к аудио
 
     private keyListener?: (event: KeyboardEvent) => void;
 
@@ -46,8 +46,11 @@ class GameService {
 
     private boardElement: BoardRenderer;
 
-    start(canvas: HTMLCanvasElement, onComplete:()=>void, onError:()=>void) {
+    private audio: HTMLAudioElement;
+
+    async start(canvas: HTMLCanvasElement, onComplete:()=>void, onError:()=>void) {
         this.levelConfig = getConfigForLevel(this.level);
+        this.audio = new Audio(this.levelConfig.song.path);
         this.board = this.levelConfig.board;
         this.then = Date.now();
         this.canvas = canvas;
@@ -97,7 +100,12 @@ class GameService {
         };
         document.addEventListener('keydown', this.keyListener);
 
+        await this.playMusic();
         this.loop();
+    }
+
+    playMusic() {
+        return this.audio.play();
     }
 
     draw() {
@@ -136,14 +144,16 @@ class GameService {
 
     loop() {
         if (this.entities.length === 0) {
-            this.stop();
+            setTimeout(() => { this.stop(); }, 2000);
             return;
         }
+
         this.requestId = requestAnimationFrame(this.loop.bind(this));
         this.draw();
     }
 
     stop() {
+        this.audio.pause();
         cancelAnimationFrame(this.requestId);
         if (this.correct >= this.levelConfig!.minimumPoints) {
             this.onComplete();

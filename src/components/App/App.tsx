@@ -7,7 +7,6 @@ import {
 import Home from 'Pages/Home';
 import Account from 'Pages/Account';
 import ErrorPage from 'Pages/ErrorPage';
-import LeaderboardPage from 'Pages/LeaderboardPage';
 import ForumPage from 'Pages/ForumPage';
 import Login from 'Pages/Login';
 import Register from 'Pages/Register';
