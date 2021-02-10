@@ -48,7 +48,12 @@ class GameService {
 
     private audio: HTMLAudioElement;
 
-    async start(canvas: HTMLCanvasElement, onComplete:()=>void, onError:()=>void) {
+    async start(
+        canvas: HTMLCanvasElement,
+        onComplete:()=>void,
+        onError:()=>void,
+        onHit: () => void,
+    ) {
         this.levelConfig = getConfigForLevel(this.level);
         this.audio = new Audio(this.levelConfig.song.path);
         this.board = this.levelConfig.board;
@@ -90,8 +95,8 @@ class GameService {
                 );
                 if (note && isOnFinishLine(note, canvas, this.levelConfig?.speed ?? 0)) {
                     this.correct += 1;
+                    onHit();
                     note.accessible = false;
-                    console.log('correct!');
                 } else {
                     // this.errors += 1;
                     console.log('error!');

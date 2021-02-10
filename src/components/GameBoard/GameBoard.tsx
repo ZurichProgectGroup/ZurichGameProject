@@ -1,24 +1,22 @@
-import React, { createRef, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import './GameBoard.css';
-import gameService from '../../services/GameService';
+import LinkButton from 'Components/LinkButton';
+import ScoreBoard from './components/ScoreBoard';
+import Board from './components/Board';
 import type { Props } from './types';
 
 const GameBoard = ({ onComplete, onError }: Props) => {
-    const canvas = createRef<HTMLCanvasElement>();
-
-    useEffect(() => {
-        gameService.start(canvas!.current!, onComplete, onError);
-        return () => {
-            gameService.stop();
-        };
-    });
+    const handlePause = useCallback(() => {}, []);
 
     return (
         <div className="game">
             <div className="game__header">
-                <span className="game__score">{0}</span>
+                <LinkButton className="game__pause" onClick={handlePause} isButton>
+                    Pause
+                </LinkButton>
+                <ScoreBoard />
             </div>
-            <canvas className="game__board" ref={canvas} />
+            <Board onComplete={onComplete} onError={onError} />
         </div>
     );
 };
