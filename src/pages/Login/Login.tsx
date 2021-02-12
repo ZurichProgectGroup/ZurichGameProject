@@ -4,18 +4,28 @@ import {
     Card, Button, Title, LinkButton, Input,
 } from 'Components';
 import ROUTES from 'Components/App/consts';
-import { useDispatch } from 'react-redux';
-import { login } from 'Store/account';
+import { useDispatch , useSelector} from 'react-redux';
+import { login } from 'Store/account';import { IStoreCTX } from 'Store';
+import { Redirect } from 'react-router-dom';
+
+const selectUser = (state: IStoreCTX) => state.account.user;
 
 const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-    const handleFormSubmit = useCallback((event) => {
+    const userData = useSelector(selectUser);
+    const handleFormSubmit = useCallback((event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        dispatch(login(event.target));
-    }, []);
+        dispatch(login({
+            login: userName,
+            password,
+        }));
+    }, [userName, password]);
 
+    if (userData) {
+        return (<Redirect to={ROUTES.main} />);
+    }
     return (
         <div className="login-page">
             <Card className="login-page__card">

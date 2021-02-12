@@ -1,4 +1,6 @@
-import React, { ChangeEvent, useState, useCallback } from 'react';
+import React, {
+    ChangeEvent, useState, useCallback, useEffect,
+} from 'react';
 import cn from 'classnames';
 import getInputImgUrl from 'Utils/getInputImageUrl';
 import type { Props } from './types';
@@ -16,13 +18,17 @@ const Avatar = (props: Props) => {
 
     const [avatar, setAvatar] = useState(url);
 
+    useEffect(() => {
+        setAvatar(props.url);
+    }, [url]);
+
     const handleChange = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
         const input = event.target;
         try {
             const imageUrl = await getInputImgUrl(input);
             setAvatar(imageUrl);
             if (onChange) {
-                onChange(imageUrl);
+                onChange(imageUrl, input.files[0]);
             }
         } catch (e) {
             throw new Error(e);
@@ -33,6 +39,7 @@ const Avatar = (props: Props) => {
         <div className={cn('avatar', {
             avatar_small: size === 'small',
             avatar_medium: size === 'medium',
+            'avatar_super-small': size === 'super-small',
             'avatar_no-border': Boolean(hideBorder),
         })}
         >
@@ -47,7 +54,7 @@ const Avatar = (props: Props) => {
             {
                 hasChange && (
                     <label className="avatar__image-upload">
-                        <input type="file" onChange={handleChange} />
+                        <input type="file" onChange={handleChange} accept="image/jpeg,image/png,image/gif" />
                     </label>
                 )
             }

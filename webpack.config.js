@@ -17,18 +17,23 @@ module.exports = (env, opt) => {
         output: {
             path: path.join(__dirname, '/dist'),
             filename: isProduction ? '[name].[contenthash].js' : '[name].js',
-            publicPath: './',
+            publicPath: '/',
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
             alias: {
+                Api: path.resolve(__dirname, 'src/api/'),
+                Audio: path.resolve(__dirname, 'src/audio/'),
                 Images: path.resolve(__dirname, 'src/images/'),
                 Components: path.resolve(__dirname, 'src/components/'),
+                Configs: path.resolve(__dirname, 'src/configs/'),
                 Utils: path.resolve(__dirname, 'src/utils/'),
                 Pages: path.resolve(__dirname, 'src/pages/'),
                 Store: path.resolve(__dirname, 'src/store/'),
                 Mocks: path.resolve(__dirname, 'src/mocks/'),
                 Types: path.resolve(__dirname, 'src/types/'),
+                Services: path.resolve(__dirname, 'src/services/'),
+                Hooks: path.resolve(__dirname, 'src/hooks/'),
             },
         },
         module: {
@@ -47,7 +52,7 @@ module.exports = (env, opt) => {
                     ],
                 },
                 {
-                    test: /\.(png|jpe?g|gif|svg)$/i,
+                    test: /\.(png|jpe?g|gif|svg|mp3)$/i,
                     use: [
                         {
                             loader: 'file-loader',
@@ -68,6 +73,7 @@ module.exports = (env, opt) => {
                 template: './www/index.html',
                 cache: false,
                 title: 'Beat Game',
+                publicPath: '/',
             }),
             new MiniCssExtractPlugin(),
             new CleanWebpackPlugin(),

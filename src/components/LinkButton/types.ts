@@ -1,9 +1,19 @@
-import { LinkProps } from 'react-router-dom';
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 
-export type OwnProps = {
+export type OwnProp = {
     className?: string,
-    children: ReactNode
-} & LinkProps;
+    children: ReactNode,
+    isButton?: boolean,
+    to?: string
+};
 
-export type Props = OwnProps;
+export type LinkProps = {
+    to: string
+    isButton?: false
+} & OwnProp;
+
+export type ButtonProps = {
+    isButton: true,
+} & ButtonHTMLAttributes<HTMLButtonElement> & OwnProp;
+
+export type Props = LinkProps | ButtonProps;

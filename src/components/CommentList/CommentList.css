@@ -1,0 +1,18 @@
+.comment-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-list__title {
+    font-size: 16px;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.comment-list__item {
+    margin-bottom: 15px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}

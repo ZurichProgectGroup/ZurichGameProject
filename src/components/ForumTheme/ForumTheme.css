@@ -1,0 +1,48 @@
+.forum-theme {
+    border: 2px solid var(--main);
+    box-sizing: border-box;
+    box-shadow: 0 0 7px var(--main);
+    border-radius: 12px;
+    padding: 20px 30px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        border: 2px solid var(--focus);
+        box-shadow: 0 0 7px var(--focus);
+        outline: none;
+
+        .forum-themes__count,
+        .forum-themes__title {
+            color: var(--focus);
+        }
+    }
+}
+
+.forum-themes__title {
+    display: block;
+    font-size: 18px;
+    color: var(--link);
+    margin-bottom: 10px;
+}
+
+.forum-themes__desc {
+    margin-bottom: 15px;
+}
+
+.forum-themes__name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.forum-themes__count {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: var(--link);
+
+    .material-icons {
+        margin-right: 6px;
+        font-size: 18px;
+    }
+}

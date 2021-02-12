@@ -2,9 +2,9 @@ export type OwnProps = {
     url?: string,
     name: string,
     hasChange?: boolean,
-    size?: 'small' | 'medium',
+    size?: 'small' | 'medium' | 'super-small',
     hideBorder?: boolean,
-    onChange?: (id: string) => unknown
+    onChange?: (id: string, file: File) => unknown
 };
 
 export type Props = OwnProps;

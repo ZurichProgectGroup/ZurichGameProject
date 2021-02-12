@@ -1,0 +1,12 @@
+.navigation-list {
+    display: flex;
+    align-items: center;
+}
+
+.navigation-list__item {
+    margin-right: 30px;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}

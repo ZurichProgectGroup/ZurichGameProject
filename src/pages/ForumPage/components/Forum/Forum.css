@@ -1,0 +1,31 @@
+.forum {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.forum__header {
+    margin-bottom: 40px;
+}
+
+.forum__post {
+    position: relative;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        height: 1px;
+        width: 100%;
+        border: 1px solid var(--focus);
+        box-shadow: 0 0 5px var(--focus);
+        border-radius: 4px;
+    }
+}
+
+.forum__create-comment {
+    margin-bottom: 50px;
+}
