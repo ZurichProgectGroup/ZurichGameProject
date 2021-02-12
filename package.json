@@ -58,6 +58,7 @@
     "postcss-loader": "4.1.0",
     "postcss-nested": "5.0.3",
     "postcss-preset-env": "6.7.0",
+    "pre-commit": "1.2.2",
     "style-loader": "2.0.0",
     "stylelint": "13.8.0",
     "stylelint-config-standard": "20.0.0",
@@ -71,6 +72,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.5.0",
+    "@types/service_worker_api": "0.0.9",
     "classnames": "2.2.6",
     "express": "4.17.1",
     "normalize.css": "8.0.1",
@@ -80,9 +82,8 @@
     "react-router-dom": "5.2.0",
     "redux": "4.0.5"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-js && npm run lint-styles"
-    }
-  }
+  "pre-commit": [
+    "lint-js",
+    "lint-styles"
+  ]
 }
