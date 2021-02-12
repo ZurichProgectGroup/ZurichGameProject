@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
@@ -11,24 +11,35 @@ import LeaderboardPage from 'Pages/LeaderboardPage';
 import ForumPage from 'Pages/ForumPage';
 import Login from 'Pages/Login';
 import Register from 'Pages/Register';
-import GamePage from 'Pages/GamePage';
+import { useDispatch } from 'react-redux';
+import { getUser } from 'Store/account';
 import ErrorBoundary from 'Components/ErrorBoundary';
+import GamePage from 'Pages/GamePage';
 import ROUTES from './consts';
 
-const App = () => (
-    <ErrorBoundary>
-        <Router>
-            <Switch>
-                <Route exact path={ROUTES.main} component={Home} />
-                <Route exact path={ROUTES.account} component={Account} />
-                <Route exact path={ROUTES.game} component={GamePage} />
-                <Route exact path={ROUTES.login} component={Login} />
-                <Route exact path={ROUTES.register} component={Register} />
-                <Route path={ROUTES.forum} component={ForumPage} />
-                <Route component={ErrorPage} />
-            </Switch>
-        </Router>
-    </ErrorBoundary>
-);
+const App = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getUser());
+    });
+
+    return (
+        <ErrorBoundary>
+            <Router>
+                <Switch>
+                    <Route exact path={ROUTES.main} component={Home} />
+                    <Route exact path={ROUTES.account} component={Account} />
+                    <Route exact path={ROUTES.game} component={GamePage} />
+                    <Route exact path={ROUTES.login} component={Login} />
+                    <Route exact path={ROUTES.register} component={Register} />
+                    <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
+                    <Route path={ROUTES.forum} component={ForumPage} />
+                    <Route component={ErrorPage} />
+                </Switch>
+            </Router>
+        </ErrorBoundary>
+    );
+};
 
 export default App;

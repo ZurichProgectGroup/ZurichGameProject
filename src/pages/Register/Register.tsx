@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import './Register.css';
 import {
     Card,
