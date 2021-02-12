@@ -8,11 +8,6 @@ function getInputImgUrl(input: HTMLInputElement): Promise<string> {
             rej(new Error('Файл не загружен'));
             return;
         }
-        const validationReg = /\.((png)|(jpe?g)|(gif))$/;
-
-        if (!validationReg.test(file.name)) {
-            rej(new Error('Загружаемый файл не картинка'));
-        }
 
         reader.onloadend = () => {
             res(`${reader.result}`);

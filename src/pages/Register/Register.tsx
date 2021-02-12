@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import './Register.css';
 import {
     Card,
@@ -42,7 +42,7 @@ const Register = () => {
     const goNextStep = () => setCurrentStep(currentStep + 1);
     const goPrevStep = () => setCurrentStep(currentStep - 1);
 
-    const getCurrentStep = () => {
+    const currentStepComponent = useMemo(() => {
         switch (currentStep) {
             case 1:
                 return (
@@ -71,7 +71,7 @@ const Register = () => {
             default:
                 return null;
         }
-    };
+    }, [currentStep, firstName, secondName, login, email, password, phone]);
 
     return (
         <div className="register-page">
@@ -81,7 +81,7 @@ const Register = () => {
                     className="register-page__form"
                     onSubmit={handleFormSubmit}
                 >
-                    {getCurrentStep()}
+                    {currentStepComponent}
                 </form>
             </Card>
         </div>

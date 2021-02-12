@@ -16,7 +16,7 @@ module.exports = (env, opt) => {
         output: {
             path: path.join(__dirname, '/dist'),
             filename: isProduction ? 'bundle.[contenthash].js' : 'bundle.js',
-            publicPath: './',
+            publicPath: '/',
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
@@ -33,6 +33,7 @@ module.exports = (env, opt) => {
                 Types: path.resolve(__dirname, 'src/types/'),
                 Services: path.resolve(__dirname, 'src/services/'),
                 Selectors: path.resolve(__dirname, 'src/selectors/'),
+                Hooks: path.resolve(__dirname, 'src/hooks/'),
             },
         },
         module: {
@@ -65,9 +66,7 @@ module.exports = (env, opt) => {
             port: 9000,
             hot: true,
             open: true,
-            historyApiFallback: {
-                index: 'index.html',
-            },
+            historyApiFallback: true,
         },
         plugins: [
             new HtmlWebpackPlugin({
