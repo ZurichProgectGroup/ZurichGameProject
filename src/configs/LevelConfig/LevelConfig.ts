@@ -8,7 +8,7 @@ const getConfigForLevel = (level: number) => {
             return {
                 song: levelOneSongConfig,
                 board: levelOneBoardConfig,
-                minimumPoints: 2,
+                minimumPoints: 4,
                 speed: 5,
             };
     }
