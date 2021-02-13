@@ -1,5 +1,8 @@
 import React, {
-    ChangeEvent, useState, useCallback, useEffect,
+    ChangeEvent,
+    useState,
+    useCallback,
+    useEffect,
 } from 'react';
 import cn from 'classnames';
 import getInputImgUrl from 'Utils/getInputImageUrl';

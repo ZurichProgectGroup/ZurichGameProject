@@ -8,7 +8,6 @@ import Avatar from 'Components/Avatar';
 import Alert from 'Components/Alert';
 import cn from 'classnames';
 import successIconPath from 'Images/success-icon.svg';
-import AlertState from './types';
 import { useDispatch, useSelector } from 'react-redux';
 import { IStoreCTX } from 'Store';
 import { logout, updateProfile } from 'Store/account';
@@ -63,9 +62,11 @@ const Account = () => {
         );
         setAlertState(AlertState.Success);
     }, [alertState, firstName, secondName, displayName, login, email, phone]);
+
     const handleAlertClick = useCallback(() => {
         setAlertState(AlertState.None);
     }, [alertState]);
+
     const handleLogOutClick = useCallback(() => {
         dispatch(logout());
     }, []);
@@ -86,50 +87,64 @@ const Account = () => {
                 <LinkButton to="/">
                     {'< Back'}
                 </LinkButton>
-                <Avatar name={firstName || ''}
+                <Avatar
+                    name={firstName || ''}
                     url={avatar}
                     hasChange
                     onChange={(url, file) => {
                         setAvatar(url);
                         setAvatarFile(file);
-                    }} />
+                    }}
+                />
                 <ActionLink onClick={handleLogOutClick}>Log out</ActionLink>
             </div>
             <form className="account_main">
                 <div className="account__fields">
-                    <Input labelText="login"
+                    <Input
+                        labelText="login"
                         value={login || ''}
-                        onChange={(e) => setLogin(e.target.value)} />
-                    <Input labelText="first name"value={firstName || ''}
-                        onChange={(e) => setFirstName(e.target.value)} />
-                    <Input labelText="e-mail"
-                    value={email || ''}
+                        onChange={(e) => setLogin(e.target.value)}
+                    />
+                    <Input
+                        labelText="first name"
+                        value={firstName || ''}
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                    <Input
+                        labelText="e-mail"
+                        value={email || ''}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <Input
                         labelText="last name"
-                    value={secondName || ''}
+                        value={secondName || ''}
                         onChange={(e) => setSecondName(e.target.value)}
                     />
                     <Input
                         labelText="phone"
-                    value={phone || ''}
+                        value={phone || ''}
                         onChange={(e) => setPhone(e.target.value)}
-                    /><Input labelText="display name" value={displayName || ''}
-                        onChange={(e) => setDisplayName(e.target.value)}/>
+                    />
+                    <Input
+                        labelText="display name"
+                        value={displayName || ''}
+                        onChange={(e) => setDisplayName(e.target.value)}
+                    />
                 </div>
                 <div className="delimiter" />
                 <div className={cn('account__fields',
                     !showPassword ? 'account__fields_hidden' : '')}
                 >
-                    <Input labelText="old password"
-                    value={oldPassword}
+                    <Input
+                        labelText="old password"
+                        value={oldPassword}
                         onChange={(e) => setOldPassword(e.target.value)}
                     />
                     <Input
                         labelText="new password"
                         value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)} />
+                        onChange={(e) => setNewPassword(e.target.value)}
+                    />
                 </div>
                 <div className="account__password_link">
                     <ActionLink onClick={handlePasswordClick}>

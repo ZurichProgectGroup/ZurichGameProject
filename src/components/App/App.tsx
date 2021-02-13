@@ -8,6 +8,7 @@ import Home from 'Pages/Home';
 import Account from 'Pages/Account';
 import ErrorPage from 'Pages/ErrorPage';
 import ForumPage from 'Pages/ForumPage';
+import LeaderboardPage from 'Pages/LeaderboardPage';
 import Login from 'Pages/Login';
 import Register from 'Pages/Register';
 import { useDispatch } from 'react-redux';
