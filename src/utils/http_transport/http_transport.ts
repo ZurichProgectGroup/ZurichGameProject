@@ -41,8 +41,7 @@ function prepareRequestCTX(method: METHOD,
     const headers = {
         ...getContentType(options?.data),
         ...options.headers,
-    };
-
+    } as HeadersInit;
     return {
         method,
         // @ts-ignore

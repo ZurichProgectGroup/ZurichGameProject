@@ -10,7 +10,7 @@ export default class AuthAPI {
         return authTransportInstance.post('/signin', { data });
     }
 
-    static async update(): Promise<UserDTO> {
+    static async update(): Promise<unknown> {
         return authTransportInstance.get('/user');
     }
 

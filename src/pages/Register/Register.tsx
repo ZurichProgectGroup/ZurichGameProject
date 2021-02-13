@@ -7,12 +7,10 @@ import {
 import ROUTES from 'Components/App/consts';
 import { register } from 'Store/account';
 import { useDispatch, useSelector } from 'react-redux';
-import { IStoreCTX } from 'Store';
 import { Redirect } from 'react-router-dom';
+import { selectUser } from 'Selectors';
 import SecondStep from './SecondStep';
 import FirstStep from './FirstStep';
-
-const selectUser = (state: IStoreCTX) => state.account.user;
 
 const Register = () => {
     const [currentStep, setCurrentStep] = useState(1);
@@ -37,7 +35,6 @@ const Register = () => {
             phone,
         }));
     }, [firstName, secondName, login, email, password, phone]);
-
     if (userData) {
         return (<Redirect to={ROUTES.main} />);
     }
