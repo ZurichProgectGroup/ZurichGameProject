@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { authApiInstance } from 'Api';
 import { StringKeyString } from 'Utils/custom_types';
+import { mapToUser } from 'Utils/mapUser';
 
 export const login = createAsyncThunk(
     'account/login',
@@ -50,7 +51,18 @@ const slice = createSlice({
         user: null,
     },
     reducers: {
-        //
+        loginSuccess: (state, action) => {
+            // eslint-disable-next-line no-param-reassign
+            state.user = mapToUser(action.payload);
+        },
+        logoutSuccess: (state) => {
+            // eslint-disable-next-line no-param-reassign
+            state.user = null;
+        },
+        loginError: (state) => {
+            // eslint-disable-next-line no-param-reassign
+            state.user = null;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(login.pending, (state/* , action */) => {
@@ -75,7 +87,7 @@ const slice = createSlice({
             // eslint-disable-next-line no-param-reassign
             state.status = AccountStatus.succeeded;
             // eslint-disable-next-line no-param-reassign
-            state.user = action.payload;
+            state.user = mapToUser(action.payload);
         });
         builder.addCase(getUser.fulfilled, (state, action) => {
             // eslint-disable-next-line no-param-reassign

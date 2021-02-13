@@ -11,11 +11,12 @@ module.exports = (env, opt) => {
     return {
         devtool: 'source-map',
         entry: {
-            index: './src/index.tsx',
+            app: './src/index.tsx',
+            sw: './src/sw.ts',
         },
         output: {
             path: path.join(__dirname, '/dist'),
-            filename: isProduction ? 'bundle.[contenthash].js' : 'bundle.js',
+            filename: isProduction ? '[name].[contenthash].js' : '[name].js',
             publicPath: '/',
         },
         resolve: {
@@ -52,7 +53,7 @@ module.exports = (env, opt) => {
                     ],
                 },
                 {
-                    test: /\.(png|jpe?g|gif|svg|mp3)$/i,
+                    test: /\.(png|jpe?g|gif|svg|mp3|ogg)$/i,
                     use: [
                         {
                             loader: 'file-loader',
@@ -77,6 +78,7 @@ module.exports = (env, opt) => {
             }),
             new MiniCssExtractPlugin(),
             new CleanWebpackPlugin(),
+
         ],
         optimization: {
             minimize: isProduction,
