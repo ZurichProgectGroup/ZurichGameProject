@@ -9,37 +9,90 @@ import Alert from 'Components/Alert';
 import cn from 'classnames';
 import successIconPath from 'Images/success-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { IStoreCTX } from 'Store';
-import { logout, updateProfile } from 'Store/account';
+import { getUser, logout, updateProfile } from 'Store/account';
+import { selectUser } from 'Selectors';
 import AlertState from './types';
-
-const selectUser = (state: IStoreCTX) => state.account.user;
 
 const Account = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [alertState, setAlertState] = useState(AlertState.None);
-    const [firstName, setFirstName] = useState('');
-    const [secondName, setSecondName] = useState('');
-    const [displayName, setDisplayName] = useState('');
-    const [login, setLogin] = useState('');
-    const [email, setEmail] = useState('');
-    const [oldPassword, setOldPassword] = useState('');
-    const [newPassword, setNewPassword] = useState('');
-    const [phone, setPhone] = useState('');
-    const [avatar, setAvatar] = useState(null);
     const [avatarFile, setAvatarFile] = useState(null);
 
+    const [profile, setProfile] = useState({
+        login: '',
+        firstName: '',
+        secondName: '',
+        displayName: '',
+        email: '',
+        phone: '',
+        oldPassword: '',
+        newPassword: '',
+        avatar: null,
+    });
+
+    const onFieldChange = useCallback(
+        (key) => ({ target: { value } }) => {
+            setProfile((prevProfile) => ({
+                ...prevProfile,
+                [key]: value,
+            }));
+        },
+        [setProfile],
+    );
+
+    const onLoginChange = useCallback(
+        onFieldChange('login'),
+        [onFieldChange],
+    );
+    const onFirstNameChange = useCallback(
+        onFieldChange('firstName'),
+        [onFieldChange],
+    );
+    const onSecondNameChange = useCallback(
+        onFieldChange('secondName'),
+        [onFieldChange],
+    );
+    const onDisplayNameChange = useCallback(
+        onFieldChange('displayName'),
+        [onFieldChange],
+    );
+    const onEmailChange = useCallback(
+        onFieldChange('email'),
+        [onFieldChange],
+    );
+    const onPhoneChange = useCallback(
+        onFieldChange('phone'),
+        [onFieldChange],
+    );
+    const onOldPasswordChange = useCallback(
+        onFieldChange('oldPassword'),
+        [onFieldChange],
+    );
+    const onNewPasswordChange = useCallback(
+        onFieldChange('newPassword'),
+        [onFieldChange],
+    );
+    const onAvatarChange = useCallback(
+        (url, file) => {
+            setProfile((prevProfile) => ({
+                ...prevProfile,
+                avatar: url,
+            }));
+            setAvatarFile(file);
+        },
+        [setAvatarFile],
+    );
+
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getUser());
+    }, []);
+
     const user = useSelector(selectUser);
 
     useEffect(() => {
-        setFirstName(user?.firstName);
-        setSecondName(user?.secondName);
-        setDisplayName(user?.displayName);
-        setLogin(user?.login);
-        setEmail(user?.email);
-        setPhone(user?.phone);
-        setAvatar(user?.avatar);
+        setProfile({ ...user, oldPassword: '', newPassword: '' });
     }, [user]);
 
     const handlePasswordClick = useCallback(() => {
@@ -47,6 +100,17 @@ const Account = () => {
     }, [showPassword]);
 
     const handleSaveClick = useCallback(() => {
+        const {
+            firstName,
+            secondName,
+            displayName,
+            login,
+            email,
+            phone,
+            oldPassword,
+            newPassword,
+        } = profile;
+
         dispatch(
             updateProfile({
                 first_name: firstName,
@@ -55,13 +119,13 @@ const Account = () => {
                 login,
                 email,
                 phone,
-                avatarFile,
                 oldPassword,
                 newPassword,
+                avatarFile,
             }),
         );
         setAlertState(AlertState.Success);
-    }, [alertState, firstName, secondName, displayName, login, email, phone]);
+    }, [alertState, profile]);
 
     const handleAlertClick = useCallback(() => {
         setAlertState(AlertState.None);
@@ -88,13 +152,10 @@ const Account = () => {
                     {'< Back'}
                 </LinkButton>
                 <Avatar
-                    name={firstName || ''}
-                    url={avatar}
+                    name={profile.firstName || ''}
+                    url={profile.avatar}
                     hasChange
-                    onChange={(url, file) => {
-                        setAvatar(url);
-                        setAvatarFile(file);
-                    }}
+                    onChange={onAvatarChange}
                 />
                 <ActionLink onClick={handleLogOutClick}>Log out</ActionLink>
             </div>
@@ -102,33 +163,33 @@ const Account = () => {
                 <div className="account__fields">
                     <Input
                         labelText="login"
-                        value={login || ''}
-                        onChange={(e) => setLogin(e.target.value)}
+                        value={profile.login || ''}
+                        onChange={onLoginChange}
                     />
                     <Input
                         labelText="first name"
-                        value={firstName || ''}
-                        onChange={(e) => setFirstName(e.target.value)}
+                        value={profile.firstName || ''}
+                        onChange={onFirstNameChange}
                     />
                     <Input
                         labelText="e-mail"
-                        value={email || ''}
-                        onChange={(e) => setEmail(e.target.value)}
+                        value={profile.email || ''}
+                        onChange={onEmailChange}
                     />
                     <Input
                         labelText="last name"
-                        value={secondName || ''}
-                        onChange={(e) => setSecondName(e.target.value)}
+                        value={profile.secondName || ''}
+                        onChange={onSecondNameChange}
                     />
                     <Input
                         labelText="phone"
-                        value={phone || ''}
-                        onChange={(e) => setPhone(e.target.value)}
+                        value={profile.phone || ''}
+                        onChange={onPhoneChange}
                     />
                     <Input
                         labelText="display name"
-                        value={displayName || ''}
-                        onChange={(e) => setDisplayName(e.target.value)}
+                        value={profile.displayName || ''}
+                        onChange={onDisplayNameChange}
                     />
                 </div>
                 <div className="delimiter" />
@@ -137,13 +198,13 @@ const Account = () => {
                 >
                     <Input
                         labelText="old password"
-                        value={oldPassword}
-                        onChange={(e) => setOldPassword(e.target.value)}
+                        value={profile.oldPassword}
+                        onChange={onOldPasswordChange}
                     />
                     <Input
                         labelText="new password"
-                        value={newPassword}
-                        onChange={(e) => setNewPassword(e.target.value)}
+                        value={profile.newPassword}
+                        onChange={onNewPasswordChange}
                     />
                 </div>
                 <div className="account__password_link">
