@@ -5,7 +5,7 @@ import { mapToUser } from 'Utils/mapUser';
 
 export const login = createAsyncThunk(
     'account/login',
-    async (data:StringKeyString) => {
+    async (data: StringKeyString) => {
         await authApiInstance.request(data);
         const user = await authApiInstance.update();
         return user;
@@ -118,54 +118,7 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-// const { loginSuccess, logoutSuccess, loginError } = slice.actions;
 const { loginSuccess } = slice.actions;
-
-// export const login = (data:StringKeyString) => async (dispatch:any):Promise<unknown> => {
-//     try {
-//         await authApiInstance.request(data);
-//         const user = await authApiInstance.update();
-//         dispatch(loginSuccess(user));
-//         return user;
-//     } catch (e) {
-//         dispatch(loginError());
-//         return null;
-//     }
-// };
-//
-// export const register = (data:StringKeyString) => async (dispatch:any):Promise<unknown> => {
-//     try {
-//         await authApiInstance.create(data);
-//         const user = await authApiInstance.update();
-//         dispatch(loginSuccess(user));
-//         return user;
-//     } catch (e) {
-//         dispatch(loginError());
-//         return null;
-//     }
-// };
-//
-// export const logout = () => async (dispatch:any):Promise<unknown> => {
-//     try {
-//         const res = await authApiInstance.delete();
-//         dispatch(logoutSuccess());
-//         return res;
-//     } catch (e) {
-//         dispatch(loginError());
-//         return null;
-//     }
-// };
-//
-// export const getUser = () => async (dispatch:any):Promise<unknown> => {
-//     try {
-//         const res = await authApiInstance.update();
-//         dispatch(loginSuccess(res));
-//         return res;
-//     } catch (e) {
-//         dispatch(loginError());
-//         return null;
-//     }
-// };
 
 export const updateProfile = (data:StringKeyString) => async (dispatch:any):Promise<unknown> => {
     try {
