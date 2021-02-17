@@ -40,38 +40,6 @@ const Account = () => {
         [setProfile],
     );
 
-    const onLoginChange = useCallback(
-        onFieldChange('login'),
-        [onFieldChange],
-    );
-    const onFirstNameChange = useCallback(
-        onFieldChange('firstName'),
-        [onFieldChange],
-    );
-    const onSecondNameChange = useCallback(
-        onFieldChange('secondName'),
-        [onFieldChange],
-    );
-    const onDisplayNameChange = useCallback(
-        onFieldChange('displayName'),
-        [onFieldChange],
-    );
-    const onEmailChange = useCallback(
-        onFieldChange('email'),
-        [onFieldChange],
-    );
-    const onPhoneChange = useCallback(
-        onFieldChange('phone'),
-        [onFieldChange],
-    );
-    const onOldPasswordChange = useCallback(
-        onFieldChange('oldPassword'),
-        [onFieldChange],
-    );
-    const onNewPasswordChange = useCallback(
-        onFieldChange('newPassword'),
-        [onFieldChange],
-    );
     const onAvatarChange = useCallback(
         (url, file) => {
             setProfile((prevProfile) => ({
@@ -164,32 +132,32 @@ const Account = () => {
                     <Input
                         labelText="login"
                         value={profile.login || ''}
-                        onChange={onLoginChange}
+                        onChange={onFieldChange('login')}
                     />
                     <Input
                         labelText="first name"
                         value={profile.firstName || ''}
-                        onChange={onFirstNameChange}
+                        onChange={onFieldChange('firstName')}
                     />
                     <Input
                         labelText="e-mail"
                         value={profile.email || ''}
-                        onChange={onEmailChange}
+                        onChange={onFieldChange('email')}
                     />
                     <Input
                         labelText="last name"
                         value={profile.secondName || ''}
-                        onChange={onSecondNameChange}
+                        onChange={onFieldChange('secondName')}
                     />
                     <Input
                         labelText="phone"
                         value={profile.phone || ''}
-                        onChange={onPhoneChange}
+                        onChange={onFieldChange('phone')}
                     />
                     <Input
                         labelText="display name"
                         value={profile.displayName || ''}
-                        onChange={onDisplayNameChange}
+                        onChange={onFieldChange('displayName')}
                     />
                 </div>
                 <div className="delimiter" />
@@ -199,12 +167,12 @@ const Account = () => {
                     <Input
                         labelText="old password"
                         value={profile.oldPassword}
-                        onChange={onOldPasswordChange}
+                        onChange={onFieldChange('oldPassword')}
                     />
                     <Input
                         labelText="new password"
                         value={profile.newPassword}
-                        onChange={onNewPasswordChange}
+                        onChange={onFieldChange('newPassword')}
                     />
                 </div>
                 <div className="account__password_link">
