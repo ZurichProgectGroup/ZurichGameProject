@@ -1,4 +1,5 @@
 import { StringKeyString } from 'Utils/custom_types';
+import { TLeaderItemDTO } from 'Api/LeaderboardApi';
 
 export interface IStoreCTX {
     account:{
@@ -7,4 +8,9 @@ export interface IStoreCTX {
     game: {
         currentScore: number
     },
+    leaderboard: {
+        list: TLeaderItemDTO[],
+        isLoading: boolean,
+        error: null | string,
+    }
 }
