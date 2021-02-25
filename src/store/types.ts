@@ -1,3 +1,5 @@
+import { TLeaderItemDTO } from 'Api/LeaderboardApi';
+
 export interface IStoreCTX {
     account:{
         user: User | null
@@ -5,4 +7,9 @@ export interface IStoreCTX {
     game: {
         currentScore: number
     },
+    leaderboard: {
+        list: TLeaderItemDTO[],
+        isLoading: boolean,
+        error: null | string,
+    }
 }
