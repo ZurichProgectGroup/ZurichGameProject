@@ -6,7 +6,7 @@ import {
 import ROUTES from 'Components/App/consts';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from 'Store/account';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { selectUser } from 'Selectors';
 
 const Login = () => {
@@ -14,12 +14,16 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
     const userData = useSelector(selectUser);
+    const history = useHistory();
+
     const handleFormSubmit = useCallback((event: { preventDefault: () => void; }) => {
         event.preventDefault();
         dispatch(login({
             login: userName,
             password,
         }));
+
+        history.push(ROUTES.main);
     }, [userName, password]);
 
     if (userData) {

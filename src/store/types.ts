@@ -1,9 +1,8 @@
-import { StringKeyString } from 'Utils/custom_types';
 import { TLeaderItemDTO } from 'Api/LeaderboardApi';
 
 export interface IStoreCTX {
     account:{
-        user: StringKeyString
+        user: User | null
     },
     game: {
         currentScore: number

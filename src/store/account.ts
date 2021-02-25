@@ -8,13 +8,14 @@ export const login = createAsyncThunk(
     async (data: StringKeyString) => {
         await authApiInstance.request(data);
         const user = await authApiInstance.update();
+
         return user;
     },
 );
 
 export const register = createAsyncThunk(
     'account/register',
-    async (data:StringKeyString) => {
+    async (data: StringKeyString) => {
         await authApiInstance.create(data);
         const user = await authApiInstance.update();
         return user;
@@ -25,6 +26,7 @@ export const logout = createAsyncThunk(
     'account/logout',
     async () => {
         await authApiInstance.delete();
+
         return null;
     },
 );
@@ -34,6 +36,32 @@ export const getUser = createAsyncThunk(
     async () => {
         const res = await authApiInstance.update();
         return res;
+    },
+);
+
+export const updateProfile = createAsyncThunk(
+    'account/updateProfile',
+    async (data: StringKeyString) => {
+        const {
+            avatarFile,
+            oldPassword,
+            newPassword,
+            ...userData
+        } = data;
+
+        if (oldPassword && newPassword) {
+            await userApiInstance.updatePassword({ oldPassword, newPassword });
+        }
+
+        if (avatarFile) {
+            const avatarData = new FormData();
+
+            avatarData.append('avatar', avatarFile);
+
+            await userApiInstance.updateAvatar(avatarData);
+        }
+
+        return userApiInstance.update(userData);
     },
 );
 
@@ -77,11 +105,15 @@ const slice = createSlice({
             // eslint-disable-next-line no-param-reassign
             state.status = AccountStatus.loading;
         });
+        builder.addCase(updateProfile.pending, (state/* , action */) => {
+            // eslint-disable-next-line no-param-reassign
+            state.status = AccountStatus.loading;
+        });
         builder.addCase(login.fulfilled, (state, action) => {
             // eslint-disable-next-line no-param-reassign
             state.status = AccountStatus.succeeded;
             // eslint-disable-next-line no-param-reassign
-            state.user = action.payload;
+            state.user = mapToUser(action.payload);
         });
         builder.addCase(register.fulfilled, (state, action) => {
             // eslint-disable-next-line no-param-reassign
@@ -93,7 +125,13 @@ const slice = createSlice({
             // eslint-disable-next-line no-param-reassign
             state.status = AccountStatus.succeeded;
             // eslint-disable-next-line no-param-reassign
-            state.user = action.payload;
+            state.user = mapToUser(action.payload);
+        });
+        builder.addCase(updateProfile.fulfilled, (state, action) => {
+            // eslint-disable-next-line no-param-reassign
+            state.status = AccountStatus.succeeded;
+            // eslint-disable-next-line no-param-reassign
+            state.user = mapToUser(action.payload);
         });
         builder.addCase(login.rejected, (state, action) => {
             // eslint-disable-next-line no-param-reassign
@@ -113,39 +151,13 @@ const slice = createSlice({
             // eslint-disable-next-line no-param-reassign
             state.user = action.payload;
         });
+        builder.addCase(updateProfile.rejected, (state, action) => {
+            // eslint-disable-next-line no-param-reassign
+            state.status = AccountStatus.failed;
+            // eslint-disable-next-line no-param-reassign
+            state.user = action.payload;
+        });
     },
 });
 
 export default slice.reducer;
-
-const { loginSuccess } = slice.actions;
-
-export const updateProfile = (data:StringKeyString) => async (dispatch:any):Promise<unknown> => {
-    try {
-        const {
-            avatarFile,
-            oldPassword,
-            newPassword,
-            ...userData
-        } = data;
-
-        if (oldPassword && newPassword) {
-            await userApiInstance.updatePassword({ oldPassword, newPassword });
-        }
-
-        if (avatarFile) {
-            const avatarData = new FormData();
-
-            avatarData.append('avatar', avatarFile);
-
-            await userApiInstance.updateAvatar(avatarData);
-        }
-
-        const user = await userApiInstance.update(userData);
-
-        dispatch(loginSuccess(user));
-        return user;
-    } catch (e) {
-        return null;
-    }
-};

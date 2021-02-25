@@ -7,7 +7,7 @@ const JSON_HEADER: StringKeyString = {
     'Content-type': 'application/json; charset=utf-8',
 };
 
-function getContentType(data?: StringKeyString|FormData): StringKeyString|null {
+function getContentType(data?: StringKeyString|FormData|unknown): StringKeyString|null {
     if (!data) {
         return null;
     }
@@ -23,7 +23,7 @@ function getContentType(data?: StringKeyString|FormData): StringKeyString|null {
     return null;
 }
 
-function getBody(data?: StringKeyString|FormData): string|FormData|null {
+function getBody(data?: StringKeyString|FormData|unknown): string|FormData|null {
     if (data instanceof FormData) {
         return data;
     }

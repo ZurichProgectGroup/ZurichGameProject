@@ -3,7 +3,6 @@ import './Register.css';
 import {
     Button, LinkButton, Input,
 } from 'Components';
-import ROUTES from 'Components/App/consts';
 import type { SecondStepProps } from './types';
 
 const SecondStep = ({
@@ -39,7 +38,7 @@ const SecondStep = ({
             onChange={(e) => setPhone(e.target.value)}
         />
         <Button type="submit" className="register-page__button">Register</Button>
-        <LinkButton onClick={goPrevStep} to={ROUTES.register}>Back</LinkButton>
+        <LinkButton onClick={goPrevStep} isButton>Back</LinkButton>
     </>
 );
 
