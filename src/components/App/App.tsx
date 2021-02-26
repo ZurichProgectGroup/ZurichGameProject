@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { getUser } from 'Store/account';
 import ErrorBoundary from 'Components/ErrorBoundary';
 import GamePage from 'Pages/GamePage';
+import PageMeta from 'Components/PageMeta';
 import ROUTES from './consts';
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
 
     return (
         <ErrorBoundary>
+            <PageMeta />
             <Switch>
                 <Route exact path={ROUTES.main} component={Home} />
                 <Route exact path={ROUTES.account} component={Account} />
