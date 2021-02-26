@@ -5,10 +5,11 @@
       "es2017",
       "webworker"
     ],
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
     "jsx": "react",
+    "resolveJsonModule": true,
     "importHelpers": true,
     "noUnusedLocals": true,
     "esModuleInterop": true,
@@ -21,7 +22,20 @@
     "baseUrl": ".",
     "outDir": "./dist",
     "paths": {
-      "*": ["./src/*"]
+        "Api": ["src/api/"],
+        "Audio": ["src/audio/"],
+        "Images": ["src/images/"],
+        "Components": ["src/components/"],
+        "Configs": ["src/configs/"],
+        "Utils": ["src/utils/"],
+        "Pages": ["src/pages/"],
+        "Store": ["src/store/"],
+        "Mocks": ["src/mocks/"],
+        "Types": ["src/types/"],
+        "Services": ["src/services/"],
+        "Selectors": ["src/selectors/"],
+        "Hooks": ["src/hooks"],
+        "*": ["src/*"]
     },
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },

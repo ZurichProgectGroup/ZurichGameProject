@@ -44,12 +44,14 @@ enum AccountStatus {
     failed = 'failed',
 }
 
+export const initialState = {
+    status: AccountStatus.idle,
+    user: null,
+};
+
 const slice = createSlice({
     name: 'account',
-    initialState: {
-        status: AccountStatus.idle,
-        user: null,
-    },
+    initialState,
     reducers: {
         loginSuccess: (state, action) => {
             // eslint-disable-next-line no-param-reassign

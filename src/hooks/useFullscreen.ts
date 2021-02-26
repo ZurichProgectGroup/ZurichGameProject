@@ -1,7 +1,9 @@
 import { useState, useLayoutEffect } from 'react';
+import { isServer } from 'Utils/_helpers';
 
-const checkIsFullscreen = () => !!(document.fullscreenElement || document.mozFullScreenElement
-    || document.webkitFullscreenElement || document.msFullscreenElement);
+const checkIsFullscreen = () => !!(!isServer
+    && (document.fullscreenElement || document.mozFullScreenElement
+    || document.webkitFullscreenElement || document.msFullscreenElement));
 
 const requestFullscreen = (elem) => {
     if (elem.requestFullscreen) {
@@ -45,7 +47,7 @@ export default function useFullscreen(elem): [boolean, () => void, () => void] {
     );
 
     const setFullscreen = () => {
-        if (elem.current == null) return;
+        if (elem.current == null || isServer) return;
 
         requestFullscreen(elem.current);
     };

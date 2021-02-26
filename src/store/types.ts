@@ -2,13 +2,13 @@ import { StringKeyString } from 'Utils/custom_types';
 import { TLeaderItemDTO } from 'Api/LeaderboardApi';
 
 export interface IStoreCTX {
-    account:{
+    readonly account:{
         user: StringKeyString
     },
-    game: {
+    readonly game: {
         currentScore: number
     },
-    leaderboard: {
+    readonly leaderboard: {
         list: TLeaderItemDTO[],
         isLoading: boolean,
         error: null | string,

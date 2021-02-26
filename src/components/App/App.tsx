@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
 } from 'react-router-dom';
@@ -26,18 +25,16 @@ const App = () => {
 
     return (
         <ErrorBoundary>
-            <Router>
-                <Switch>
-                    <Route exact path={ROUTES.main} component={Home} />
-                    <Route exact path={ROUTES.account} component={Account} />
-                    <Route exact path={ROUTES.game} component={GamePage} />
-                    <Route exact path={ROUTES.login} component={Login} />
-                    <Route exact path={ROUTES.register} component={Register} />
-                    <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
-                    <Route path={ROUTES.forum} component={ForumPage} />
-                    <Route component={ErrorPage} />
-                </Switch>
-            </Router>
+            <Switch>
+                <Route exact path={ROUTES.main} component={Home} />
+                <Route exact path={ROUTES.account} component={Account} />
+                <Route exact path={ROUTES.game} component={GamePage} />
+                <Route exact path={ROUTES.login} component={Login} />
+                <Route exact path={ROUTES.register} component={Register} />
+                <Route exact path={ROUTES.leaderboard} component={LeaderboardPage} />
+                <Route path={ROUTES.forum} component={ForumPage} />
+                <Route component={ErrorPage} />
+            </Switch>
         </ErrorBoundary>
     );
 };

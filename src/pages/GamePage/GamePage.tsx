@@ -3,6 +3,7 @@ import './GamePage.css';
 import Game from 'Components/Game';
 import useFullscreen from 'Hooks/useFullscreen';
 import { FullscreenButton } from 'Components';
+import { isServer } from 'utils/_helpers';
 
 const GamePage = () => {
     const fullscreenWrapper = useRef(null);
@@ -15,6 +16,10 @@ const GamePage = () => {
             setFullscreen();
         }
     }, [isFullscreen]);
+
+    if (isServer) {
+        return null;
+    }
 
     return (
         <div ref={fullscreenWrapper} className="game-page">

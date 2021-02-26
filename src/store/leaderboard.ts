@@ -8,13 +8,15 @@ export const getLeaderboard = createAsyncThunk(
     ),
 );
 
+export const initialState = {
+    list: [],
+    isLoading: false,
+    error: null,
+};
+
 const slice = createSlice({
     name: 'leaderboard',
-    initialState: {
-        list: [],
-        isLoading: false,
-        error: null,
-    },
+    initialState,
     reducers: {
         setList: (state, { payload }) => {
             // eslint-disable-next-line no-param-reassign

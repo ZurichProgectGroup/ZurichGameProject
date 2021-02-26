@@ -1,3 +1,5 @@
+import { IStoreCTX } from 'Store';
+
 declare module '*.png' {
     const value: string;
     export default value;
@@ -49,4 +51,13 @@ interface User {
     avatar: string | null;
     email: string;
     phone: string;
+}
+
+declare global {
+    interface Window {
+        __INITIAL_STATE__: {
+            state: IStoreCTX,
+            location: string
+        };
+    }
 }

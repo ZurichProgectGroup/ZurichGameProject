@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Home.css';
-import logo from 'Images/logo.png';
 import { Avatar, Button } from 'Components';
 import { ButtonSize, ButtonVariant } from 'Components/Button/types';
 import NavigationList from 'Components/NavigationList';
 import ROUTES from 'Components/App/consts';
+import logo from 'Images/logo.png';
 import RouteMap from './const';
 
 const Home = () => {
