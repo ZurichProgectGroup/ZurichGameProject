@@ -1,0 +1,121 @@
+openapi: 3.0.0
+info:
+    title: Api
+    description: Api for game
+    version: 1.0.0
+servers:
+    - url: http://localhost:3000
+tags:
+    - name: themes
+    - name: user themes
+paths:
+    /themes:
+        get:
+            tags:
+                - themes
+            summary: Get all themes
+            responses:
+                '200':
+                    description: List of themes
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Theme'
+        post:
+            tags:
+                - themes
+            summary: Creates a new theme
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateTheme'
+            responses:
+                '201':
+                    description: Created theme
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Theme'
+    /themes/{id}:
+        delete:
+            tags:
+                - themes
+            summary: Delete theme by id
+            parameters:
+                -   in: path
+                    name: id
+                    schema:
+                        $ref: '#/components/schemas/Id'
+                    required: true
+            responses:
+                '200':
+                    description: Deleted
+    /user-themes:
+        post:
+            tags:
+                - user themes
+            summary: Set theme for user
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserTheme'
+            responses:
+                '200':
+                    description: User theme
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserTheme'
+    /user-themes/{userId}:
+        get:
+            tags:
+                - user themes
+            summary: Get theme for user
+            parameters:
+                -   in: path
+                    name: userId
+                    schema:
+                        $ref: '#/components/schemas/Id'
+                    required: true
+            responses:
+                '200':
+                    description: Theme
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Theme'
+components:
+    schemas:
+        Id:
+            type: integer
+            example: 1
+        CreateTheme:
+            type: object
+            required:
+                - title
+            properties:
+                title:
+                    type: string
+        Theme:
+            type: object
+            properties:
+                id:
+                    $ref: '#/components/schemas/Id'
+                title:
+                    type: string
+        UserTheme:
+            type: object
+            required:
+                - userId
+                - themeId
+            properties:
+                userId:
+                    $ref: '#/components/schemas/Id'
+                themeId:
+                    $ref: '#/components/schemas/Id'
