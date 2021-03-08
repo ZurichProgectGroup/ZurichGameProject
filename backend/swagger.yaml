@@ -9,6 +9,37 @@ tags:
     - name: themes
     - name: user themes
 paths:
+    /api/feedback:
+        get:
+            tags:
+                - feedback
+            summary: Get all feedbacks
+            responses:
+                '200':
+                    description: List of feedbacks
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Feedback'
+        put:
+            tags:
+                - feedback
+            summary: Creates a new feedback
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateFeedback'
+            responses:
+                '201':
+                    description: Created feedback
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Feedback'
     /themes:
         get:
             tags:
@@ -95,6 +126,28 @@ components:
         Id:
             type: integer
             example: 1
+        CreateFeedback:
+            type: object
+            required:
+                - name
+                - title
+                - feedback
+            properties:
+                name:
+                    type: string
+                title:
+                    type: string
+                feedback:
+                    type: string
+        Feedback:
+            type: object
+            properties:
+                name:
+                    type: string
+                title:
+                    type: string
+                feedback:
+                    type: string
         CreateTheme:
             type: object
             required:

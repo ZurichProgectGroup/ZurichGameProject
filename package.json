@@ -10,7 +10,11 @@
     "lint-styles": "stylelint \"**/*.css\"",
     "lint:fix": "npm run lint-js -- --fix && npm run lint-styles -- --fix",
     "serve": "node server.js",
-    "test": "jest"
+    "buildback": "npx tsc --p ./backend/tsconfig.json",
+    "serveback": "nodemon ./backend/dist/app.js",
+    "startback": "npm run buildback  && npm run serveback",
+    "test": "jest",
+    "backend": ""
   },
   "repository": {
     "type": "git",
@@ -29,6 +33,7 @@
     "@testing-library/react": "11.2.3",
     "@types/classnames": "2.2.11",
     "@types/jest": "26.0.20",
+    "@types/mongoose": "5.10.3",
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
     "@types/react-redux": "7.1.15",
@@ -80,6 +85,7 @@
     "cookie-parser": "1.4.5",
     "dotenv": "8.2.0",
     "express": "4.17.1",
+    "mongoose": "5.11.19",
     "normalize.css": "8.0.1",
     "pg": "8.5.1",
     "pg-hstore": "2.3.3",
