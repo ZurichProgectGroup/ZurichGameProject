@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import path from 'path';
+import { HotModuleReplacementPlugin } from 'webpack';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssnanoPlugin from 'cssnano-webpack-plugin';
@@ -10,10 +11,21 @@ import cssLoader from './loaders/cssLoader';
 import fileLoader from './loaders/fileLoader';
 import { DIST_DIR, SRC_DIR, IS_DEV } from './env';
 
+const getPlugins = () => {
+    const plugins = [
+        new MiniCssExtractPlugin(),
+        new CleanWebpackPlugin(),
+    ];
+    if (IS_DEV) {
+        plugins.push(new HotModuleReplacementPlugin());
+    }
+    return plugins;
+};
+
 const config = {
     devtool: 'source-map',
     entry: {
-        app: path.resolve(SRC_DIR, 'index.tsx'),
+        app: ['react-hot-loader/patch', 'webpack-hot-middleware/client', path.resolve(SRC_DIR, 'index.tsx')],
         sw: path.resolve(SRC_DIR, 'sw.ts'),
     },
     output: {
@@ -43,18 +55,7 @@ const config = {
     module: {
         rules: [tsLoader.client, cssLoader.client, fileLoader.client],
     },
-    devServer: {
-        contentBase: DIST_DIR,
-        port: 9000,
-        hot: true,
-        open: true,
-        historyApiFallback: true,
-    },
-    plugins: [
-        new MiniCssExtractPlugin(),
-        new CleanWebpackPlugin(),
-
-    ],
+    plugins: getPlugins(),
     optimization: {
         minimize: !IS_DEV,
         minimizer: [
