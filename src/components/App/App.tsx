@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+// import { hot } from 'react-hot-loader/root';
 import React, { useEffect } from 'react';
 import {
     Switch,

@@ -25,6 +25,7 @@ const Login = () => {
     if (userData) {
         return (<Redirect to={ROUTES.main} />);
     }
+
     return (
         <div className="login-page">
             <Card className="login-page__card">

@@ -120,7 +120,7 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-const { loginSuccess } = slice.actions;
+export const { loginSuccess } = slice.actions;
 
 export const updateProfile = (data:StringKeyString) => async (dispatch:any):Promise<unknown> => {
     try {

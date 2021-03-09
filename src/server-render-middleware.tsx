@@ -5,17 +5,14 @@ import { Request, Response } from 'express';
 import { StaticRouter } from 'react-router-dom';
 import { StaticRouterContext } from 'react-router';
 import App from 'Components/App';
-import configureAppStore from 'Store';
-import getInitialState from 'Store/getInitialState';
 import Helmet, { HelmetData } from 'react-helmet';
+import ssrInitStore from 'utils/ssrInitStore';
 
-export default (req: Request, res: Response) => {
+export default async (req: Request, res: Response) => {
     const location = req.url || '/';
     const context: StaticRouterContext = {};
-    const initialState = getInitialState();
-    const store = configureAppStore(initialState);
     const helmetData = Helmet.renderStatic();
-
+    const store = await ssrInitStore(req);
     const jsx = (
         <Provider store={store}>
             <StaticRouter context={context} location={location}>
