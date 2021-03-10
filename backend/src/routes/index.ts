@@ -1,9 +1,11 @@
 import themesRoutes from './themes';
 import userThemesRoutes from './userThemes';
-import swaggerRoutes from './swagger';
+import topicsRoutes from './topics';
+import commentsRoutes from './comments';
 
 export {
     themesRoutes,
-    swaggerRoutes,
     userThemesRoutes,
+    topicsRoutes,
+    commentsRoutes,
 };

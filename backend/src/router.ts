@@ -1,10 +1,13 @@
 import { Router } from 'express';
-import { themesRoutes, swaggerRoutes, userThemesRoutes } from './routes';
+import {
+    themesRoutes, userThemesRoutes, topicsRoutes, commentsRoutes,
+} from './routes';
 
 const router: Router = Router();
 
 themesRoutes(router);
 userThemesRoutes(router);
-swaggerRoutes(router);
+topicsRoutes(router);
+commentsRoutes(router);
 
 export default router;
