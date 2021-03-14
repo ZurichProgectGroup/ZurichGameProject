@@ -5,7 +5,8 @@
 
 .forum-themes__item {
     margin-bottom: 20px;
-    
+    text-align: left;
+
     &:last-child {
         margin-bottom: 0;
     }

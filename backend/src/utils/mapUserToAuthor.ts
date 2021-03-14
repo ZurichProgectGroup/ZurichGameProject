@@ -7,7 +7,7 @@ export default function mapUserToAuthor(user: User) {
 
     return {
         id,
-        avatar,
+        avatar: avatar ? `https://ya-praktikum.tech/${avatar}` : null,
         name: displayName || firstName,
     };
 }

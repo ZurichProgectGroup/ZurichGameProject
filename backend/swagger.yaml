@@ -210,6 +210,10 @@ components:
         Id:
             type: integer
             example: 1
+        NullableId:
+            type: integer
+            nullable: true
+            example: 1
         NotEmptyString:
             type: string
             minLength: 1
@@ -308,7 +312,7 @@ components:
                 topicId:
                     $ref: '#/components/schemas/Id'
                 parentId:
-                    $ref: '#/components/schemas/Id'
+                    $ref: '#/components/schemas/NullableId'
         Comment:
             type: object
             properties:
@@ -319,8 +323,7 @@ components:
                 topicId:
                     $ref: '#/components/schemas/Id'
                 parentId:
-                    $ref: '#/components/schemas/Id'
-                    nullable: true
+                    $ref: '#/components/schemas/NullableId'
         Replies:
             type: array
             items:
@@ -331,8 +334,7 @@ components:
                     text:
                         $ref: '#/components/schemas/NotEmptyString'
                     parentId:
-                        $ref: '#/components/schemas/Id'
-                        nullable: true
+                        $ref: '#/components/schemas/NullableId'
                     author:
                         $ref: '#/components/schemas/Author'
                     createdAt:

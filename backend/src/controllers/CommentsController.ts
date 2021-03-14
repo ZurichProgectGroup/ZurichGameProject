@@ -13,8 +13,9 @@ export default class CommentsController {
 
     public static getReplies = async (request: CustomRequest, response: Response) => {
         const { id } = request.params;
+        const commentId = Number(id);
 
-        const comments = await CommentService.getChildren(Number(id));
+        const comments = await CommentService.getChildren(commentId);
 
         const userIds = new Set<number>();
 
@@ -31,7 +32,7 @@ export default class CommentsController {
             author: mapUserToAuthor(users[authorId]),
         }));
 
-        response.status(HTTPStatusCode.OK).json(buildCommentTree(commentsWithUsers));
+        response.status(HTTPStatusCode.OK).json(buildCommentTree(commentsWithUsers, commentId));
     };
 
     public static delete = async (request: Request, response: Response) => {

@@ -11,10 +11,25 @@ export default class TopicsController {
         response.status(HTTPStatusCode.Created).json(theme);
     };
 
-    public static getAll = async (request: Request, response: Response) => {
+    public static getAll = async (request: CustomRequest, response: Response) => {
         const themes = await TopicService.getAll();
 
-        response.status(HTTPStatusCode.OK).json(themes);
+        const userIds = new Set<number>();
+
+        themes.forEach(({ authorId }) => {
+            userIds.add(authorId);
+        });
+
+        const { api } = request;
+
+        const users = await getUsersGroupedById([...userIds], api);
+
+        const themesWithUsers = themes.map(({ authorId, ...commentData }) => ({
+            ...commentData,
+            author: mapUserToAuthor(users[authorId]),
+        }));
+
+        response.status(HTTPStatusCode.OK).json(themesWithUsers);
     };
 
     public static getById = async (request: CustomRequest, response: Response) => {
