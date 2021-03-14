@@ -1,14 +1,22 @@
 .link-button {
     font-size: 14px;
     color: var(--link);
-    text-transform: uppercase;
     text-shadow: 0 3px 10px rgba(var(--link-rgb), 0.4);
     text-decoration: underline;
     background: transparent;
+    display: inline-block;
+    padding: 8px;
 
     &:focus,
     &:hover {
         outline: none;
         opacity: 0.6;
+    }
+
+    /* &_small {
+    } */
+
+    &_large {
+        text-transform: uppercase;
     }
 }
