@@ -2,13 +2,14 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import router from './router';
-import initDb from './db';
+import {initMongoDB} from './db/mongo';
+import {initPostgreeDB} from './db/postgree';
 
 dotenv.config();
-
+initMongoDB();
 const server: Express = express();
 const PORT = process.env.PORT || 3000;
-const db = initDb();
+const postgreedb = initPostgreeDB();
 
 server
     .disable('x-powered-by')
@@ -18,7 +19,7 @@ server
     .use(router);
 
 (async () => {
-    await db.sync({ alter: true });
+    await postgreedb.sync({ alter: true });
 
     server.listen(PORT);
 })();

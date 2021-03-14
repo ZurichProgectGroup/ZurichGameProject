@@ -1,6 +1,5 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
-
-export default () => {
+export const initPostgreeDB = () => {
     const sequelizeOptions: SequelizeOptions = {
         host: 'localhost',
         port: 5432,
@@ -9,10 +8,8 @@ export default () => {
         database: process.env.POSTGRES_DB,
         dialect: 'postgres',
     };
-
     const sequelize = new Sequelize(sequelizeOptions);
-
     sequelize.addModels([`${__dirname}/models`]);
-
     return sequelize;
 };
+export default initPostgreeDB;
