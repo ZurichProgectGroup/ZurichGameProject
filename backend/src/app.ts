@@ -9,7 +9,8 @@ import * as OpenApiValidator from 'express-openapi-validator';
 import swaggerUi from 'swagger-ui-express';
 import yaml from 'yamljs';
 import router from './router';
-import initDb from './db';
+import { initMongoDB } from './db/mongo';
+import { initPostgreeDB } from './db/postgree';
 import { auth, errorHandler, makeApiInstance } from './middleware';
 
 const specPath = path.resolve('swagger.yaml');
@@ -22,7 +23,8 @@ const cert = fs.readFileSync(path.resolve(process.cwd(), 'certs/cert.pem'));
 
 const app: Express = express();
 const PORT = process.env.PORT || 443;
-const db = initDb();
+initMongoDB();
+const postgreedb = initPostgreeDB();
 
 app
     .disable('x-powered-by')
@@ -48,7 +50,7 @@ app
 const server = https.createServer({ key, cert }, app);
 
 (async () => {
-    await db.sync({ alter: true });
+    await postgreedb.sync({ alter: true });
 
     server.listen(PORT, () => { console.log(`listening on ${PORT}`); });
 })();

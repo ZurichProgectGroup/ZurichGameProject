@@ -14,9 +14,22 @@ services:
             POSTGRES_DB: ${POSTGRES_DB}
     mongo:
         image: mongo
-        ports:
-            - "27017:27017"
+        container_name: mongodb
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
         volumes:
-            - data-volume:/data/db
+            - mongo-volume:/data/db
+            - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+        restart: always
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
 volumes:
+    mongo-volume:
+    node_modules:
     data-volume:
