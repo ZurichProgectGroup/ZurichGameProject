@@ -5,9 +5,10 @@ import {
 } from 'Components';
 import ROUTES from 'Components/App/consts';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from 'Store/account';
+import { login, yaLogin } from 'Store/account';
 import { Redirect, useHistory } from 'react-router-dom';
 import { selectUser } from 'Selectors';
+import { LinkButtonSize } from 'Components/LinkButton/types';
 
 const Login = () => {
     const [userName, setUserName] = useState('');
@@ -25,6 +26,10 @@ const Login = () => {
 
         history.push(ROUTES.main);
     }, [userName, password]);
+
+    const handleYandexClick = useCallback(() => {
+        dispatch(yaLogin());
+    }, []);
 
     if (userData) {
         return (<Redirect to={ROUTES.main} />);
@@ -52,6 +57,14 @@ const Login = () => {
                     />
                     <Button type="submit" className="login-page__button">Sign in</Button>
                 </form>
+                <LinkButton
+                    size={LinkButtonSize.Small}
+                    isButton
+                    onClick={handleYandexClick}
+                >
+                    Sign in via yandex
+                </LinkButton>
+                <br />
                 <LinkButton to={ROUTES.register}>I don`t have an account</LinkButton>
             </Card>
         </div>
