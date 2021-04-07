@@ -2,8 +2,8 @@ import express, { Express } from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import router from './router';
-import {initMongoDB} from './db/mongo';
-import {initPostgreeDB} from './db/postgree';
+import { initMongoDB } from './db/mongo';
+import { initPostgreeDB } from './db/postgree';
 
 dotenv.config();
 initMongoDB();
@@ -19,7 +19,11 @@ server
     .use(router);
 
 (async () => {
-    await postgreedb.sync({ alter: true });
-
+    try {
+        await postgreedb.sync({ alter: true });
+    } catch (e) {
+        console.log('postgreedb error', e);
+    }
     server.listen(PORT);
+    console.log('Backend server started at Port: ', PORT);
 })();

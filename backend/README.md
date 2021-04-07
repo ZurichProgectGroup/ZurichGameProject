@@ -23,3 +23,5 @@ https://docs.mongodb.com/manual/administration/install-community/
 ...   {role: "dbAdminAnyDatabase", db: <MONGO_DB from .env> }
 ...   ]
 ...   });
+
+mongodb://zurich:zurich@127.0.0.1:27017/zurich

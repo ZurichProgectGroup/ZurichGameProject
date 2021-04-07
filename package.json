@@ -6,11 +6,11 @@
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode=production",
-    "lint-js": "eslint . --ext .js,.jsx,.ts,.tsx ",
+    "lint-js": "eslint . --ext .jsx,.ts,.tsx ",
     "lint-styles": "stylelint \"**/*.css\"",
     "lint:fix": "npm run lint-js -- --fix && npm run lint-styles -- --fix",
     "serve": "node server.js",
-    "buildback": "npx tsc --p ./backend/tsconfig.json",
+    "buildback": "npx tsc --p ./backend/",
     "serveback": "nodemon ./backend/dist/app.js",
     "startback": "npm run buildback  && npm run serveback",
     "test": "jest",
@@ -100,7 +100,7 @@
     "sequelize-typescript": "2.1.0",
     "swagger-ui-express": "4.1.6",
     "yamljs": "0.3.0"
-  },
+},
   "pre-commit": [
     "lint-js",
     "lint-styles"

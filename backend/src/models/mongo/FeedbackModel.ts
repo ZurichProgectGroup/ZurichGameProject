@@ -5,21 +5,21 @@ import {
 } from './IFeedBackModel';
 
 const feedBackSchema = new mongoose.Schema({
-    name:{
-        type:String,
+    name: {
+        type: String,
         required: true,
     },
     title: {
-        type:String,
+        type: String,
         required: true,
     },
     feedback: {
-        type:String,
+        type: String,
         required: true,
     },
 
-})
+});
 
-const FeedbackModel = mongoose.model<IFeedbackDocument, IFeedbackModel>('Feedback', feedBackSchema)
+const FeedbackModel = mongoose.model<IFeedbackDocument, IFeedbackModel>('Feedback', feedBackSchema);
 
 export default FeedbackModel;

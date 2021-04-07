@@ -3,7 +3,7 @@ import {
     themesRoutes,
     swaggerRoutes,
     userThemesRoutes,
-    feedbackRoutes
+    feedbackRoutes,
 } from './routes';
 
 const router: Router = Router();
