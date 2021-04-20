@@ -6,6 +6,7 @@ services:
             - "${POSTGRES_PORT}:${POSTGRES_PORT}"
         volumes:
             - ./postgresdata:/var/lib/postgresql/data
+            - ./dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
         restart: always
         environment:
             POSTGRES_USER: ${POSTGRES_USER}
@@ -59,7 +60,7 @@ services:
         privileged: true
         ports:
             - "0.0.0.0:${BACKEND_PORT}:${BACKEND_PORT}"
-        command: bash -c "cd app && npm install -g typescript && npm i && npm run buildback && npm run serveback"
+        command: bash -c "cd app && npm install -g typescript && npm i && npm run buildback && npm run serveback && npm run migrate"
         volumes:
             - .:/app
 

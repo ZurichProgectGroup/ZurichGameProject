@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { HTTPStatusCode, CustomRequest } from 'types';
+import { HTTPStatusCode, CustomRequest } from '../types';
 import CommentService from '../services/CommentService';
 import { mapUserToAuthor, getUsersGroupedById, buildCommentTree } from '../utils';
 

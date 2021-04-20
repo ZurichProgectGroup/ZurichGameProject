@@ -14,4 +14,4 @@ const YA_OAUTH_URL = `https://oauth.yandex.ru/authorize?
 
 const yandexOauthInstance = new OauthTransport(YA_OAUTH_URL);
 
-export default { yandexOauthInstance };
+export default yandexOauthInstance;

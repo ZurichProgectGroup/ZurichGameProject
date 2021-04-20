@@ -11,10 +11,10 @@
     "lint:fix": "npm run lint-js -- --fix && npm run lint-styles -- --fix",
     "serve": "node server.js",
     "buildback": "npx tsc --p ./backend/",
+    "migrate": "npx sequelize-cli db:migrate",
     "serveback": "nodemon ./backend/dist/app.js",
     "startback": "npm run buildback  && npm run serveback",
-    "test": "jest",
-    "backend": ""
+    "test": "jest"
   },
   "scriptsComments": {
     "start": "add port 5000 for yandex oauth authorisation, becase it always redirects to http://localhost:5000/"
@@ -109,7 +109,7 @@
     "sequelize-typescript": "2.1.0",
     "swagger-ui-express": "4.1.6",
     "yamljs": "0.3.0"
-},
+  },
   "pre-commit": [
     "lint-js",
     "lint-styles"

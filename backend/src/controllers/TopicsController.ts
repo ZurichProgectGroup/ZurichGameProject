@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { HTTPStatusCode, CustomRequest } from 'types';
+import { HTTPStatusCode, CustomRequest } from '../types';
 import TopicService from '../services/TopicService';
 import { getUsersGroupedById, mapUserToAuthor } from '../utils';
 
