@@ -32,6 +32,7 @@ app
     .use(express.json())
     .use(cors({
         credentials: true,
+        origin: true,
     }))
     .use(cookieParser())
     .use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec))

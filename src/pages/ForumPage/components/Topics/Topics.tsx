@@ -1,14 +1,21 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import ForumThemes from 'Components/ForumThemes';
-import NavigationList from 'Components/NavigationList';
-import PlusButton from 'Components/PlusButton';
-import Title from 'Components/Title';
-import { forumThemes } from 'Mocks/forum';
+import {
+    Title, Loader, PlusButton, NavigationList, ForumTopics,
+} from 'Components';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectTopics } from 'Selectors';
+import { getTopics } from 'Store/topics';
 import RouteMap from './const';
 
-const Themes = () => {
+const Topics = () => {
     const history = useHistory();
+    const dispatch = useDispatch();
+    const { list, isLoading } = useSelector(selectTopics);
+
+    useEffect(() => {
+        dispatch(getTopics());
+    }, []);
 
     const handleAddNewTheme = useCallback(() => {
         history.push(`${history.location.pathname}/create`);
@@ -26,10 +33,13 @@ const Themes = () => {
                 <PlusButton onClick={handleAddNewTheme} className="forum-page__add" />
             </div>
             <div className="forum-page__content">
-                <ForumThemes themes={forumThemes} onThemeClick={handleThemeClick} />
+                {
+                    isLoading ? <Loader />
+                        : <ForumTopics topics={list} onThemeClick={handleThemeClick} />
+                }
             </div>
         </>
     );
 };
 
-export default Themes;
+export default Topics;

@@ -1,5 +1,17 @@
 .create-comment__text {
     margin-bottom: 20px;
+    position: relative;
+}
+
+.create-comment__emoji {
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    display: none;
+
+    &_show {
+        display: block;
+    }
 }
 
 .create-comment__btn {

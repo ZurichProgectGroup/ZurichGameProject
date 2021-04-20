@@ -1,7 +1,7 @@
 type UserInfo = {
     userId: number,
-    imgUrl: string | null,
-    userName: string
+    avatar: string | null,
+    name: string
 };
 
 export default UserInfo;

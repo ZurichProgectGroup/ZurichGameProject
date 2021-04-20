@@ -1,4 +1,4 @@
-export default function buildCommentTree(comments) {
+export default function buildCommentTree(comments, rootId: number) {
     const tree = [];
     const mappedArr = {};
 
@@ -13,7 +13,7 @@ export default function buildCommentTree(comments) {
         const { parentId } = comment;
         if (mappedArr[parentId]) {
             mappedArr[parentId].children.push(comment);
-        } else {
+        } else if (parentId === rootId) {
             tree.push(comment);
         }
     });
