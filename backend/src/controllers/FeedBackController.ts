@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { HTTPStatusCode } from 'types';
+import { HTTPStatusCode } from '../types';
 import FeedServiceService from '../services/FeedBackService';
 
 export default class FeedBackController {

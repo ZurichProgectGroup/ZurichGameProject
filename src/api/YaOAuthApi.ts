@@ -1,5 +1,5 @@
 import { StringKeyString } from 'Utils/custom_types';
-import { yandexOauthInstance } from './OauthInstances';
+import yandexOauthInstance from './OauthInstances';
 import { oauthTransportInstance } from './TransportInstances';
 
 export default class YaOAuthAPI {

@@ -116,4 +116,5 @@ dist
 .pnp.*
 
 # DBs
-backend/postgresdata/
+backend/postgresdata
+postgresdata/

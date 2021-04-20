@@ -7,15 +7,14 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = (env, opt) => {
     const isProduction = opt.mode === 'production';
-
     return {
         devtool: 'source-map',
         entry: {
-            app: './src/index.tsx',
-            sw: './src/sw.ts',
+            app: '/src/index.tsx',
+            sw: '/src/sw.ts',
         },
         output: {
-            path: path.join(__dirname, '/dist'),
+            path: path.join(__dirname, 'dist'),
             filename: isProduction ? '[name].[contenthash].js' : '[name].js',
             publicPath: '/',
         },

@@ -18,11 +18,11 @@ const spec = yaml.load(specPath);
 
 dotenv.config();
 
-const key = fs.readFileSync(path.resolve(process.cwd(), 'certs/key.pem'));
-const cert = fs.readFileSync(path.resolve(process.cwd(), 'certs/cert.pem'));
+const key = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/key.pem'));
+const cert = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/cert.pem'));
 
 const app: Express = express();
-const PORT = process.env.PORT || 443;
+const PORT = process.env.BACKEND_PORT || 443;
 initMongoDB();
 const postgreedb = initPostgreeDB();
 

@@ -30,7 +30,7 @@ const Avatar = (props: Props) => {
         try {
             const imageUrl = await getInputImgUrl(input);
             setAvatar(imageUrl);
-            if (onChange) {
+            if (onChange && input.files) {
                 onChange(imageUrl, input.files[0]);
             }
         } catch (e) {

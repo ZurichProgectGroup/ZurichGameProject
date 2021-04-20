@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { HTTPStatusCode } from 'types';
+import { HTTPStatusCode } from '../types';
 import ThemeService from '../services/ThemeService';
 import UserThemeService from '../services/UserThemeService';
 
