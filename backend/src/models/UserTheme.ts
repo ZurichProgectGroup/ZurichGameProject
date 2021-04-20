@@ -17,24 +17,18 @@ interface UserThemeAttributes {
 }
 
 @Table({
-    tableName: 'user_theme',
+    tableName: 'userTheme',
     timestamps: false,
 })
 export default class UserTheme extends Model<UserThemeAttributes> {
     @AutoIncrement
     @PrimaryKey
-    @Column({
-        type: DataType.INTEGER,
-        field: 'user_id',
-    })
+    @Column(DataType.INTEGER)
     userId: number;
 
     @ForeignKey(() => Theme)
     @AllowNull(false)
-    @Column({
-        type: DataType.INTEGER,
-        field: 'theme_id',
-    })
+    @Column(DataType.INTEGER)
     themeId: number;
 
     @BelongsTo(() => Theme)

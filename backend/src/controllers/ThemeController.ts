@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { HTTPStatusCode } from 'types';
 import ThemeService from '../services/ThemeService';
 import UserThemeService from '../services/UserThemeService';
 
@@ -9,13 +10,13 @@ export default class ThemeController {
         const { body } = request;
 
         const theme = await ThemeService.create(body);
-        response.status(201).json(theme);
+        response.status(HTTPStatusCode.OK).json(theme);
     };
 
     public static getAll = async (request: Request, response: Response) => {
         const themes = await ThemeService.getAll();
 
-        response.status(200).json(themes);
+        response.status(HTTPStatusCode.OK).json(themes);
     };
 
     public static delete = async (request: Request, response: Response) => {
@@ -23,7 +24,7 @@ export default class ThemeController {
 
         await ThemeService.delete(Number(id));
 
-        response.sendStatus(200);
+        response.sendStatus(HTTPStatusCode.OK);
     };
 
     public static setUserTheme = async (request: Request, response: Response) => {
@@ -31,7 +32,7 @@ export default class ThemeController {
 
         const res = await UserThemeService.setUserTheme(body);
 
-        response.status(200).json(res);
+        response.status(HTTPStatusCode.OK).json(res);
     };
 
     public static getUserTheme = async (request: Request, response: Response) => {
@@ -39,6 +40,6 @@ export default class ThemeController {
 
         const theme = await UserThemeService.getUserTheme(Number(userId));
 
-        response.status(200).json(theme);
+        response.status(HTTPStatusCode.OK).json(theme);
     };
 }
