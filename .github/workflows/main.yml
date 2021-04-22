@@ -19,11 +19,11 @@ jobs:
                   branch: "main"
                   usedocker: true
 
-          build-yacloud:
-            runs-on: ubuntu-latest
-            steps:
-              - name: Checkout code
-                uses: actions/checkout@v2
-              - run: echo ${{secrets.YACLOUD_SSH_PRIVATE}} > key
-              - run: rsync -av  -e "ssh -i key" ./ ${{secrets.YACLOUD_LOGIN}}@${{secrets.YACLOUD_IP}}:~/
-              - run: ssh ${{secrets.YACLOUD_LOGIN}}@{{secrets.YACLOUD_IP}} -i key sudo docker-compose up
+      build-yacloud:
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout code
+            uses: actions/checkout@v2
+          - run: echo ${{secrets.YACLOUD_SSH_PRIVATE}} > key
+          - run: rsync -av  -e "ssh -i key" ./ ${{secrets.YACLOUD_LOGIN}}@${{secrets.YACLOUD_IP}}:~/
+          - run: ssh ${{secrets.YACLOUD_LOGIN}}@{{secrets.YACLOUD_IP}} -i key sudo docker-compose up
