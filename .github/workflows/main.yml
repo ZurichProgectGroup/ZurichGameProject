@@ -2,11 +2,12 @@ name: Deploy
 
 on:
     push:
-        branches:
-            - main
+      branches: [ feature-51, main ]
+    pull_request:
+      branches: [ main ]
 
 jobs:
-    build:
+    build-heroku:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -17,3 +18,12 @@ jobs:
                   heroku_email: ${{secrets.HEROKU_EMAIL}}
                   branch: "main"
                   usedocker: true
+
+          build-yacloud:
+            runs-on: ubuntu-latest
+            steps:
+              - name: Checkout code
+                uses: actions/checkout@v2
+              - run: echo ${{secrets.YACLOUD_SSH_PRIVATE}} > key
+              - run: rsync -av  -e "ssh -i key" ./ ${{secrets.YACLOUD_LOGIN}}@${{secrets.YACLOUD_IP}}:~/
+              - run: ssh ${{secrets.YACLOUD_LOGIN}}@{{secrets.YACLOUD_IP}} -i key sudo docker-compose up

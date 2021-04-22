@@ -42,11 +42,11 @@ class GameService {
 
     private onError!: () => void;
 
-    private beatItems: {[key: string] : BeatItemRenderer};
+    private beatItems: { [key: string]: BeatItemRenderer; } | undefined;
 
-    private boardElement: BoardRenderer;
+    private boardElement: BoardRenderer | undefined;
 
-    private audio: HTMLAudioElement;
+    private audio: HTMLAudioElement | undefined;
 
     async start(
         canvas: HTMLCanvasElement,
@@ -110,18 +110,20 @@ class GameService {
     }
 
     playMusic() {
-        return this.audio.play();
+        return this.audio?.play();
     }
 
     draw() {
-        const now = Date.now();
-        const delta = now - this.then;
-        if (delta > this.interval) {
-            this.then = now - (delta % this.interval);
-            clearCanvas(this.canvas);
-            this.boardElement.render();
-            this.entities = this.updateEntities(now - this.startTime!);
-            drawEntitities(this.boardElement, this.levelConfig!, this.entities, this.beatItems);
+        if (this.boardElement && this.beatItems) {
+            const now = Date.now();
+            const delta = now - this.then;
+            if (delta > this.interval) {
+                this.then = now - (delta % this.interval);
+                clearCanvas(this.canvas);
+                this.boardElement.render();
+                this.entities = this.updateEntities(now - this.startTime!);
+                drawEntitities(this.boardElement, this.levelConfig!, this.entities, this.beatItems);
+            }
         }
     }
 
@@ -158,7 +160,7 @@ class GameService {
     }
 
     stop() {
-        this.audio.pause();
+        this.audio?.pause();
         cancelAnimationFrame(this.requestId);
         if (this.correct >= this.levelConfig!.minimumPoints) {
             this.onComplete();

@@ -27,7 +27,7 @@ const Row = (props: Props) => {
             </td>
             <td className="leaderboard__avatar">
                 <Avatar
-                    name={leader.name}
+                    name={leader?.name || ''}
                     url={leader.url}
                     size={avatarSize}
                     hideBorder={!isTop}

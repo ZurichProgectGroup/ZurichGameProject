@@ -17,8 +17,7 @@ const Account = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [alertState, setAlertState] = useState(AlertState.None);
     const [avatarFile, setAvatarFile] = useState(null);
-
-    const [profile, setProfile] = useState({
+    const initialUser: ChangedUser = {
         login: '',
         firstName: '',
         secondName: '',
@@ -28,13 +27,23 @@ const Account = () => {
         oldPassword: '',
         newPassword: '',
         avatar: null,
-    });
+    };
+    const [profile, setProfile] = useState(initialUser);
+
+    interface FieldChangeEventTarget {
+        value: string
+
+    }
+
+    interface FieldChangeEvent {
+        target:FieldChangeEventTarget
+    }
 
     const onFieldChange = useCallback(
-        (key) => ({ target: { value } }) => {
+        (key) => (event:FieldChangeEvent) => {
             setProfile((prevProfile) => ({
                 ...prevProfile,
-                [key]: value,
+                [key]: event.target.value,
             }));
         },
         [setProfile],
@@ -59,9 +68,7 @@ const Account = () => {
 
     const user = useSelector(selectUser);
 
-    useEffect(() => {
-        setProfile({ ...user, oldPassword: '', newPassword: '' });
-    }, [user]);
+    useEffect(() => setProfile({ ...user, oldPassword: '', newPassword: '' }), [user]);
 
     const handlePasswordClick = useCallback(() => {
         setShowPassword(!showPassword);
@@ -121,7 +128,7 @@ const Account = () => {
                 </LinkButton>
                 <Avatar
                     name={profile.firstName || ''}
-                    url={profile.avatar}
+                    url={profile.avatar || undefined}
                     hasChange
                     onChange={onAvatarChange}
                 />

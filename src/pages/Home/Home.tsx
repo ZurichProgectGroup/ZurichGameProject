@@ -19,7 +19,7 @@ const Home = () => {
         <div className="home">
             <div className="home__header">
                 <LinkButton to={ROUTES.account}>
-                    <Avatar size="medium" name={user?.firstName ?? ''} url={user?.avatar} />
+                    <Avatar size="medium" name={user?.firstName ?? ''} url={user?.avatar || undefined} />
                 </LinkButton>
                 <NavigationList routes={RouteMap} />
             </div>

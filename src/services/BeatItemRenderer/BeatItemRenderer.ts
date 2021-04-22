@@ -7,7 +7,7 @@ class BeatItemRenderer extends Renderer {
 
     private image: null | CanvasImageSource = null;
 
-    constructor(canvas, direction: string) {
+    constructor(canvas: HTMLCanvasElement, direction: string) {
         super(canvas);
         this.direction = direction;
         this.createImage();
@@ -23,7 +23,9 @@ class BeatItemRenderer extends Renderer {
     }
 
     render(coords: TCoords) {
-        this.ctx.drawImage(this.image, coords.x, coords.y);
+        if (this.image) {
+            this.ctx.drawImage(this.image, coords.x, coords.y);
+        }
     }
 }
 

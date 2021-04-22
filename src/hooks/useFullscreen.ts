@@ -3,7 +3,12 @@ import { useState, useLayoutEffect } from 'react';
 const checkIsFullscreen = () => !!(document.fullscreenElement || document.mozFullScreenElement
     || document.webkitFullscreenElement || document.msFullscreenElement);
 
-const requestFullscreen = (elem) => {
+const requestFullscreen = (elem: {
+    requestFullscreen: () => void;
+    msRequestFullscreen: () => void;
+    mozRequestFullScreen: () => void;
+    webkitRequestFullscreen: (arg0: any) => void;
+}) => {
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
     }
@@ -39,7 +44,14 @@ const exitFullscreen = () => {
     }
 };
 
-export default function useFullscreen(elem): [boolean, () => void, () => void] {
+export default function useFullscreen(elem: {
+    current:{
+        requestFullscreen: () => void;
+        msRequestFullscreen: () => void;
+        mozRequestFullScreen: () => void;
+        webkitRequestFullscreen: (arg0: any) => void;
+    }
+}): [boolean, () => void, () => void] {
     const [isFullscreen, setIsFullscreen] = useState(
         checkIsFullscreen(),
     );
@@ -54,7 +66,7 @@ export default function useFullscreen(elem): [boolean, () => void, () => void] {
         document.onfullscreenchange = () => setIsFullscreen(checkIsFullscreen());
 
         return () => {
-            document.onfullscreenchange = undefined;
+            document.onfullscreenchange = null;
         };
     });
 

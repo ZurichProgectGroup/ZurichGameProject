@@ -41,12 +41,17 @@ interface UserDTO {
 }
 
 interface User {
-    id: number;
-    firstName: string;
-    secondName: string;
-    displayName: string | null;
-    login: string;
-    avatar: string | null;
-    email: string;
-    phone: string;
+    id?: number;
+    firstName?: string;
+    secondName?: string;
+    displayName?: string | null;
+    login?: string;
+    avatar?: string | null;
+    email?: string;
+    phone?: string;
+}
+
+interface ChangedUser extends User {
+    oldPassword?: string;
+    newPassword?: string;
 }

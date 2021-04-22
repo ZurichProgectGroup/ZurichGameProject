@@ -13,9 +13,9 @@ export type TResultsSave = {
 
 export type TLeaderItemDTO = {
     data: {
-        id: string | number,
-        login: string,
-        avatar: null | string,
+        id?: string | number,
+        login?: string,
+        avatar?: string,
         [ratingFieldName]: number
     }
 };

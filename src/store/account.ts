@@ -72,12 +72,19 @@ enum AccountStatus {
     failed = 'failed',
 }
 
+interface AccountState {
+    status: AccountStatus,
+    user?: User,
+}
+
+const accountInitialState: AccountState = {
+    status: AccountStatus.idle,
+    user: undefined,
+};
+
 const slice = createSlice({
     name: 'account',
-    initialState: {
-        status: AccountStatus.idle,
-        user: null,
-    },
+    initialState: accountInitialState,
     reducers: {
         loginSuccess: (state, action) => {
             // eslint-disable-next-line no-param-reassign
@@ -94,68 +101,60 @@ const slice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(login.pending, (state/* , action */) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.loading;
+            const newState = state;
+            newState.status = AccountStatus.loading;
         });
         builder.addCase(register.pending, (state/* , action */) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.loading;
+            const newState = state;
+            newState.status = AccountStatus.loading;
         });
         builder.addCase(getUser.pending, (state/* , action */) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.loading;
+            const newState = state;
+            newState.status = AccountStatus.loading;
         });
         builder.addCase(updateProfile.pending, (state/* , action */) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.loading;
+            const newState = state;
+            newState.status = AccountStatus.loading;
         });
         builder.addCase(login.fulfilled, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.succeeded;
-            // eslint-disable-next-line no-param-reassign
-            state.user = mapToUser(action.payload);
+            const newState = state;
+            newState.status = AccountStatus.succeeded;
+            newState.user = mapToUser(action.payload as UserDTO);
         });
         builder.addCase(register.fulfilled, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.succeeded;
-            // eslint-disable-next-line no-param-reassign
-            state.user = mapToUser(action.payload);
+            const newState = state;
+            newState.status = AccountStatus.succeeded;
+            newState.user = mapToUser(action.payload as UserDTO);
         });
         builder.addCase(getUser.fulfilled, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.succeeded;
-            // eslint-disable-next-line no-param-reassign
-            state.user = mapToUser(action.payload);
+            const newState = state;
+            newState.status = AccountStatus.succeeded;
+            newState.user = mapToUser(action.payload as UserDTO);
         });
         builder.addCase(updateProfile.fulfilled, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.succeeded;
-            // eslint-disable-next-line no-param-reassign
-            state.user = mapToUser(action.payload);
+            const newState = state;
+            newState.status = AccountStatus.succeeded;
+            newState.user = mapToUser(action.payload as UserDTO);
         });
         builder.addCase(login.rejected, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.failed;
-            // eslint-disable-next-line no-param-reassign
-            state.user = action.payload;
+            const newState = state;
+            newState.status = AccountStatus.failed;
+            newState.user = action.payload;
         });
         builder.addCase(register.rejected, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.failed;
-            // eslint-disable-next-line no-param-reassign
-            state.user = action.payload;
+            const newState = state;
+            newState.status = AccountStatus.failed;
+            newState.user = action.payload;
         });
         builder.addCase(getUser.rejected, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.failed;
-            // eslint-disable-next-line no-param-reassign
-            state.user = action.payload;
+            const newState = state;
+            newState.status = AccountStatus.failed;
+            newState.user = action.payload;
         });
         builder.addCase(updateProfile.rejected, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.failed;
-            // eslint-disable-next-line no-param-reassign
-            state.user = action.payload;
+            const newState = state;
+            newState.status = AccountStatus.failed;
+            newState.user = action.payload;
         });
     },
 });
