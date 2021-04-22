@@ -24,6 +24,9 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - run: echo ${{secrets.YACLOUD_SSH_PRIVATE}} > key
+            - run: 'echo "$SSH_KEY" > key'
+              shell: bash
+              env:
+                SSH_KEY: ${{secrets.YACLOUD_SSH_PRIVATE}}
             - run: rsync -av  -e "ssh -i key" ./ ${{secrets.YACLOUD_LOGIN}}@${{secrets.YACLOUD_IP}}:~/
             - run: ssh ${{secrets.YACLOUD_LOGIN}}@{{secrets.YACLOUD_IP}} -i key sudo docker-compose up
