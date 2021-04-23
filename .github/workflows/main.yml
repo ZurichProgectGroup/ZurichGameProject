@@ -24,10 +24,15 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - run: 'echo "$SSH_KEY" > key'
+            - run:
+                mkdir -p ~/.ssh/
+                echo "$SSH_KEY" > key
+                sudo chmod 600 ../key
+                echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
               shell: bash
               env:
                 SSH_KEY: ${{secrets.YACLOUD_SSH_PRIVATE}}
+                SSH_KNOWN_HOSTS: ${{secrets.YACLOUD_KNOWN_HOST}}
             - run: rsync -av  -e "ssh -i key" ./ $SSH_LOGIN@$SSH_IP:~/
               shell: bash
               env:
