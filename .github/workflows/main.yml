@@ -25,7 +25,7 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
             - run:
-                mkdir -p /home/{{ ansible_user }}/.ssh/
+                sudo mkdir -p /home/{{ ansible_user }}/.ssh/
                 echo "$SSH_KEY" > key
                 sudo chmod 600 ../key
                 echo "$SSH_KNOWN_HOSTS" > /home/{{ ansible_user }}/.ssh/known_hosts
