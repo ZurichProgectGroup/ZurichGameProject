@@ -40,9 +40,9 @@ jobs:
                 SSH_KEY: ${{secrets.YACLOUD_SSH_PRIVATE}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
                 SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
-            - run: rsync -av  -e "ssh deploy-yacloud" ./ $SSH_LOGIN@$SSH_IP:~/
+            - run: rsync -av  -e "ssh -i ~/.ssh/ya_key" ./ $SSH_LOGIN@$SSH_IP:~/
               shell: bash
               env:
                 SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
-            - run: ssh deploy-yacloud 'sudo docker-compose up'
+            - run: ssh -i ~/.ssh/ya_key sudo docker-compose up
