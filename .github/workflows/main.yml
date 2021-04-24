@@ -26,16 +26,23 @@ jobs:
               uses: actions/checkout@v2
             - run: |
                 sudo mkdir -p ~/.ssh/
-                echo "$SSH_KEY" > key
-                sudo chmod 600 key
-                ssh-keyscan -H "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+                echo "$SSH_KEY" > ~/.ssh/ya_key
+                sudo chmod 600 ~/.ssh/ya_key
+                cat >>~/.ssh/config <<END
+                Host deploy-yacloud
+                    HostName $SSH_IP
+                    User $SSH_LOGIN
+                    IdentityFile ~/.ssh/ya_key
+                    StrictHostKeyChecking no
+                END
               shell: bash
               env:
                 SSH_KEY: ${{secrets.YACLOUD_SSH_PRIVATE}}
-                SSH_KNOWN_HOSTS: ${{secrets.YACLOUD_KNOWN_HOST}}
-            - run: rsync -av  -e "ssh -i key" ./ $SSH_LOGIN@$SSH_IP:~/
+                SSH_IP: ${{secrets.YACLOUD_IP}}
+                SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
+            - run: rsync -av  -e "ssh deploy-yacloud" ./ $SSH_LOGIN@$SSH_IP:~/
               shell: bash
               env:
                 SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
-            - run: ssh $SSH_LOGIN@SSH_IP -i key sudo docker-compose up
+            - run: ssh deploy-yacloud 'sudo docker-compose up'
