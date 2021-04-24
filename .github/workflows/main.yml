@@ -25,10 +25,10 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
             - run:
-                sudo mkdir -p /home/{{ ansible_user }}/.ssh/
+                sudo mkdir -p /home/runner/.ssh/
                 echo "$SSH_KEY" > key
                 sudo chmod 600 ../key
-                echo "$SSH_KNOWN_HOSTS" > /home/{{ ansible_user }}/.ssh/known_hosts
+                sudo echo "$SSH_KNOWN_HOSTS" > /home/runner/.ssh/known_hosts
               shell: bash
               env:
                 SSH_KEY: ${{secrets.YACLOUD_SSH_PRIVATE}}
