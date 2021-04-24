@@ -40,7 +40,7 @@ jobs:
                 SSH_KEY: ${{secrets.YACLOUD_SSH_PRIVATE}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
                 SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
-            - run: rsync -av  -e "ssh -i ~/.ssh/ya_key" ./ $SSH_LOGIN@$SSH_IP:~/
+            - run: rsync  ./ deploy-yacloud:~/
               shell: bash
               env:
                 SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
