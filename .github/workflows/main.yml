@@ -28,7 +28,7 @@ jobs:
                 sudo mkdir -p ~/.ssh/
                 echo "$SSH_KEY" > key
                 sudo chmod 600 key
-                sudo echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+                echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
               shell: bash
               env:
                 SSH_KEY: ${{secrets.YACLOUD_SSH_PRIVATE}}
