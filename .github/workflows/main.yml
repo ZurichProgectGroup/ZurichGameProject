@@ -25,9 +25,9 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
             - run: |
-                sudo mkdir -p ~/.ssh/
-                sudo echo "$SSH_KEY" > ~/.ssh/ya_key
-                sudo chmod 600 ~/.ssh/ya_key
+                mkdir -p ~/.ssh/
+                echo "$SSH_KEY" > ~/.ssh/ya_key
+                chmod 600 ~/.ssh/ya_key
                 cat >>~/.ssh/config <<END
                 Host deploy-yacloud
                     HostName $SSH_IP
