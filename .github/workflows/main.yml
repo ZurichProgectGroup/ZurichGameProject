@@ -50,7 +50,7 @@ jobs:
               env:
                 SSH_IP: ${{secrets.YACLOUD_IP}}
             - name: check status
-              if: status_code != 200
+              if: $status_code != 200
               run: |
                 echo "ERROR!" \
                 exit 1
