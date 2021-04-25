@@ -46,11 +46,12 @@ jobs:
             - name: get status
               run: |
                 sleep 5 \
-                status_code=$(curl --write-out %{http_code} --silent --output /dev/null http://$SSH_IP)
+                export STATUS_CODE=$(curl --write-out %{http_code} --silent --output /dev/null http://$SSH_IP) \
+                echo "::set-env name=STATUS_CODE::$STATUS_CODE"
               env:
                 SSH_IP: ${{secrets.YACLOUD_IP}}
             - name: check status
-              if: $status_code != 200
+              if: $STATUS_CODE != 200
               run: |
                 echo "ERROR!" \
                 exit 1
