@@ -36,7 +36,8 @@ jobs:
               env:
                 SSH_LOGIN: ${{secrets.YACLOUD_LOGIN}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
-            - run: ssh $SSH_LOGIN@SSH_IP sudo docker-compose up
+            - name: run docker over ssh
+              run: ssh $SSH_LOGIN@$SSH_IP sudo docker-compose up
               env:
                 SSH_LOGIN: ${{secrets.YACLOUD_LOGIN}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
