@@ -1,5 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authApiInstance, userApiInstance } from 'Api';
+import {
+    authApiInstance,
+    userApiInstance,
+    yaOauthApiInstance,
+} from 'Api';
 import { StringKeyString } from 'Utils/custom_types';
 import { mapToUser } from 'Utils/mapUser';
 
@@ -10,6 +14,13 @@ export const login = createAsyncThunk(
         const user = await authApiInstance.update();
 
         return user;
+    },
+);
+
+export const yaLogin = createAsyncThunk(
+    'account/yaLogin',
+    () => {
+        yaOauthApiInstance.request();
     },
 );
 
@@ -36,6 +47,19 @@ export const getUser = createAsyncThunk(
     async () => {
         const res = await authApiInstance.update();
         return res;
+    },
+);
+
+export const checkUserOnStart = createAsyncThunk(
+    'account/checkUserOnStart',
+    async (data: StringKeyString) => {
+        if (data.code) {
+            await yaOauthApiInstance.update(data);
+            const user = await authApiInstance.update();
+
+            return user;
+        }
+        return getUser();
     },
 );
 

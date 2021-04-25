@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
-import './ForumThemes.css';
-import ForumTheme from 'Components/ForumTheme';
+import './ForumTopics.css';
+import ForumTopic from 'Components/ForumTopic';
 import { OwnProps as Props } from './types';
 
-const ForumThemes = ({ themes, onThemeClick }: Props) => {
+const ForumTopics = ({ topics = [], onThemeClick }: Props) => {
     const handleThemeClick = useCallback(
         (id: number) => () => onThemeClick && onThemeClick(id),
         [onThemeClick],
@@ -12,8 +12,8 @@ const ForumThemes = ({ themes, onThemeClick }: Props) => {
     return (
         <div className="forum-themes">
             {
-                themes.map((theme) => (
-                    <ForumTheme
+                topics.map((theme) => (
+                    <ForumTopic
                         className="forum-themes__item"
                         theme={theme}
                         key={`forum-themes_${theme.id}`}
@@ -25,4 +25,4 @@ const ForumThemes = ({ themes, onThemeClick }: Props) => {
     );
 };
 
-export default ForumThemes;
+export default ForumTopics;

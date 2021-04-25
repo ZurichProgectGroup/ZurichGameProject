@@ -1,11 +1,12 @@
 import React from 'react';
 import cn from 'classnames';
+import dayjs from 'dayjs';
 import InlineDotedList from 'Components/InlineDotedList';
 import User from 'Components/User';
 import type { OwnProps as Props } from './types';
-import './ForumTheme.css';
+import './ForumTopic.css';
 
-const ForumTheme = ({
+const ForumTopic = ({
     className = '',
     theme,
     onClick = () => {},
@@ -13,7 +14,7 @@ const ForumTheme = ({
     <div className={cn('forum-theme', className)} onClick={onClick} role="button" tabIndex={0} onKeyPress={onClick}>
         <b className="forum-themes__title">{theme.title}</b>
         <p className="forum-themes__desc">
-            {theme.desc}
+            {theme.content}
         </p>
         <InlineDotedList>
             <InlineDotedList.Item>
@@ -24,24 +25,14 @@ const ForumTheme = ({
                     <span className="material-icons">
                         chat_bubble_outline
                     </span>
-                    <span>{theme.messagesCount}</span>
+                    <span>{theme.commentsCount}</span>
                 </div>
             </InlineDotedList.Item>
-            {
-                theme.lastMessage && (
-                    <InlineDotedList.Item>
-                        последнее сообщение:
-                        {' '}
-                        <span className="forum-themes__name">
-                            {theme.lastMessage.userName}
-                        </span>
-                        {' '}
-                        {theme.lastMessage.date}
-                    </InlineDotedList.Item>
-                )
-            }
+            <InlineDotedList.Item>
+                {dayjs(theme.createdAt).format('D MMM YYYY')}
+            </InlineDotedList.Item>
         </InlineDotedList>
     </div>
 );
 
-export default ForumTheme;
+export default ForumTopic;

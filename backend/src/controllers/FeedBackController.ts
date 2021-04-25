@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
+import { HTTPStatusCode } from '../types';
 import FeedServiceService from '../services/FeedBackService';
-import HttpStatus from '../utils/httpCodes';
 
 export default class FeedBackController {
     public static create = async (request: Request, response: Response) => {
@@ -8,15 +8,15 @@ export default class FeedBackController {
 
         try {
             const feedback = await FeedServiceService.create(body);
-            response.status(HttpStatus.CREATED).json(feedback);
+            response.status(HTTPStatusCode.Created).json(feedback);
         } catch (e) {
-            response.status(HttpStatus.INTERNAL_ERROR).json(e.message);
+            response.status(HTTPStatusCode.InternalServerError).json(e.message);
         }
     };
 
     public static getAll = async (request: Request, response: Response) => {
         const feedbacks = await FeedServiceService.getAll();
 
-        response.status(HttpStatus.OK).json(feedbacks);
+        response.status(HTTPStatusCode.OK).json(feedbacks);
     };
 }

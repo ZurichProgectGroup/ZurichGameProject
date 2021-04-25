@@ -11,7 +11,7 @@ export default async function httpRequest<T>(url: string,
     });
 
     clearTimeout(id);
-    if (response.status === 200) {
+    if (response.status === 200 || response.status === 201) {
         return response.json();
     }
     throw new Error();

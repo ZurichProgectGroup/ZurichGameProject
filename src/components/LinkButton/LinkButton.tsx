@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 import './LinkButton.css';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import type { Props } from 'components/LinkButton/types';
+import { LinkButtonSize } from './types';
+import type { Props } from './types';
 
 const LinkButton = (props: Props) => {
     const {
@@ -10,9 +11,17 @@ const LinkButton = (props: Props) => {
         className,
         isButton = false,
         to = '',
+        size = LinkButtonSize.Large,
         ...otherProps
     } = props;
-    const classNames = useMemo(() => cn('link-button', className), [className]);
+    const classNames = useMemo(() => cn(
+        'link-button',
+        {
+            'link-button_small': size === LinkButtonSize.Small,
+            'link-button_large': size === LinkButtonSize.Large,
+        },
+        className,
+    ), [className, size]);
 
     if (isButton) {
         return (
@@ -23,7 +32,7 @@ const LinkButton = (props: Props) => {
     }
 
     return (
-        <Link className={cn('link-button', className)} to={to}>
+        <Link className={classNames} to={to}>
             {children}
         </Link>
     );
