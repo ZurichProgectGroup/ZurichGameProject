@@ -29,7 +29,7 @@ jobs:
               with:
                 key: ${{ secrets.YACLOUD_SSH_PRIVATE }}
                 name: id_rsa
-                known_hosts: ${{ secrets.KNOWN_HOSTS }}
+                known_hosts: ${{ secrets.YACLOUD_KNOWN_HOST }}
                 if_key_exists: replace
             - name: rsync over ssh
               run: rsync ./ $SSH_LOGIN@$SSH_IP:~/
