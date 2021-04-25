@@ -37,7 +37,20 @@ jobs:
                 SSH_LOGIN: ${{secrets.YACLOUD_LOGIN}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
             - name: run docker over ssh
-              run: ssh $SSH_LOGIN@$SSH_IP sudo docker-compose up
+              run: |
+                ssh $SSH_LOGIN@$SSH_IP sudo docker-compose up \
+                exit
               env:
                 SSH_LOGIN: ${{secrets.YACLOUD_LOGIN}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
+            - name: get status
+              run: |
+                sleep 5 \
+                status_code=$(curl --write-out %{http_code} --silent --output /dev/null http://$SSH_IP)
+              env:
+                SSH_IP: ${{secrets.YACLOUD_IP}}
+            - name: check status
+              if: status_code != 200
+              run: |
+                echo "ERROR!" \
+                exit 1
