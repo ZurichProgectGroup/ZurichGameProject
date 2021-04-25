@@ -9,6 +9,7 @@ import { register } from 'Store/account';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { selectUser } from 'Selectors';
+import { LoadingStatus } from 'Types/common';
 import SecondStep from './SecondStep';
 import FirstStep from './FirstStep';
 
@@ -22,7 +23,7 @@ const Register = () => {
     const [phone, setPhone] = useState('');
 
     const dispatch = useDispatch();
-    const userData = useSelector(selectUser);
+    const { user, status } = useSelector(selectUser);
 
     const handleFormSubmit = useCallback((event: { preventDefault: () => void; }) => {
         event.preventDefault();
@@ -35,9 +36,6 @@ const Register = () => {
             phone,
         }));
     }, [firstName, secondName, login, email, password, phone]);
-    if (userData) {
-        return (<Redirect to={ROUTES.main} />);
-    }
 
     const goNextStep = () => setCurrentStep(currentStep + 1);
     const goPrevStep = () => setCurrentStep(currentStep - 1);
@@ -72,6 +70,10 @@ const Register = () => {
                 return null;
         }
     }, [currentStep, firstName, secondName, login, email, password, phone]);
+
+    if (status === LoadingStatus.succeeded && user) {
+        return (<Redirect to={ROUTES.main} />);
+    }
 
     return (
         <div className="register-page">

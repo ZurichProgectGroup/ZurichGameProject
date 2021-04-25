@@ -1,10 +1,14 @@
 import { TLeaderItemDTO } from 'Api/LeaderboardApi';
 import { Topic } from 'Types/ForumTopic';
 import type { Comment } from 'Types/Comment';
+import { LoadingStatus } from 'Types/common';
+import { Theme } from 'Types/Theme';
 
 export interface IStoreCTX {
     account:{
-        user: User | null
+        user: User | null,
+        status: LoadingStatus,
+        theme: Theme
     },
     game: {
         currentScore: number

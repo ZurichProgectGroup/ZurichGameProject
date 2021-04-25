@@ -1,16 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './Account.css';
-import Input from 'Components/Input';
-import Button from 'Components/Button';
-import LinkButton from 'Components/LinkButton';
-import ActionLink from 'Components/ActionLink';
-import Avatar from 'Components/Avatar';
-import Alert from 'Components/Alert';
+import {
+    Input, Button, LinkButton, ActionLink, Avatar, Alert,
+} from 'Components';
 import cn from 'classnames';
 import successIconPath from 'Images/success-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser, logout, updateProfile } from 'Store/account';
+import { logout, updateProfile } from 'Store/account';
 import { selectUser } from 'Selectors';
+import { Redirect } from 'react-router-dom';
+import ROUTES from 'Components/App/consts';
+import { LoadingStatus } from 'Types/common';
 import AlertState from './types';
 
 const Account = () => {
@@ -53,11 +53,7 @@ const Account = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getUser());
-    }, []);
-
-    const user = useSelector(selectUser);
+    const { user, status } = useSelector(selectUser);
 
     useEffect(() => {
         setProfile({ ...user, oldPassword: '', newPassword: '' });
@@ -93,7 +89,7 @@ const Account = () => {
             }),
         );
         setAlertState(AlertState.Success);
-    }, [alertState, profile]);
+    }, [alertState, profile, avatarFile]);
 
     const handleAlertClick = useCallback(() => {
         setAlertState(AlertState.None);
@@ -102,6 +98,10 @@ const Account = () => {
     const handleLogOutClick = useCallback(() => {
         dispatch(logout());
     }, []);
+
+    if (status === LoadingStatus.succeeded && !user) {
+        return (<Redirect to={ROUTES.login} />);
+    }
 
     return (
         <div className="account__widjet">
