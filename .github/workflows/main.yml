@@ -46,6 +46,6 @@ jobs:
               run: |
                 sleep 5 \
                 status_code=$(curl --write-out %{http_code} --silent --output /dev/null http://$SSH_IP) \
-                if [ $status_code -ne "200" ]; then echo Error; exit 1; fi
+                if [ "$status_code" -ne "200" ]; then echo "Error"; exit 1; fi
               env:
                 SSH_IP: ${{secrets.YACLOUD_IP}}
