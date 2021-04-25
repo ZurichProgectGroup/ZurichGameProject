@@ -24,20 +24,18 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-            - run: |
-                mkdir -p ~/.ssh/
-                echo "$SSH_KEY" > yakey
-                chmod 600 yakey
-                cat >>~/.ssh/config <<END
-                Host deploy-yacloud
-                    HostName $SSH_IP
-                    User $SSH_LOGIN
-                    IdentityFile yakey
-                    StrictHostKeyChecking no
-                END
+            - name: Install SSH key
+              uses: shimataro/ssh-key-action@v2
+              with:
+                key: ${{ secrets.YACLOUD_SSH_PRIVATE }}
+                known_hosts: ${{ secrets.KNOWN_HOSTS }}
+                if_key_exists: replace
+            - name: rsync over ssh
+              run: rsync ./ $SSH_LOGIN@$SSH_IP:~/
               env:
-                SSH_KEY: ${{secrets.YACLOUD_SSH_PRIVATE}}
-                SSH_IP: ${{secrets.YACLOUD_IP}}
                 SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
-            - run: rsync  ./ deploy-yacloud:~/
-            - run: ssh -i yakey sudo docker-compose up
+                SSH_IP: ${{secrets.YACLOUD_IP}}
+            - run: ssh $SSH_LOGIN@SSH_IP sudo docker-compose up
+              env:
+                SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
+                SSH_IP: ${{secrets.YACLOUD_IP}}
