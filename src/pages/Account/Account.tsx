@@ -1,16 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './Account.css';
-import Input from 'Components/Input';
-import Button from 'Components/Button';
-import LinkButton from 'Components/LinkButton';
-import ActionLink from 'Components/ActionLink';
-import Avatar from 'Components/Avatar';
-import Alert from 'Components/Alert';
+import {
+    Input, Button, LinkButton, ActionLink, Avatar, Alert,
+} from 'Components';
 import cn from 'classnames';
 import successIconPath from 'Images/success-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser, logout, updateProfile } from 'Store/account';
+import { logout, updateProfile } from 'Store/account';
 import { selectUser } from 'Selectors';
+import { Redirect } from 'react-router-dom';
+import ROUTES from 'Components/App/consts';
+import { LoadingStatus } from 'Types/common';
 import AlertState from './types';
 
 const Account = () => {
@@ -53,11 +53,11 @@ const Account = () => {
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getUser());
-    }, []);
+    const { user, status } = useSelector(selectUser);
 
-    const user = useSelector(selectUser);
+    if (status === LoadingStatus.failed || (status === LoadingStatus.succeeded && !user)) {
+        return (<Redirect to={ROUTES.login} />);
+    }
 
     useEffect(() => {
         setProfile({ ...user, oldPassword: '', newPassword: '' });

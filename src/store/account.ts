@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
     authApiInstance,
@@ -6,6 +8,7 @@ import {
 } from 'Api';
 import { StringKeyString } from 'Utils/custom_types';
 import { mapToUser } from 'Utils/mapUser';
+import { LoadingStatus } from 'Types/common';
 
 export const login = createAsyncThunk(
     'account/login',
@@ -44,22 +47,17 @@ export const logout = createAsyncThunk(
 
 export const getUser = createAsyncThunk(
     'account/getUser',
-    async () => {
-        const res = await authApiInstance.update();
-        return res;
-    },
+    () => authApiInstance.update(),
 );
 
 export const checkUserOnStart = createAsyncThunk(
     'account/checkUserOnStart',
-    async (data: StringKeyString) => {
+    async (data: StringKeyString, { dispatch }) => {
         if (data.code) {
             await yaOauthApiInstance.update(data);
-            const user = await authApiInstance.update();
-
-            return user;
         }
-        return getUser();
+
+        dispatch(getUser());
     },
 );
 
@@ -89,17 +87,10 @@ export const updateProfile = createAsyncThunk(
     },
 );
 
-enum AccountStatus {
-    idle = 'idle',
-    loading = 'loading',
-    succeeded = 'succeeded',
-    failed = 'failed',
-}
-
 const slice = createSlice({
     name: 'account',
     initialState: {
-        status: AccountStatus.idle,
+        status: LoadingStatus.idle,
         user: null,
     },
     reducers: {
@@ -112,73 +103,52 @@ const slice = createSlice({
             state.user = null;
         },
         loginError: (state) => {
-            // eslint-disable-next-line no-param-reassign
             state.user = null;
         },
     },
     extraReducers: (builder) => {
         builder.addCase(login.pending, (state/* , action */) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.loading;
+            state.status = LoadingStatus.loading;
         });
         builder.addCase(register.pending, (state/* , action */) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.loading;
+            state.status = LoadingStatus.loading;
         });
         builder.addCase(getUser.pending, (state/* , action */) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.loading;
+            state.status = LoadingStatus.loading;
         });
         builder.addCase(updateProfile.pending, (state/* , action */) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.loading;
+            state.status = LoadingStatus.loading;
         });
         builder.addCase(login.fulfilled, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.succeeded;
-            // eslint-disable-next-line no-param-reassign
+            state.status = LoadingStatus.succeeded;
             state.user = mapToUser(action.payload);
         });
         builder.addCase(register.fulfilled, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.succeeded;
-            // eslint-disable-next-line no-param-reassign
+            state.status = LoadingStatus.succeeded;
             state.user = mapToUser(action.payload);
         });
         builder.addCase(getUser.fulfilled, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.succeeded;
-            // eslint-disable-next-line no-param-reassign
+            state.status = LoadingStatus.succeeded;
             state.user = mapToUser(action.payload);
         });
         builder.addCase(updateProfile.fulfilled, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.succeeded;
-            // eslint-disable-next-line no-param-reassign
+            state.status = LoadingStatus.succeeded;
             state.user = mapToUser(action.payload);
         });
         builder.addCase(login.rejected, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.failed;
-            // eslint-disable-next-line no-param-reassign
+            state.status = LoadingStatus.failed;
             state.user = action.payload;
         });
         builder.addCase(register.rejected, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.failed;
-            // eslint-disable-next-line no-param-reassign
+            state.status = LoadingStatus.failed;
             state.user = action.payload;
         });
         builder.addCase(getUser.rejected, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.failed;
-            // eslint-disable-next-line no-param-reassign
+            state.status = LoadingStatus.failed;
             state.user = action.payload;
         });
         builder.addCase(updateProfile.rejected, (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.status = AccountStatus.failed;
-            // eslint-disable-next-line no-param-reassign
+            state.status = LoadingStatus.failed;
             state.user = action.payload;
         });
     },

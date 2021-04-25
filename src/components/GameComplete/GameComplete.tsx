@@ -13,16 +13,16 @@ const GameComplete = (props: Props) => {
     } = props;
 
     const currentGameScore = useSelector(selectCurrentGameScore);
-    const userInfo = useSelector(selectUser);
+    const { user } = useSelector(selectUser);
 
     useEffect(() => {
         LeaderboardApi.saveResult({
             score: currentGameScore,
-            id: userInfo.id,
-            login: userInfo.login,
-            avatar: userInfo.avatar,
+            id: user.id,
+            login: user.login,
+            avatar: user.avatar,
         });
-    }, [currentGameScore, userInfo]);
+    }, [currentGameScore, user]);
 
     return (
         <div className="game-complete">

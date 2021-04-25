@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import './Login.css';
 import {
-    Card, Button, Title, LinkButton, Input,
+    Button, Card, Input, LinkButton, Title,
 } from 'Components';
 import ROUTES from 'Components/App/consts';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,12 +9,13 @@ import { login, yaLogin } from 'Store/account';
 import { Redirect, useHistory } from 'react-router-dom';
 import { selectUser } from 'Selectors';
 import { LinkButtonSize } from 'Components/LinkButton/types';
+import { LoadingStatus } from 'Types/common';
 
 const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-    const userData = useSelector(selectUser);
+    const { user, status } = useSelector(selectUser);
     const history = useHistory();
 
     const handleFormSubmit = useCallback((event: { preventDefault: () => void; }) => {
@@ -31,9 +32,10 @@ const Login = () => {
         dispatch(yaLogin());
     }, []);
 
-    if (userData) {
+    if (status === LoadingStatus.succeeded && user) {
         return (<Redirect to={ROUTES.main} />);
     }
+
     return (
         <div className="login-page">
             <Card className="login-page__card">

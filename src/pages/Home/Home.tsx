@@ -2,7 +2,9 @@ import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Home.css';
 import logo from 'Images/logo.png';
-import { Avatar, Button, LinkButton } from 'Components';
+import {
+    Avatar, Button, LinkButton, DarkModeToggle,
+} from 'Components';
 import { ButtonSize, ButtonVariant } from 'Components/Button/types';
 import NavigationList from 'Components/NavigationList';
 import ROUTES from 'Components/App/consts';
@@ -13,7 +15,7 @@ import RouteMap from './const';
 const Home = () => {
     const history = useHistory();
     const handleGameStart = useCallback(() => history.push(ROUTES.game), [history]);
-    const user = useSelector(selectUser);
+    const { user } = useSelector(selectUser);
 
     return (
         <div className="home">
@@ -22,6 +24,7 @@ const Home = () => {
                     <Avatar size="medium" name={user?.firstName ?? ''} url={user?.avatar} />
                 </LinkButton>
                 <NavigationList routes={RouteMap} />
+                <DarkModeToggle />
             </div>
             <img className="home__logo" src={logo} width={685} height={320} alt="logo" />
             <Button
