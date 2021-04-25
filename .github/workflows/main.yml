@@ -32,7 +32,7 @@ jobs:
                 known_hosts: ${{ secrets.YACLOUD_KNOWN_HOST }}
                 if_key_exists: replace
             - name: rsync over ssh
-              run: rsync ./ $SSH_LOGIN@$SSH_IP:~/
+              run: rsync -avz ./ $SSH_LOGIN@$SSH_IP:~/
               env:
                 SSH_LOGIN: ${{secrets.YACLOUD_LOGIN}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
