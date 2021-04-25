@@ -5,18 +5,40 @@ import {
     authApiInstance,
     userApiInstance,
     yaOauthApiInstance,
+    themeApiInstance,
 } from 'Api';
 import { StringKeyString } from 'Utils/custom_types';
 import { mapToUser } from 'Utils/mapUser';
 import { LoadingStatus } from 'Types/common';
+import { ThemeEnum } from 'Types/Theme';
+import { IStoreCTX } from 'store/types';
+
+export const getUsersTheme = createAsyncThunk(
+    'account/getUsersTheme',
+    (userId: number) => themeApiInstance.getUsersTheme(userId),
+);
+
+export const getUser = createAsyncThunk(
+    'account/getUser',
+    async (_, { dispatch }) => {
+        const user = await authApiInstance.update();
+
+        if (user) {
+            const { id } = user;
+
+            dispatch(getUsersTheme(id));
+        }
+
+        return user;
+    },
+);
 
 export const login = createAsyncThunk(
     'account/login',
-    async (data: StringKeyString) => {
+    async (data: StringKeyString, { dispatch }) => {
         await authApiInstance.request(data);
-        const user = await authApiInstance.update();
 
-        return user;
+        dispatch(getUser());
     },
 );
 
@@ -29,10 +51,10 @@ export const yaLogin = createAsyncThunk(
 
 export const register = createAsyncThunk(
     'account/register',
-    async (data: StringKeyString) => {
+    async (data: StringKeyString, { dispatch }) => {
         await authApiInstance.create(data);
-        const user = await authApiInstance.update();
-        return user;
+
+        dispatch(getUser());
     },
 );
 
@@ -45,9 +67,18 @@ export const logout = createAsyncThunk(
     },
 );
 
-export const getUser = createAsyncThunk(
-    'account/getUser',
-    () => authApiInstance.update(),
+export const setUsersTheme = createAsyncThunk(
+    'account/setUsersTheme',
+    async (themeId: number, { getState }) => {
+        const { account: { user } } = getState() as IStoreCTX;
+
+        if (user) {
+            const { id } = user;
+            await themeApiInstance.setUsersTheme({ themeId, userId: id });
+        }
+
+        return themeId;
+    },
 );
 
 export const checkUserOnStart = createAsyncThunk(
@@ -92,14 +123,10 @@ const slice = createSlice({
     initialState: {
         status: LoadingStatus.idle,
         user: null,
+        theme: { id: ThemeEnum.dark },
     },
     reducers: {
-        loginSuccess: (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.user = mapToUser(action.payload);
-        },
         logoutSuccess: (state) => {
-            // eslint-disable-next-line no-param-reassign
             state.user = null;
         },
         loginError: (state) => {
@@ -119,17 +146,24 @@ const slice = createSlice({
         builder.addCase(updateProfile.pending, (state/* , action */) => {
             state.status = LoadingStatus.loading;
         });
-        builder.addCase(login.fulfilled, (state, action) => {
+        builder.addCase(login.fulfilled, (state) => {
             state.status = LoadingStatus.succeeded;
-            state.user = mapToUser(action.payload);
         });
-        builder.addCase(register.fulfilled, (state, action) => {
+        builder.addCase(logout.fulfilled, (state) => {
+            state.user = null;
+        });
+        builder.addCase(register.fulfilled, (state) => {
             state.status = LoadingStatus.succeeded;
-            state.user = mapToUser(action.payload);
         });
         builder.addCase(getUser.fulfilled, (state, action) => {
             state.status = LoadingStatus.succeeded;
             state.user = mapToUser(action.payload);
+        });
+        builder.addCase(getUsersTheme.fulfilled, (state, action) => {
+            state.theme = action.payload;
+        });
+        builder.addCase(setUsersTheme.fulfilled, (state, action) => {
+            state.theme = { id: action.payload };
         });
         builder.addCase(updateProfile.fulfilled, (state, action) => {
             state.status = LoadingStatus.succeeded;

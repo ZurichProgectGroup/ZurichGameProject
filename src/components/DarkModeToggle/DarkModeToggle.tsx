@@ -1,22 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Toggle from 'react-toggle';
+import { ThemeEnum } from 'Types/Theme';
+import { useDispatch } from 'react-redux';
+import { setUsersTheme } from 'Store/account';
+import type { Props } from './types';
+import './DarkModeToggle.css';
 
-const DarkModeToggle = () => {
-    const [isDark, setIsDark] = useState(false);
+const DarkModeToggle = ({ theme }: Props) => {
+    const isLightTheme = theme.id === ThemeEnum.light;
+    const dispatch = useDispatch();
+
+    const setTheme = useCallback(({ target: { checked } }) => {
+        const themeId = checked ? ThemeEnum.light : ThemeEnum.dark;
+
+        dispatch(setUsersTheme(themeId));
+    }, []);
 
     useEffect(() => {
-        if (isDark) {
+        if (isLightTheme) {
             document.documentElement.style.setProperty('filter', 'invert(1) hue-rotate(180deg)');
         } else {
             document.documentElement.style.removeProperty('filter');
         }
-    }, [isDark]);
+    }, [isLightTheme]);
 
     return (
         <Toggle
-            className="dark-toggle"
-            checked={isDark}
-            onChange={(event) => setIsDark(event.target.checked)}
+            checked={isLightTheme}
+            onChange={setTheme}
             icons={{ checked: '🌙', unchecked: '🔆' }}
             aria-label="Dark mode"
         />

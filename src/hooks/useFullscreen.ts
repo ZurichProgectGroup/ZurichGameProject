@@ -45,9 +45,7 @@ export default function useFullscreen(elem): [boolean, () => void, () => void] {
     );
 
     const setFullscreen = () => {
-        if (elem.current == null) return;
-
-        requestFullscreen(elem.current);
+        requestFullscreen(elem);
     };
 
     useLayoutEffect(() => {

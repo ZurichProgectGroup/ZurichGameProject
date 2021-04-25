@@ -16,6 +16,11 @@
     margin: 40px 0 50px 0;
 }
 
+.home__side-buttons {
+    display: flex;
+    align-items: center;
+}
+
 .home__logo {
     margin-bottom: 50px;
 }

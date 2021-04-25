@@ -6,7 +6,7 @@ import {
 import ROUTES from 'Components/App/consts';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, yaLogin } from 'Store/account';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { selectUser } from 'Selectors';
 import { LinkButtonSize } from 'Components/LinkButton/types';
 import { LoadingStatus } from 'Types/common';
@@ -16,7 +16,6 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
     const { user, status } = useSelector(selectUser);
-    const history = useHistory();
 
     const handleFormSubmit = useCallback((event: { preventDefault: () => void; }) => {
         event.preventDefault();
@@ -24,8 +23,6 @@ const Login = () => {
             login: userName,
             password,
         }));
-
-        history.push(ROUTES.main);
     }, [userName, password]);
 
     const handleYandexClick = useCallback(() => {

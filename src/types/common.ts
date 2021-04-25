@@ -4,3 +4,5 @@ export const enum LoadingStatus {
     succeeded = 'succeeded',
     failed = 'failed',
 }
+
+export default LoadingStatus;

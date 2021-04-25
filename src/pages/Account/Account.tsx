@@ -55,10 +55,6 @@ const Account = () => {
 
     const { user, status } = useSelector(selectUser);
 
-    if (status === LoadingStatus.failed || (status === LoadingStatus.succeeded && !user)) {
-        return (<Redirect to={ROUTES.login} />);
-    }
-
     useEffect(() => {
         setProfile({ ...user, oldPassword: '', newPassword: '' });
     }, [user]);
@@ -93,7 +89,7 @@ const Account = () => {
             }),
         );
         setAlertState(AlertState.Success);
-    }, [alertState, profile]);
+    }, [alertState, profile, avatarFile]);
 
     const handleAlertClick = useCallback(() => {
         setAlertState(AlertState.None);
@@ -102,6 +98,10 @@ const Account = () => {
     const handleLogOutClick = useCallback(() => {
         dispatch(logout());
     }, []);
+
+    if (status === LoadingStatus.succeeded && !user) {
+        return (<Redirect to={ROUTES.login} />);
+    }
 
     return (
         <div className="account__widjet">
