@@ -35,14 +35,9 @@ jobs:
                     IdentityFile yakey
                     StrictHostKeyChecking no
                 END
-              shell: bash
-              env:
+             env:
                 SSH_KEY: ${{secrets.YACLOUD_SSH_PRIVATE}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
                 SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
             - run: rsync  ./ deploy-yacloud:~/
-              shell: bash
-              env:
-                SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
-                SSH_IP: ${{secrets.YACLOUD_IP}}
             - run: ssh -i yakey sudo docker-compose up
