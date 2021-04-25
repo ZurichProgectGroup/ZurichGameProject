@@ -34,9 +34,9 @@ jobs:
             - name: rsync over ssh
               run: rsync ./ $SSH_LOGIN@$SSH_IP:~/
               env:
-                SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
+                SSH_LOGIN: ${{secrets.YACLOUD_LOGIN}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
             - run: ssh $SSH_LOGIN@SSH_IP sudo docker-compose up
               env:
-                SSH_LOGIN: ${{secrets.YACLOUD_SSH_PRIVATE}}
+                SSH_LOGIN: ${{secrets.YACLOUD_LOGIN}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
