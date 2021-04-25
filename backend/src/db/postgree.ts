@@ -5,10 +5,10 @@ import Comment from '../models/Comment';
 import Theme from '../models/Theme';
 import UserTheme from '../models/UserTheme';
 
-export const initPostgreeDB = () => {
+export const getSequelizeInstance = () => {
     const sequelize = new Sequelize(development);
     sequelize.addModels([Topic, Comment, UserTheme, Theme]);
     return sequelize;
 };
 
-export default initPostgreeDB;
+export default getSequelizeInstance;
