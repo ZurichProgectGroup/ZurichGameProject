@@ -10,7 +10,6 @@ import { logout, updateProfile } from 'Store/account';
 import { selectUser } from 'Selectors';
 import { Redirect } from 'react-router-dom';
 import ROUTES from 'Components/App/consts';
-import { LoadingStatus } from 'Types/common';
 import AlertState from './types';
 
 const Account = () => {
@@ -53,7 +52,7 @@ const Account = () => {
 
     const dispatch = useDispatch();
 
-    const { user, status } = useSelector(selectUser);
+    const { user } = useSelector(selectUser);
 
     useEffect(() => {
         setProfile({ ...user, oldPassword: '', newPassword: '' });
@@ -99,7 +98,7 @@ const Account = () => {
         dispatch(logout());
     }, []);
 
-    if (status === LoadingStatus.succeeded && !user) {
+    if (!user) {
         return (<Redirect to={ROUTES.login} />);
     }
 

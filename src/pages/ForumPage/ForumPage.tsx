@@ -14,13 +14,13 @@ import ForumCreate from './components/ForumCreate';
 const ForumPage = () => {
     const { path } = useRouteMatch();
 
-    const userData = useSelector(selectUser);
+    const { user } = useSelector(selectUser);
 
     return (
         <div className="forum-page">
             <div className="forum-page__container">
                 {
-                    (!userData && <LinkButton to={ROUTES.login}>Go to login</LinkButton>) || (
+                    (!user && <LinkButton to={ROUTES.login}>Go to login</LinkButton>) || (
                         <Switch>
                             <Route exact path={path} component={Topics} />
                             <Route exact path={`${path}/create`} component={ForumCreate} />
