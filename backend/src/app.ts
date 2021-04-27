@@ -41,7 +41,7 @@ app
         origin: true,
     }))
     .use(cookieParser())
-    .use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(spec))
+    .use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec))
     .use(
         OpenApiValidator.middleware({
             apiSpec: specPath,
@@ -52,9 +52,8 @@ app
     .use(auth)
     .use(router)
     .use(errorHandler);
-if (key) {
-    app = https.createServer({ key, cert }, app);
-}
+
+const server = key ? https.createServer({ key, cert }, app) : app;
 
 (async () => {
     try {
@@ -63,5 +62,5 @@ if (key) {
         console.log(`postgreedb error ${e}`);
     }
 
-    app.listen(PORT, () => { console.log(`listening on ${PORT}`); });
+    server.listen(PORT, () => { console.log(`listening on ${PORT}`); });
 })();
