@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import cn from 'classnames';
-import Avatar from 'Components/Avatar';
+import Avatar from 'components/Avatar';
 import type { Props } from './types';
 import './Row.css';
 
@@ -27,7 +27,7 @@ const Row = (props: Props) => {
             </td>
             <td className="leaderboard__avatar">
                 <Avatar
-                    name={leader.name}
+                    name={leader?.name || ''}
                     url={leader.url}
                     size={avatarSize}
                     hideBorder={!isTop}

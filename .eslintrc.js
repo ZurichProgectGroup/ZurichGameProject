@@ -13,6 +13,8 @@ module.exports = {
         "jsx-a11y/label-has-associated-control": "off",
         "react/prop-types": "off",
         "react/jsx-props-no-spreading": "off",
-        "react/button-has-type": "off"
+        "react/button-has-type": "off",
+        'no-console': "off",
+        "@typescript-eslint/no-use-before-define": "off"
     }
 };

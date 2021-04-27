@@ -1,14 +1,14 @@
 import React from 'react';
 import './CommentList.css';
-import Comment from 'Components/Comment';
+import Comment from 'components/Comment';
 import type { Props } from './types';
 
-const CommentList = ({ comments, hideTitle } : Props) => (
+const CommentList = ({ comments, hideTitle, count } : Props) => (
     <div className="comment-list">
         {
             !hideTitle && (
                 <h3 className="comment-list__title">
-                    {`Комментарии (${comments.length}):`}
+                    {`Комментарии (${count}):`}
                 </h3>
             )
         }

@@ -1,0 +1,101 @@
+version: "3"
+services:
+    postgres:
+        image: postgres:12
+        container_name: postgres
+        ports:
+            - ${POSTGRES_PORT}:${POSTGRES_PORT}
+        volumes:
+            - ./postgresdata:/var/lib/postgresql/data
+            - ./dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+        restart: always
+        environment:
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_DB: ${POSTGRES_DB}
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:5432"]
+            interval: 1s
+            timeout: 20s
+            retries: 20
+        networks:
+          - app-network
+
+    mongo:
+        image: mongo
+        container_name: mongo
+        ports:
+            - ${MONGO_PORT}:${MONGO_PORT}
+        environment:
+            - MONGO_INITDB_DATABASE=${MONGO_DB}
+            - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+        volumes:
+            - mongo-volume:/data/db
+            - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+        restart: always
+        healthcheck:
+            test: echo 'db.runCommand("ping").ok' | mongo mongo:27017/test
+            interval: 1s
+            timeout: 20s
+            retries: 20
+        networks:
+          - app-network
+    client:
+        image: node:12
+        container_name: client
+        environment:
+            PORT: 8000
+        privileged: true
+        command: bash -c "cd app && npm i && npm run build && npm run start:server"
+        volumes:
+            - ./:/app
+        networks:
+          - app-network
+    backend:
+        image: node:12
+        container_name: backend
+        environment:
+            - PORT=${BACKEND_PORT}
+            - POSTGRES_HOSTNAME=postgres
+            - POSTGRES_PORT=${POSTGRES_PORT}
+            - MONGO_HOSTNAME=mongo
+            - MONGO_PORT=${MONGO_PORT}
+            - MONGO_USERNAME=${MONGO_USERNAME}
+            - MONGO_PASSWORD=${MONGO_PASSWORD}
+            - MONGO_DB=${MONGO_DB}
+        depends_on:
+            - mongo
+            - postgres
+            - client
+        privileged: true
+        command: bash -c "cd app && ./wait-for-it.sh client:80 -s -t 0 -- npm run buildback && npm run initDB && npm run serveback"
+        volumes:
+            - .:/app
+        networks:
+          - app-network
+    nginx:
+        image: nginx:mainline-alpine
+        container_name: nginx
+        restart: unless-stopped
+        ports:
+            - "80:80"
+        links:
+          - client:client
+          - backend:backend
+        volumes:
+          - ./nginx:/etc/nginx/conf.d:ro
+        depends_on:
+          - client
+          - backend
+        networks:
+          - app-network
+
+volumes:
+    mongo-volume:
+    node_modules:
+    data-volume:
+
+networks:
+    app-network:
+        driver: bridge

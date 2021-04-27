@@ -1,10 +1,16 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 
+export enum LinkButtonSize {
+    Large,
+    Small,
+}
+
 export type OwnProp = {
     className?: string,
     children: ReactNode,
     isButton?: boolean,
-    to?: string
+    to?: string,
+    size?: LinkButtonSize,
 };
 
 export type LinkProps = {

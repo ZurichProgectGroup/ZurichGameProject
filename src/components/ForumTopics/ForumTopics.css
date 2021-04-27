@@ -1,0 +1,13 @@
+.forum-themes {
+    display: flex;
+    flex-direction: column;
+}
+
+.forum-themes__item {
+    margin-bottom: 20px;
+    text-align: left;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}

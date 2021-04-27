@@ -1,12 +1,14 @@
-import getConfigForLevel from 'Configs/LevelConfig/LevelConfig';
-import { IBoardCtx } from 'Configs/BoardConfig/IBoardConfig';
-import { INoteCtx } from 'Configs/SongConfig/ISongConfig';
-import { ILevelCtx } from 'Configs/LevelConfig/ILevelConfig';
+import getConfigForLevel from 'configs/LevelConfig/LevelConfig';
+import { IBoardCtx } from 'configs/BoardConfig/IBoardConfig';
+import { INoteCtx } from 'configs/SongConfig/ISongConfig';
+import { ILevelCtx } from 'configs/LevelConfig/ILevelConfig';
+import { Directions } from 'services/BeatItemRenderer/consts';
+import BeatItemRenderer from 'services/BeatItemRenderer';
+import BoardRenderer from 'services/BoardRenderer';
 import { IGameEntitity } from './IGameService';
 import {
     isOnFinishLine,
     clearCanvas,
-    drawBoard,
     drawEntitities,
 } from './GameServiceUtils';
 
@@ -32,7 +34,7 @@ class GameService {
 
     private board?: IBoardCtx;
 
-    private startTime?: number;// todo - убрать!привязать к аудио
+    private startTime?: number; // todo - убрать!привязать к аудио
 
     private keyListener?: (event: KeyboardEvent) => void;
 
@@ -40,19 +42,38 @@ class GameService {
 
     private onError!: () => void;
 
-    start(canvas: HTMLCanvasElement, onComplete:()=>void, onError:()=>void) {
+    private beatItems: { [key: string]: BeatItemRenderer; } | undefined;
+
+    private boardElement: BoardRenderer | undefined;
+
+    private audio: HTMLAudioElement | undefined;
+
+    async start(
+        canvas: HTMLCanvasElement,
+        onComplete:()=>void,
+        onError:()=>void,
+        onHit: () => void,
+    ) {
         this.levelConfig = getConfigForLevel(this.level);
+        this.audio = new Audio(this.levelConfig.song.path);
         this.board = this.levelConfig.board;
         this.then = Date.now();
         this.canvas = canvas;
         this.interval = 1000 / 60; // 60fps
         this.requestId = 0;
-        // this.errors = 0;
         this.correct = 0;
-        // this.missed = 0;
         this.startTime = Date.now(); // todo: link to song time
         this.onComplete = onComplete;
         this.onError = onError;
+
+        this.beatItems = {
+            [Directions.left]: new BeatItemRenderer(canvas, Directions.left),
+            [Directions.right]: new BeatItemRenderer(canvas, Directions.right),
+            [Directions.up]: new BeatItemRenderer(canvas, Directions.up),
+            [Directions.down]: new BeatItemRenderer(canvas, Directions.down),
+        };
+
+        this.boardElement = new BoardRenderer(canvas);
 
         this.entities = this.levelConfig.song.notes
             .sort((note1, note2) => note1.time - note2.time)
@@ -74,8 +95,8 @@ class GameService {
                 );
                 if (note && isOnFinishLine(note, canvas, this.levelConfig?.speed ?? 0)) {
                     this.correct += 1;
+                    onHit();
                     note.accessible = false;
-                    console.log('correct!');
                 } else {
                     // this.errors += 1;
                     console.log('error!');
@@ -84,18 +105,25 @@ class GameService {
         };
         document.addEventListener('keydown', this.keyListener);
 
+        await this.playMusic();
         this.loop();
     }
 
+    playMusic() {
+        return this.audio?.play();
+    }
+
     draw() {
-        const now = Date.now();
-        const delta = now - this.then;
-        if (delta > this.interval) {
-            this.then = now - (delta % this.interval);
-            clearCanvas(this.canvas!);
-            drawBoard(this.canvas!, this.board!);
-            this.entities = this.updateEntities(now - this.startTime!);
-            drawEntitities(this.canvas!, this.levelConfig!, this.entities);
+        if (this.boardElement && this.beatItems) {
+            const now = Date.now();
+            const delta = now - this.then;
+            if (delta > this.interval) {
+                this.then = now - (delta % this.interval);
+                clearCanvas(this.canvas);
+                this.boardElement.render();
+                this.entities = this.updateEntities(now - this.startTime!);
+                drawEntitities(this.boardElement, this.levelConfig!, this.entities, this.beatItems);
+            }
         }
     }
 
@@ -123,14 +151,16 @@ class GameService {
 
     loop() {
         if (this.entities.length === 0) {
-            this.stop();
+            setTimeout(() => { this.stop(); }, 2000);
             return;
         }
+
         this.requestId = requestAnimationFrame(this.loop.bind(this));
         this.draw();
     }
 
     stop() {
+        this.audio?.pause();
         cancelAnimationFrame(this.requestId);
         if (this.correct >= this.levelConfig!.minimumPoints) {
             this.onComplete();

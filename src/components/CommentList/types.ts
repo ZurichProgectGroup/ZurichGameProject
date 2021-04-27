@@ -1,6 +1,7 @@
-import type { Comment } from 'Types/Comment';
+import type { Comment } from 'types/Comment';
 
 export type Props = {
     comments: Comment[],
-    hideTitle?: boolean
+    hideTitle?: boolean,
+    count?: number,
 };

@@ -1,6 +1,11 @@
-import React, { ChangeEvent, useState, useCallback } from 'react';
+import React, {
+    ChangeEvent,
+    useState,
+    useCallback,
+    useEffect,
+} from 'react';
 import cn from 'classnames';
-import getInputImgUrl from 'Utils/getInputImageUrl';
+import getInputImgUrl from 'utils/getInputImageUrl';
 import type { Props } from './types';
 import './Avatar.css';
 
@@ -16,13 +21,17 @@ const Avatar = (props: Props) => {
 
     const [avatar, setAvatar] = useState(url);
 
+    useEffect(() => {
+        setAvatar(props.url);
+    }, [url]);
+
     const handleChange = useCallback(async (event: ChangeEvent<HTMLInputElement>) => {
         const input = event.target;
         try {
             const imageUrl = await getInputImgUrl(input);
             setAvatar(imageUrl);
-            if (onChange) {
-                onChange(imageUrl);
+            if (onChange && input.files) {
+                onChange(imageUrl, input.files[0]);
             }
         } catch (e) {
             throw new Error(e);

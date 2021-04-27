@@ -2,8 +2,7 @@ import React from 'react';
 import './Register.css';
 import {
     Button, LinkButton, Input,
-} from 'Components';
-import ROUTES from 'Components/App/consts';
+} from 'components';
 import type { SecondStepProps } from './types';
 
 const SecondStep = ({
@@ -15,6 +14,7 @@ const SecondStep = ({
     phone,
     setPhone,
 }: SecondStepProps) => (
+
     <>
         <Input
             className="register-page__input"
@@ -37,8 +37,8 @@ const SecondStep = ({
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
         />
-        <Button className="register-page__button">Register</Button>
-        <LinkButton onClick={goPrevStep} to={ROUTES.register}>Back</LinkButton>
+        <Button type="submit" className="register-page__button">Register</Button>
+        <LinkButton onClick={goPrevStep} isButton>Back</LinkButton>
     </>
 );
 

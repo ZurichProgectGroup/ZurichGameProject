@@ -1,0 +1,394 @@
+openapi: 3.0.0
+info:
+    title: Api
+    description: Api for game
+    version: 1.0.0
+servers:
+    - url: ../../
+tags:
+    - name: themes
+    - name: user themes
+    - name: topics
+    - name: comments
+paths:
+    /api/feedback:
+        get:
+            tags:
+                - feedback
+            summary: Get all feedbacks
+            responses:
+                '200':
+                    description: List of feedbacks
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Feedback'
+        put:
+            tags:
+                - feedback
+            summary: Creates a new feedback
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateFeedback'
+            responses:
+                '201':
+                    description: Created feedback
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Feedback'
+    /themes:
+        get:
+            tags:
+                - themes
+            summary: Get all themes
+            responses:
+                '200':
+                    description: List of themes
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Theme'
+        post:
+            tags:
+                - themes
+            summary: Creates a new theme
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateTheme'
+            responses:
+                '201':
+                    description: Created theme
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Theme'
+    /themes/{id}:
+        delete:
+            tags:
+                - themes
+            summary: Delete theme by id
+            parameters:
+                -   in: path
+                    name: id
+                    schema:
+                        $ref: '#/components/schemas/Id'
+                    required: true
+            responses:
+                '200':
+                    description: Deleted
+    /user-themes:
+        post:
+            tags:
+                - user themes
+            summary: Set theme for user
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UserTheme'
+            responses:
+                '200':
+                    description: User theme
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UserTheme'
+    /user-themes/{userId}:
+        get:
+            tags:
+                - user themes
+            summary: Get theme for user
+            parameters:
+                -   in: path
+                    name: userId
+                    schema:
+                        $ref: '#/components/schemas/Id'
+                    required: true
+            responses:
+                '200':
+                    description: Theme
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Theme'
+
+    /topics:
+        get:
+            tags:
+                - topics
+            summary: Get all topics
+            responses:
+                '200':
+                    description: List of topics
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/Topic'
+        post:
+            tags:
+                - topics
+            summary: Creates a new topic
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateTopic'
+            responses:
+                '201':
+                    description: Created topic
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Topic'
+    /topics/{id}:
+        get:
+            tags:
+                - topics
+            summary: Get topic by id
+            parameters:
+                -   in: path
+                    name: id
+                    schema:
+                        $ref: '#/components/schemas/Id'
+                    required: true
+            responses:
+                '200':
+                    description: Topic
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/TopicWithComments'
+        delete:
+            tags:
+                - topics
+            summary: Delete topic by id
+            parameters:
+                -   in: path
+                    name: id
+                    schema:
+                        $ref: '#/components/schemas/Id'
+                    required: true
+            responses:
+                '200':
+                    description: Deleted
+
+    /comments:
+        post:
+            tags:
+                - comments
+            summary: Creates a new comment
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateComment'
+            responses:
+                '201':
+                    description: Created comments
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Comment'
+    /comments/{id}:
+        get:
+            tags:
+                - comments
+            summary: Get replies by comment id
+            parameters:
+                -   in: path
+                    name: id
+                    schema:
+                        $ref: '#/components/schemas/Id'
+                    required: true
+            responses:
+                '200':
+                    description: Replies
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Replies'
+        delete:
+            tags:
+                - comments
+            summary: Delete comment by id
+            parameters:
+                -   in: path
+                    name: id
+                    schema:
+                        $ref: '#/components/schemas/Id'
+                    required: true
+            responses:
+                '200':
+                    description: Deleted
+components:
+    schemas:
+        Id:
+            type: integer
+            example: 1
+        NullableId:
+            type: integer
+            nullable: true
+            example: 1
+        NotEmptyString:
+            type: string
+            minLength: 1
+        TimeStamp:
+            type: string
+            format: date-time
+        CreateFeedback:
+            type: object
+            required:
+                - name
+                - title
+                - feedback
+            properties:
+                name:
+                    type: string
+                title:
+                    type: string
+                feedback:
+                    type: string
+        Feedback:
+            type: object
+            properties:
+                name:
+                    type: string
+                title:
+                    type: string
+                feedback:
+                    type: string
+        CreateTheme:
+            type: object
+            required:
+                - title
+            properties:
+                title:
+                    $ref: '#/components/schemas/NotEmptyString'
+        Theme:
+            type: object
+            properties:
+                id:
+                    $ref: '#/components/schemas/Id'
+                title:
+                    $ref: '#/components/schemas/NotEmptyString'
+        UserTheme:
+            type: object
+            required:
+                - userId
+                - themeId
+            properties:
+                userId:
+                    $ref: '#/components/schemas/Id'
+                themeId:
+                    $ref: '#/components/schemas/Id'
+        CreateTopic:
+            type: object
+            required:
+                - title
+                - content
+            properties:
+                title:
+                    $ref: '#/components/schemas/NotEmptyString'
+                content:
+                    $ref: '#/components/schemas/NotEmptyString'
+        Author:
+            type: object
+            properties:
+                id:
+                    $ref: '#/components/schemas/Id'
+                name:
+                    $ref: '#/components/schemas/NotEmptyString'
+                avatar:
+                    type: string
+                    nullable: true
+        Topic:
+            type: object
+            properties:
+                id:
+                    $ref: '#/components/schemas/Id'
+                title:
+                    $ref: '#/components/schemas/NotEmptyString'
+                content:
+                    $ref: '#/components/schemas/NotEmptyString'
+                authorId:
+                    $ref: '#/components/schemas/Id'
+        TopicWithComments:
+            type: object
+            properties:
+                id:
+                    $ref: '#/components/schemas/Id'
+                title:
+                    $ref: '#/components/schemas/NotEmptyString'
+                content:
+                    $ref: '#/components/schemas/NotEmptyString'
+                author:
+                    $ref: '#/components/schemas/Author'
+                createdAt:
+                    $ref: '#/components/schemas/TimeStamp'
+                comments:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            id:
+                                $ref: '#/components/schemas/Id'
+                            text:
+                                $ref: '#/components/schemas/NotEmptyString'
+                            author:
+                                $ref: '#/components/schemas/Author'
+                            createdAt:
+                                $ref: '#/components/schemas/TimeStamp'
+        CreateComment:
+            type: object
+            required:
+                - text
+                - topicId
+            properties:
+                text:
+                    $ref: '#/components/schemas/NotEmptyString'
+                topicId:
+                    $ref: '#/components/schemas/Id'
+                parentId:
+                    $ref: '#/components/schemas/NullableId'
+        Comment:
+            type: object
+            properties:
+                id:
+                    $ref: '#/components/schemas/Id'
+                text:
+                    $ref: '#/components/schemas/NotEmptyString'
+                topicId:
+                    $ref: '#/components/schemas/Id'
+                parentId:
+                    $ref: '#/components/schemas/NullableId'
+        Replies:
+            type: array
+            items:
+                type: object
+                properties:
+                    id:
+                        $ref: '#/components/schemas/Id'
+                    text:
+                        $ref: '#/components/schemas/NotEmptyString'
+                    parentId:
+                        $ref: '#/components/schemas/NullableId'
+                    author:
+                        $ref: '#/components/schemas/Author'
+                    createdAt:
+                        $ref: '#/components/schemas/TimeStamp'

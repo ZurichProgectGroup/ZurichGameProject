@@ -1,17 +1,44 @@
-import React, { FormEvent, useCallback } from 'react';
+import React, { FormEvent, useCallback, useState } from 'react';
 import './ForumCreate.css';
-import NavigationList from 'Components/NavigationList';
-import LinkButton from 'Components/LinkButton';
-import ROUTES from 'Components/App/consts';
-import Input from 'Components/Input';
-import Textarea from 'Components/Textarea';
-import Button from 'Components/Button';
+import NavigationList from 'components/NavigationList';
+import LinkButton from 'components/LinkButton';
+import ROUTES from 'components/App/consts';
+import { Input, Textarea, Button } from 'components';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { createTopic } from 'store/topics';
 import RouteMap from './const';
 
 const ForumCreate = () => {
-    const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const onTitleChange = useCallback(
+        ({ target: { value } }) => {
+            setTitle(value);
+        },
+        [setTitle],
+    );
+
+    const onContentChange = useCallback(
+        ({ target: { value } }) => {
+            setContent(value);
+        },
+        [setContent],
+    );
+
+    const onSubmit = useCallback(async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-    }, []);
+
+        await dispatch(createTopic({
+            title,
+            content,
+        }));
+
+        history.push(ROUTES.forum);
+    }, [title, content]);
 
     return (
         <>
@@ -23,8 +50,8 @@ const ForumCreate = () => {
             </div>
             <form className="forum-create" onSubmit={onSubmit}>
                 <div className="forum-create__fields">
-                    <Input labelText="НОВАЯ ТЕМА" name="theme" />
-                    <Textarea label="Описание" className="forum-create__text" />
+                    <Input onChange={onTitleChange} value={title} labelText="НОВАЯ ТЕМА" />
+                    <Textarea onChange={onContentChange} value={content} label="Описание" className="forum-create__text" />
                 </div>
                 <Button type="submit" className="forum-create__submit">Добавить тему</Button>
             </form>

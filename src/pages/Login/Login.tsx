@@ -1,20 +1,37 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import './Login.css';
 import {
-    Card, Button, Title, LinkButton, Input,
-} from 'Components';
-import ROUTES from 'Components/App/consts';
-import { useDispatch } from 'react-redux';
-import { login } from 'Store/account';
+    Button, Card, Input, LinkButton, Title,
+} from 'components';
+import ROUTES from 'components/App/consts';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, yaLogin } from 'store/account';
+import { Redirect } from 'react-router-dom';
+import { selectUser } from 'selectors';
+import { LinkButtonSize } from 'components/LinkButton/types';
+import { LoadingStatus } from 'types/common';
 
 const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-    const handleFormSubmit = useCallback((event) => {
+    const { user, status } = useSelector(selectUser);
+
+    const handleFormSubmit = useCallback((event: { preventDefault: () => void; }) => {
         event.preventDefault();
-        dispatch(login(event.target));
+        dispatch(login({
+            login: userName,
+            password,
+        }));
+    }, [userName, password]);
+
+    const handleYandexClick = useCallback(() => {
+        dispatch(yaLogin());
     }, []);
+
+    if (status === LoadingStatus.succeeded && user) {
+        return (<Redirect to={ROUTES.main} />);
+    }
 
     return (
         <div className="login-page">
@@ -39,6 +56,14 @@ const Login = () => {
                     />
                     <Button type="submit" className="login-page__button">Sign in</Button>
                 </form>
+                <LinkButton
+                    size={LinkButtonSize.Small}
+                    isButton
+                    onClick={handleYandexClick}
+                >
+                    Sign in via yandex
+                </LinkButton>
+                <br />
                 <LinkButton to={ROUTES.register}>I don`t have an account</LinkButton>
             </Card>
         </div>

@@ -1,9 +1,9 @@
 type LeaderboardUserType = {
-    id: string,
-    name: string,
+    id?: string,
+    name?: string,
     url?: string,
-    score: number,
-    isUser: boolean
+    score?: number,
+    isUser?: boolean
 };
 
 export default LeaderboardUserType;

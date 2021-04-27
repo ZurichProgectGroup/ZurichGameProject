@@ -1,35 +1,16 @@
-import React, { createRef, useEffect } from 'react';
+import React from 'react';
 import './GameBoard.css';
-import gameService from '../../services/GameService';
+import ScoreBoard from './components/ScoreBoard';
+import Board from './components/Board';
 import type { Props } from './types';
 
-const GameBoard = ({ onComplete, onError }: Props) => {
-    const canvas = createRef<HTMLCanvasElement>();
-
-    useEffect(() => {
-        gameService.start(canvas!.current!, onComplete, onError);
-        return () => {
-            gameService.stop();
-        };
-    });
-
-    return (
-        <div className="game">
-            <canvas className="canvas" ref={canvas} />
-            <div className="correct">
-                Correct:
-                <span>0</span>
-            </div>
-            <div className="errors">
-                Error:
-                <span>0</span>
-            </div>
-            <div className="missed">
-                Missed:
-                <span>0</span>
-            </div>
+const GameBoard = ({ onComplete, onError }: Props) => (
+    <div className="game">
+        <div className="game__header">
+            <ScoreBoard />
         </div>
-    );
-};
+        <Board onComplete={onComplete} onError={onError} />
+    </div>
+);
 
 export default GameBoard;

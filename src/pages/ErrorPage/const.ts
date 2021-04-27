@@ -1,5 +1,5 @@
-import Image404 from 'Images/404.svg';
-import Image500 from 'Images/500.svg';
+import Image404 from 'images/404.svg';
+import Image500 from 'images/500.svg';
 
 const ErrorsStatusCodes = {
     404: {

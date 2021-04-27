@@ -1,14 +1,15 @@
 import React from 'react';
-import InlineDotedList from 'Components/InlineDotedList';
-import User from 'Components/User';
+import InlineDotedList from 'components/InlineDotedList';
+import User from 'components/User';
 import './Post.css';
+import dayjs from 'dayjs';
 import { Props } from './types';
 
 const Post = ({ post } : Props) => (
     <div className="post">
         <b className="post__title">{post.title}</b>
         <p className="post__description">
-            {post.desc}
+            {post.content}
         </p>
         <div className="post__author">
             <InlineDotedList>
@@ -16,7 +17,7 @@ const Post = ({ post } : Props) => (
                     <User user={post.author} />
                 </InlineDotedList.Item>
                 <InlineDotedList.Item>
-                    {post.uploadDate}
+                    {dayjs(post.createdAt).format('D MMM YYYY')}
                 </InlineDotedList.Item>
             </InlineDotedList>
         </div>
