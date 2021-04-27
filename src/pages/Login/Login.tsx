@@ -1,19 +1,22 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import './Login.css';
 import {
-    Card, Button, Title, LinkButton, Input,
+    Button, Card, Input, LinkButton, Title,
 } from 'Components';
 import ROUTES from 'Components/App/consts';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from 'Store/account';
+import { login, yaLogin } from 'Store/account';
 import { Redirect } from 'react-router-dom';
 import { selectUser } from 'Selectors';
+import { LinkButtonSize } from 'Components/LinkButton/types';
+import { LoadingStatus } from 'Types/common';
 
 const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-    const userData = useSelector(selectUser);
+    const { user, status } = useSelector(selectUser);
+
     const handleFormSubmit = useCallback((event: { preventDefault: () => void; }) => {
         event.preventDefault();
         dispatch(login({
@@ -22,9 +25,14 @@ const Login = () => {
         }));
     }, [userName, password]);
 
-    if (userData) {
+    const handleYandexClick = useCallback(() => {
+        dispatch(yaLogin());
+    }, []);
+
+    if (status === LoadingStatus.succeeded && user) {
         return (<Redirect to={ROUTES.main} />);
     }
+
     return (
         <div className="login-page">
             <Card className="login-page__card">
@@ -48,6 +56,14 @@ const Login = () => {
                     />
                     <Button type="submit" className="login-page__button">Sign in</Button>
                 </form>
+                <LinkButton
+                    size={LinkButtonSize.Small}
+                    isButton
+                    onClick={handleYandexClick}
+                >
+                    Sign in via yandex
+                </LinkButton>
+                <br />
                 <LinkButton to={ROUTES.register}>I don`t have an account</LinkButton>
             </Card>
         </div>

@@ -7,19 +7,36 @@ import LinkButton from 'Components/LinkButton';
 import CommentList from 'Components/CommentList';
 import CreateComment from 'Components/CreateComment';
 import ToggleButton from 'Components/ToggleButton';
+import dayjs from 'dayjs';
+import { useDispatch } from 'react-redux';
+import { getReplies } from 'Store/topic';
 import type { Props } from './types';
 
-const Comment = ({ comment }: Props) => {
+const Comment = ({
+    comment: {
+        id,
+        repliesCount,
+        author,
+        createdAt,
+        text,
+        children,
+    },
+}: Props) => {
+    const dispatch = useDispatch();
     const [isCommentsOpen, setIsCommentsOpen] = useState(false);
     const [isAnswerOpen, setIsAnswerOpen] = useState(false);
-
-    const isAnswer = useMemo(() => comment.answers === undefined, [comment.answers]);
-    const hasAnswers = useMemo(() => Boolean(comment.answers?.length), [comment.answers]);
+    const hasAnswers = useMemo(() => Boolean(repliesCount), [repliesCount]);
 
     const handleToggleAnswers = useCallback(() => setIsAnswerOpen(!isAnswerOpen), [isAnswerOpen]);
     const handleToggleComments = useCallback(
-        () => setIsCommentsOpen(!isCommentsOpen),
-        [isCommentsOpen],
+        async () => {
+            if (!isCommentsOpen && (!children || !children.length)) {
+                await dispatch(getReplies(id));
+            }
+
+            setIsCommentsOpen(!isCommentsOpen);
+        },
+        [isCommentsOpen, children],
     );
 
     return (
@@ -29,17 +46,16 @@ const Comment = ({ comment }: Props) => {
                     <div className="comment__author">
                         <InlineDotedList>
                             <InlineDotedList.Item>
-                                <User user={comment.author} />
+                                <User user={author} />
                             </InlineDotedList.Item>
                             <InlineDotedList.Item>
-                                {comment.date}
+                                {dayjs(createdAt).format('D MMM YYYY')}
                             </InlineDotedList.Item>
                         </InlineDotedList>
                     </div>
                     <LinkButton
                         className={cn('comment__answer-btn', {
                             'comment__answer-btn_open': isAnswerOpen,
-                            'comment__answer-btn_hide': isAnswer,
                         })}
                         type="button"
                         isButton
@@ -52,7 +68,7 @@ const Comment = ({ comment }: Props) => {
                     </LinkButton>
                 </div>
                 <p className="comment__text">
-                    {comment.message}
+                    {text}
                 </p>
             </div>
             <div className={cn('comment__answers', {
@@ -66,21 +82,21 @@ const Comment = ({ comment }: Props) => {
                             onClick={handleToggleComments}
                             className="comment__answer-toggle"
                         >
-                            {!isAnswerOpen && `${comment.answers?.length} комментариев`}
+                            {!isAnswerOpen && `${repliesCount} комментариев`}
                         </ToggleButton>
                     )
                 }
                 {
                     isAnswerOpen && (
                         <div className="comment__create">
-                            <CreateComment />
+                            <CreateComment parentId={id} />
                         </div>
                     )
                 }
                 {
                     isCommentsOpen && hasAnswers && (
                         <div className="comment__answers-list">
-                            <CommentList comments={comment.answers || []} hideTitle />
+                            <CommentList comments={children || []} hideTitle />
                         </div>
                     )
                 }

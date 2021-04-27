@@ -1,5 +1,5 @@
-import type { ForumTheme } from 'Types/ForumTheme';
+import type { Topic } from 'types/ForumTopic';
 
 export type Props = {
-    post: ForumTheme
+    post: Topic
 };

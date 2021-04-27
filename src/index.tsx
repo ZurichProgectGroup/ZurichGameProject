@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import getStore from 'Store';
 import App from 'Components/App';
-
+import 'react-toggle/style.css';
 import './styles/index.css';
 import { BrowserRouter } from 'react-router-dom';
 

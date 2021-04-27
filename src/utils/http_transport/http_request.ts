@@ -11,8 +11,16 @@ export default async function httpRequest<T>(url: string,
     });
 
     clearTimeout(id);
-    if (response.status === 200) {
-        return response.json();
+
+    if (response.status === 200 || response.status === 201) {
+        const text = await response.text();
+
+        try {
+            return JSON.parse(text);
+        } catch (_) {
+            // @ts-ignore
+            return text;
+        }
     }
     throw new Error();
 }

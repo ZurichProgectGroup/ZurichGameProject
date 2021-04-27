@@ -47,9 +47,9 @@ export default function useFullscreen(elem): [boolean, () => void, () => void] {
     );
 
     const setFullscreen = () => {
-        if (elem.current == null || isServer) return;
+        if (isServer) return;
 
-        requestFullscreen(elem.current);
+        requestFullscreen(elem);
     };
 
     useLayoutEffect(() => {

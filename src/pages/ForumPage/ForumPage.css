@@ -33,4 +33,5 @@
 
 .forum-page__content {
     flex-grow: 1;
+    text-align: center;
 }
