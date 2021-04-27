@@ -118,13 +118,15 @@ export const updateProfile = createAsyncThunk(
     },
 );
 
+export const initialState = {
+    status: LoadingStatus.idle,
+    user: null,
+    theme: { id: ThemeEnum.dark },
+};
+
 const slice = createSlice({
     name: 'account',
-    initialState: {
-        status: LoadingStatus.idle,
-        user: null,
-        theme: { id: ThemeEnum.dark },
-    },
+    initialState,
     reducers: {
         logoutSuccess: (state) => {
             state.user = null;

@@ -18,13 +18,15 @@ export const createTopic = createAsyncThunk(
     },
 );
 
+export const initialState = {
+    list: [],
+    isLoading: false,
+    error: null,
+};
+
 const slice = createSlice({
     name: 'topics',
-    initialState: {
-        list: [],
-        isLoading: false,
-        error: null,
-    },
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getTopics.pending, (state) => {

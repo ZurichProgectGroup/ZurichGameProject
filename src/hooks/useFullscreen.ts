@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { isServer } from 'Utils/_helpers';
 
 const checkIsFullscreen = () => !!(!isServer
@@ -52,7 +52,7 @@ export default function useFullscreen(elem): [boolean, () => void, () => void] {
         requestFullscreen(elem);
     };
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         document.onfullscreenchange = () => setIsFullscreen(checkIsFullscreen());
 
         return () => {

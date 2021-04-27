@@ -1,7 +1,7 @@
 import React from 'react';
 import './GamePage.css';
 import Game from 'Components/Game';
-import { isServer } from 'utils/_helpers';
+import { isServer } from 'Utils/_helpers';
 
 const GamePage = () => {
     if (isServer) {
@@ -13,6 +13,6 @@ const GamePage = () => {
             <Game />
         </div>
     );
-}
+};
 
 export default GamePage;

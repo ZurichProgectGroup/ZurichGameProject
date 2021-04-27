@@ -11,6 +11,7 @@ import ROUTES from 'Components/App/consts';
 import { useSelector } from 'react-redux';
 import { selectUser } from 'Selectors';
 import useFullscreen from 'Hooks/useFullscreen';
+import { isServer } from 'Utils/_helpers';
 import RouteMap from './const';
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
     const handleGameStart = useCallback(() => history.push(ROUTES.game), [history]);
     const { user, theme } = useSelector(selectUser);
 
-    const fullscreenWrapper = document.querySelector('.app');
+    const fullscreenWrapper = (!isServer && document.querySelector('.app')) || null;
     const [isFullscreen, setFullscreen, exitFullscreen] = useFullscreen(fullscreenWrapper);
 
     const handleClick = useCallback(() => {

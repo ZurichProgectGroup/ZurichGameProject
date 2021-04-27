@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import path from 'path';
-import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssnanoPlugin from 'cssnano-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
@@ -52,8 +51,6 @@ const config = {
     },
     plugins: [
         new MiniCssExtractPlugin(),
-        new CleanWebpackPlugin(),
-
     ],
     optimization: {
         minimize: !IS_DEV,

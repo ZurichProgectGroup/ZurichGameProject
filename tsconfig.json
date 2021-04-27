@@ -18,26 +18,14 @@
     "strict": false,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": false,
     "skipLibCheck": true,
     "declaration": false,
     "sourceMap": false,
     "baseUrl": ".",
     "outDir": "./dist",
     "paths": {
-        "Api": ["src/api/"],
-        "Audio": ["src/audio/"],
-        "Images": ["src/images/"],
-        "Components": ["src/components/"],
-        "Configs": ["src/configs/"],
-        "Utils": ["src/utils/"],
-        "Pages": ["src/pages/"],
-        "Store": ["src/store/"],
-        "Mocks": ["src/mocks/"],
-        "Types": ["src/types/"],
-        "Services": ["src/services/"],
-        "Selectors": ["src/selectors/"],
-        "Hooks": ["src/hooks"],
-        "*": ["src/*"]
+        "*": ["./src/*"]
     },
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },

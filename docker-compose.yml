@@ -40,7 +40,7 @@ services:
         privileged: true
         ports:
             - "0.0.0.0:80:80"
-        command: bash -c "cd app && npm i && npm run build && npm run serve"
+        command: bash -c "cd app && npm i && npm run build && npm run start:server"
         volumes:
             - .:/app
     backend:

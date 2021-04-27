@@ -24,14 +24,16 @@ export const getReplies = createAsyncThunk(
     (id: number) => ForumApi.getReplies(id),
 );
 
+export const initialState = {
+    topic: {},
+    comments: [],
+    isLoading: false,
+    error: null,
+};
+
 const slice = createSlice({
     name: 'topic',
-    initialState: {
-        topic: {},
-        comments: [],
-        isLoading: false,
-        error: null,
-    },
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getTopic.pending, (state: IStoreCTX['topic']) => {

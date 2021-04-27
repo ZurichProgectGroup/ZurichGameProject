@@ -19,7 +19,7 @@ export interface IStoreCTX {
         error: null | string,
     },
     readonly topics: {
-        list: [],
+        list: Topic[],
         isLoading: boolean,
         error: null | string,
     },
