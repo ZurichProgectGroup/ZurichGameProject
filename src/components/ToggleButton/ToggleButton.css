@@ -26,7 +26,7 @@
         width: var(--size);
         height: var(--size);
         display: block;
-        background: url("Images/toggle-btn.svg") center/contain no-repeat;
+        background: url("images/toggle-btn.svg") center/contain no-repeat;
     }
 
     &_open {
