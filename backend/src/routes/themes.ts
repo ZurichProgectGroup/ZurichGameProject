@@ -9,5 +9,5 @@ export default (router: Router) => {
         .get('/', ThemeController.getAll)
         .delete('/:id', ThemeController.delete);
 
-    router.use('/themes', themesRouter);
+    router.use('/api/themes', themesRouter);
 };

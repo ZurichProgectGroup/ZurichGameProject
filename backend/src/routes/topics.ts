@@ -11,5 +11,5 @@ export default (router: Router) => {
         .get('/:id', [protectedRoute], TopicsController.getById)
         .delete('/:id', [protectedRoute], TopicsController.delete);
 
-    router.use('/topics', topicsRouter);
+    router.use('/api/topics', topicsRouter);
 };
