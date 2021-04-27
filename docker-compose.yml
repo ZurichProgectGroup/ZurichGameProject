@@ -2,6 +2,7 @@ version: "3"
 services:
     postgres:
         image: postgres:12
+        container_name: postgres
         ports:
             - ${POSTGRES_PORT}:${POSTGRES_PORT}
         volumes:
@@ -17,9 +18,12 @@ services:
             interval: 1s
             timeout: 20s
             retries: 20
+        networks:
+          - app-network
 
     mongo:
         image: mongo
+        container_name: mongo
         ports:
             - ${MONGO_PORT}:${MONGO_PORT}
         environment:
@@ -35,18 +39,22 @@ services:
             interval: 1s
             timeout: 20s
             retries: 20
+        networks:
+          - app-network
     client:
         image: node:12
+        container_name: client
         environment:
-            - PORT=80
+            PORT: 8000
         privileged: true
-        ports:
-            - "0.0.0.0:80:80"
         command: bash -c "cd app && npm i && npm run build && npm run start:server"
         volumes:
-            - .:/app
+            - ./:/app
+        networks:
+          - app-network
     backend:
         image: node:12
+        container_name: backend
         environment:
             - PORT=${BACKEND_PORT}
             - POSTGRES_HOSTNAME=postgres
@@ -61,12 +69,33 @@ services:
             - postgres
             - client
         privileged: true
-        ports:
-            - "0.0.0.0:${BACKEND_PORT}:${BACKEND_PORT}"
         command: bash -c "cd app && ./wait-for-it.sh client:80 -s -t 0 -- npm run buildback && npm run initDB && npm run serveback"
         volumes:
             - .:/app
+        networks:
+          - app-network
+    nginx:
+        image: nginx:mainline-alpine
+        container_name: nginx
+        restart: unless-stopped
+        ports:
+            - "80:80"
+        links:
+          - client:client
+          - backend:backend
+        volumes:
+          - ./nginx:/etc/nginx/conf.d:ro
+        depends_on:
+          - client
+          - backend
+        networks:
+          - app-network
+
 volumes:
     mongo-volume:
     node_modules:
     data-volume:
+
+networks:
+    app-network:
+        driver: bridge

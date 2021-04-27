@@ -8,5 +8,5 @@ export default (router: Router) => {
         .post('/', ThemeController.setUserTheme)
         .get('/:userId', ThemeController.getUserTheme);
 
-    router.use('/user-themes', userThemesRouter);
+    router.use('/api/user-themes', userThemesRouter);
 };

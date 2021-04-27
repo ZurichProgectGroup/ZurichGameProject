@@ -18,8 +18,14 @@ const spec = yaml.load(specPath);
 
 dotenv.config();
 
-const key = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/key.pem'));
-const cert = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/cert.pem'));
+let key;
+let cert;
+try {
+    key = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/key.pem'));
+    cert = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/cert.pem'));
+} catch (e) {
+    console.log(`serts error ${e}`);
+}
 
 const app: Express = express();
 const PORT = process.env.BACKEND_PORT || 443;
@@ -48,9 +54,14 @@ app
     .use(router)
     .use(errorHandler);
 
-const server = https.createServer({ key, cert }, app);
+const server = key ? https.createServer({ key, cert }, app) : app;
 
 (async () => {
-    await sequelize.sync({ alter: true });
+    try {
+        await sequelize.sync({ alter: true });
+    } catch (e) {
+        console.log(`postgreedb error ${e}`);
+    }
+
     server.listen(PORT, () => { console.log(`listening on ${PORT}`); });
 })();
