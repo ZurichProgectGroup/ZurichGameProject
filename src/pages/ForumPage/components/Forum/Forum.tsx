@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import './Forum.css';
-import NavigationList from 'Components/NavigationList';
-import Post from 'Components/Post';
-import CreateComment from 'Components/CreateComment';
-import CommentList from 'Components/CommentList';
+import NavigationList from 'components/NavigationList';
+import Post from 'components/Post';
+import CreateComment from 'components/CreateComment';
+import CommentList from 'components/CommentList';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectTopic } from 'Selectors';
-import { getTopic } from 'Store/topic';
+import { selectTopic } from 'selectors';
+import { getTopic } from 'store/topic';
 import { useParams } from 'react-router-dom';
-import { Loader } from 'Components';
+import { Loader } from 'components';
 import RouteMap from './const';
 
 const Forum = () => {

@@ -1,4 +1,4 @@
-import ROUTES from 'Components/App/consts';
+import ROUTES from 'components/App/consts';
 
 const RouteMap = {
     [ROUTES.leaderboard]: 'LEADERBOARD',

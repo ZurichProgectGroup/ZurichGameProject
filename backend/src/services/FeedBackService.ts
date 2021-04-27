@@ -1,6 +1,6 @@
 import BaseService from './BaseService';
-import FeedBackModel from '../models/mongo/FeedBackModel';
-import { IFeedback } from '../models/mongo/IFeedBackModel';
+import FeedBackModel from '../models/mongo/FeedbackModel';
+import { IFeedback } from '../models/mongo/IFeedbackModel';
 
 export default class FeedbackService implements BaseService {
     public static create = async (data: IFeedback) => {

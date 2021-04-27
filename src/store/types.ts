@@ -1,25 +1,29 @@
-import { TLeaderItemDTO } from 'Api/LeaderboardApi';
-import { Topic } from 'Types/ForumTopic';
-import type { Comment } from 'Types/Comment';
+import { TLeaderItemDTO } from 'api/LeaderboardApi';
+import { Topic } from 'types/ForumTopic';
+import type { Comment } from 'types/Comment';
+import { LoadingStatus } from 'types/common';
+import { Theme } from 'types/Theme';
 
 export interface IStoreCTX {
-    account:{
-        user: User | null
+    readonly account:{
+        user: User | null,
+        status: LoadingStatus,
+        theme: Theme
     },
-    game: {
+    readonly game: {
         currentScore: number
     },
-    leaderboard: {
+    readonly leaderboard: {
         list: TLeaderItemDTO[],
         isLoading: boolean,
         error: null | string,
     },
-    topics: {
-        list: [],
+    readonly topics: {
+        list: Topic[],
         isLoading: boolean,
         error: null | string,
     },
-    topic: {
+    readonly topic: {
         topic: Topic,
         comments: Comment[],
         isLoading: boolean,

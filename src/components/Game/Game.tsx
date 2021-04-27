@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import GameStart from 'Components/GameStart';
-import GameComplete from 'Components/GameComplete';
-import GameBoard from 'Components/GameBoard';
+import GameStart from 'components/GameStart';
+import GameComplete from 'components/GameComplete';
+import GameBoard from 'components/GameBoard';
 import GameState from './types';
 
 const Game = () => {

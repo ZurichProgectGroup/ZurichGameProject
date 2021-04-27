@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ErrorPage from 'Pages/ErrorPage';
+import ErrorPage from 'pages/ErrorPage';
 import { OwnProps as Props, OwnState as State } from './types';
 
 class ErrorBoundary extends Component<Props, State> {

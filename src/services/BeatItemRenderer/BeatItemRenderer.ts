@@ -1,6 +1,6 @@
-import Renderer from 'Services/Renderer';
-import { TCoords } from 'Services/Renderer/types';
-import { DirectionToImage } from 'Services/BeatItemRenderer/consts';
+import Renderer from 'services/Renderer';
+import { TCoords } from 'services/Renderer/types';
+import { DirectionToImage } from 'services/BeatItemRenderer/consts';
 
 class BeatItemRenderer extends Renderer {
     private direction: string;

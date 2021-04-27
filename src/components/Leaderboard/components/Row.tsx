@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import cn from 'classnames';
-import Avatar from 'Components/Avatar';
+import Avatar from 'components/Avatar';
 import type { Props } from './types';
 import './Row.css';
 

@@ -1,10 +1,10 @@
-import getConfigForLevel from 'Configs/LevelConfig/LevelConfig';
-import { IBoardCtx } from 'Configs/BoardConfig/IBoardConfig';
-import { INoteCtx } from 'Configs/SongConfig/ISongConfig';
-import { ILevelCtx } from 'Configs/LevelConfig/ILevelConfig';
-import { Directions } from 'Services/BeatItemRenderer/consts';
-import BeatItemRenderer from 'Services/BeatItemRenderer';
-import BoardRenderer from 'Services/BoardRenderer';
+import getConfigForLevel from 'configs/LevelConfig/LevelConfig';
+import { IBoardCtx } from 'configs/BoardConfig/IBoardConfig';
+import { INoteCtx } from 'configs/SongConfig/ISongConfig';
+import { ILevelCtx } from 'configs/LevelConfig/ILevelConfig';
+import { Directions } from 'services/BeatItemRenderer/consts';
+import BeatItemRenderer from 'services/BeatItemRenderer';
+import BoardRenderer from 'services/BoardRenderer';
 import { IGameEntitity } from './IGameService';
 import {
     isOnFinishLine,

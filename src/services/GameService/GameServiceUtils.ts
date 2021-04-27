@@ -1,8 +1,8 @@
-import { ILevelCtx } from 'Configs/LevelConfig/ILevelConfig';
-import BeatItemRenderer from 'Services/BeatItemRenderer';
-import BoardRenderer from 'Services/BoardRenderer';
-import { ColumnsOrder } from 'Services/BeatItemRenderer/consts';
-import { ACTION_LINE_HEIGHT, ITEM_WIDTH } from 'Services/BoardRenderer/consts';
+import { ILevelCtx } from 'configs/LevelConfig/ILevelConfig';
+import BeatItemRenderer from 'services/BeatItemRenderer';
+import BoardRenderer from 'services/BoardRenderer';
+import { ColumnsOrder } from 'services/BeatItemRenderer/consts';
+import { ACTION_LINE_HEIGHT, ITEM_WIDTH } from 'services/BoardRenderer/consts';
 import { IGameEntitity } from './IGameService';
 
 export const getContext = (canvas: HTMLCanvasElement) => canvas.getContext('2d');

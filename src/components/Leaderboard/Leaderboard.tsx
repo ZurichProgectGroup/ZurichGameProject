@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from 'Components/Title';
+import Title from 'components/Title';
 import type { Props } from './types';
 import './Leaderboard.css';
 import Row from './components';

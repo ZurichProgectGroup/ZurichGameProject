@@ -1,4 +1,4 @@
-import { StringKeyString } from 'Utils/custom_types';
+import { StringKeyString } from 'utils/custom_types';
 import yandexOauthInstance from './OauthInstances';
 import { oauthTransportInstance } from './TransportInstances';
 

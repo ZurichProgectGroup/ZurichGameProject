@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import ForumApi from 'Api/ForumApi';
+import ForumApi from 'api/ForumApi';
 import { StringKeyString } from 'utils/custom_types';
 
 export const getTopics = createAsyncThunk(
@@ -18,13 +18,15 @@ export const createTopic = createAsyncThunk(
     },
 );
 
+export const initialState = {
+    list: [],
+    isLoading: false,
+    error: null,
+};
+
 const slice = createSlice({
     name: 'topics',
-    initialState: {
-        list: [],
-        isLoading: false,
-        error: null,
-    },
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getTopics.pending, (state) => {

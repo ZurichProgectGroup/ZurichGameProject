@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import {
     IFeedbackModel,
     IFeedbackDocument,
-} from './IFeedBackModel';
+} from './IFeedbackModel';
 
 const feedBackSchema = new mongoose.Schema({
     name: {
