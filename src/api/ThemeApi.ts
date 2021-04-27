@@ -1,4 +1,4 @@
-import { Theme } from 'Types/Theme';
+import { Theme } from 'types/Theme';
 import { userThemesInstance } from './TransportInstances';
 
 export default class ThemeApi {

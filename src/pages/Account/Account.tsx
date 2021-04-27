@@ -2,14 +2,14 @@ import React, { useState, useCallback, useEffect } from 'react';
 import './Account.css';
 import {
     Input, Button, LinkButton, ActionLink, Avatar, Alert,
-} from 'Components';
+} from 'components';
 import cn from 'classnames';
-import successIconPath from 'Images/success-icon.svg';
+import successIconPath from 'images/success-icon.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, updateProfile } from 'Store/account';
-import { selectUser } from 'Selectors';
+import { logout, updateProfile } from 'store/account';
+import { selectUser } from 'selectors';
 import { Redirect } from 'react-router-dom';
-import ROUTES from 'Components/App/consts';
+import ROUTES from 'components/App/consts';
 import AlertState from './types';
 
 const Account = () => {

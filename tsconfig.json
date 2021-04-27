@@ -7,23 +7,25 @@
       "es2019",
       "webworker"
     ],
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "target": "es5",
     "jsx": "react",
+    "resolveJsonModule": true,
     "importHelpers": true,
     "noUnusedLocals": true,
     "esModuleInterop": true,
     "strict": false,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": false,
     "skipLibCheck": true,
     "declaration": false,
     "sourceMap": false,
     "baseUrl": ".",
     "outDir": "./dist",
     "paths": {
-      "*": ["./src/*"]
+        "*": ["./src/*"]
     },
     "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"]
   },

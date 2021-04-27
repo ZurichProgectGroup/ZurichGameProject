@@ -1,4 +1,4 @@
-import type UserInfo from 'Types/UserInfo';
+import type UserInfo from 'types/UserInfo';
 
 export type OwnProps = {
     user?: UserInfo

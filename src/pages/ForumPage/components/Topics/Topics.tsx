@@ -2,10 +2,10 @@ import React, { useCallback, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
     Title, Loader, PlusButton, NavigationList, ForumTopics,
-} from 'Components';
+} from 'components';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectTopics } from 'Selectors';
-import { getTopics } from 'Store/topics';
+import { selectTopics } from 'selectors';
+import { getTopics } from 'store/topics';
 import RouteMap from './const';
 
 const Topics = () => {

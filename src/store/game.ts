@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+export const initialState = {
+    currentScore: 0,
+};
+
 const slice = createSlice({
     name: 'game',
-    initialState: {
-        currentScore: 123,
-    },
+    initialState,
     reducers: {
         resetCurrentScore: (state) => {
             // eslint-disable-next-line no-param-reassign

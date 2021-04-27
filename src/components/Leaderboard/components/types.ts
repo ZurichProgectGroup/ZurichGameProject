@@ -1,4 +1,4 @@
-import LeaderboardUserType from 'Types/LeaderboardUser';
+import LeaderboardUserType from 'types/LeaderboardUser';
 
 export type OwnProps = {
     isLeader?: boolean,

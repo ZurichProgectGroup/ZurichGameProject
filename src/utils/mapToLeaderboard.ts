@@ -1,5 +1,5 @@
-import { ratingFieldName, TLeaderItemDTO } from 'Api/LeaderboardApi';
-import LeaderboardUserType from 'Types/LeaderboardUser';
+import { ratingFieldName, TLeaderItemDTO } from 'api/LeaderboardApi';
+import LeaderboardUserType from 'types/LeaderboardUser';
 
 const mapToLeaderboard = (
     leaderboardDTO: TLeaderItemDTO[],

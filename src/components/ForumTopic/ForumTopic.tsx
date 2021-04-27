@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
 import dayjs from 'dayjs';
-import InlineDotedList from 'Components/InlineDotedList';
-import User from 'Components/User';
+import InlineDotedList from 'components/InlineDotedList';
+import User from 'components/User';
 import type { OwnProps as Props } from './types';
 import './ForumTopic.css';
 

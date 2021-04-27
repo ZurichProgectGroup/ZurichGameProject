@@ -1,4 +1,4 @@
-import OauthTransport from 'Utils/oauth/oauthUtil';
+import OauthTransport from 'utils/oauth/oauthUtil';
 
 // seems to be right in the real word,
 // but in practicum there is no way to register redirect url,

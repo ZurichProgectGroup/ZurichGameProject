@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
-import { IStoreCTX } from 'Store';
-import mapToLeaderboard from 'Utils/mapToLeaderboard';
+import { IStoreCTX } from 'store';
+import mapToLeaderboard from 'utils/mapToLeaderboard';
 
 const userSelector = (state: IStoreCTX) => state.account;
 const leaderboardSelector = (state: IStoreCTX) => state.leaderboard;

@@ -1,12 +1,12 @@
 import React, { FormEvent, useCallback, useState } from 'react';
 import './ForumCreate.css';
-import NavigationList from 'Components/NavigationList';
-import LinkButton from 'Components/LinkButton';
-import ROUTES from 'Components/App/consts';
-import { Input, Textarea, Button } from 'Components';
+import NavigationList from 'components/NavigationList';
+import LinkButton from 'components/LinkButton';
+import ROUTES from 'components/App/consts';
+import { Input, Textarea, Button } from 'components';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { createTopic } from 'Store/topics';
+import { createTopic } from 'store/topics';
 import RouteMap from './const';
 
 const ForumCreate = () => {

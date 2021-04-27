@@ -1,7 +1,7 @@
-import { IHTTPTransportCtx } from 'Utils/iutils/ihttp_transport';
-import httpRequest from 'Utils/http_transport/http_request';
-import { StringKeyString } from 'Utils/custom_types';
-import { METHOD } from 'Utils/iutils/ihttp_request';
+import { IHTTPTransportCtx } from 'utils/iutils/ihttp_transport';
+import httpRequest from 'utils/http_transport/http_request';
+import { StringKeyString } from 'utils/custom_types';
+import { METHOD } from 'utils/iutils/ihttp_request';
 
 const JSON_HEADER: StringKeyString = {
     'Content-type': 'application/json; charset=utf-8',

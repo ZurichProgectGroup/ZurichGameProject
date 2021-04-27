@@ -1,4 +1,4 @@
-import songUrl from 'Audio/level1.ogg';
+import songUrl from 'audio/level1.ogg';
 
 const levelOneSongConfig = {
     path: songUrl,

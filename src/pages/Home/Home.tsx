@@ -1,16 +1,17 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Home.css';
-import logo from 'Images/logo.png';
+import logo from 'images/logo.png';
 import {
     Avatar, Button, LinkButton, DarkModeToggle, FullscreenButton,
-} from 'Components';
-import { ButtonSize, ButtonVariant } from 'Components/Button/types';
-import NavigationList from 'Components/NavigationList';
-import ROUTES from 'Components/App/consts';
+} from 'components';
+import { ButtonSize, ButtonVariant } from 'components/Button/types';
+import NavigationList from 'components/NavigationList';
+import ROUTES from 'components/App/consts';
 import { useSelector } from 'react-redux';
-import { selectUser } from 'Selectors';
-import useFullscreen from 'Hooks/useFullscreen';
+import { selectUser } from 'selectors';
+import useFullscreen from 'hooks/useFullscreen';
+import { isServer } from 'utils/_helpers';
 import RouteMap from './const';
 
 const Home = () => {
@@ -18,7 +19,7 @@ const Home = () => {
     const handleGameStart = useCallback(() => history.push(ROUTES.game), [history]);
     const { user, theme } = useSelector(selectUser);
 
-    const fullscreenWrapper = document.querySelector('.app');
+    const fullscreenWrapper = (!isServer && document.querySelector('.app')) || null;
     const [isFullscreen, setFullscreen, exitFullscreen] = useFullscreen(fullscreenWrapper);
 
     const handleClick = useCallback(() => {
