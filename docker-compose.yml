@@ -69,7 +69,7 @@ services:
             - postgres
             - client
         privileged: true
-        command: bash -c "cd app && ./wait-for-it.sh client:80 -s -t 0 -- npm run buildback && npm run initDB && npm run serveback"
+        command: bash -c "cd app && ./wait-for-it.sh client:8000 -s -t 0 -- npm run buildback && npm run initDB && npm run serveback"
         volumes:
             - .:/app
         networks:
