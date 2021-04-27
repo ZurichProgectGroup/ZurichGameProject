@@ -3,7 +3,7 @@ services:
     postgres:
         image: postgres:12
         ports:
-            - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+            - ${POSTGRES_PORT}:${POSTGRES_PORT}
         volumes:
             - ./postgresdata:/var/lib/postgresql/data
             - ./dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
@@ -21,7 +21,7 @@ services:
     mongo:
         image: mongo
         ports:
-            - "${MONGO_PORT}:${MONGO_PORT}"
+            - ${MONGO_PORT}:${MONGO_PORT}
         environment:
             - MONGO_INITDB_DATABASE=${MONGO_DB}
             - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}

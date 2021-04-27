@@ -15,9 +15,11 @@ class BoardRenderer extends Renderer {
 
     private columnsCount = 4;
 
-    constructor(canvas) {
+    constructor(canvas: HTMLCanvasElement) {
         super(canvas);
-        this.boardStartX = (this.canvas.width - BOARD_WIDTH) / 2;
+        if (this.canvas) {
+            this.boardStartX = (this.canvas.width - BOARD_WIDTH) / 2;
+        }
     }
 
     render() {
@@ -39,7 +41,7 @@ class BoardRenderer extends Renderer {
         );
     }
 
-    drawVerticalLine(start, color = BLUE_COLOR) {
+    drawVerticalLine(start: number, color = BLUE_COLOR) {
         const { height } = this.canvas;
         this.drawLine({ x: start, y: 0 }, { x: start, y: height }, 2, color);
     }
@@ -51,7 +53,7 @@ class BoardRenderer extends Renderer {
         }
     }
 
-    renderActionLine(start) {
+    renderActionLine(start: { x: any; y: any; }) {
         const radius = 12;
         const { ctx } = this;
         const { x, y } = start;

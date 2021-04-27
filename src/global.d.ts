@@ -40,6 +40,7 @@ declare global {
 
     interface UserDTO {
         [key: string]: any;
+
         id?: number;
         first_name?: string;
         second_name?: string;
@@ -51,13 +52,18 @@ declare global {
     }
 
     interface User {
-        id: number;
-        firstName: string;
-        secondName: string;
-        displayName: string | null;
-        login: string;
-        avatar: string | null;
-        email: string;
-        phone: string;
+        id?: number;
+        firstName?: string;
+        secondName?: string;
+        displayName?: string | null;
+        login?: string;
+        avatar?: string | null;
+        email?: string;
+        phone?: string;
+    }
+
+    interface ChangedUser extends User {
+        oldPassword?: string;
+        newPassword?: string;
     }
 }

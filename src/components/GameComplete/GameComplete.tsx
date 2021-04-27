@@ -19,9 +19,9 @@ const GameComplete = (props: Props) => {
     useEffect(() => {
         LeaderboardApi.saveResult({
             score: currentGameScore,
-            id: user.id,
-            login: user.login,
-            avatar: user.avatar,
+            id: user?.id || 0,
+            login: user?.login || '',
+            avatar: user?.avatar || '',
         });
     }, [currentGameScore, user]);
 

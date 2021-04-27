@@ -14,6 +14,10 @@ const requestFullscreen = (elem) => {
         elem.msRequestFullscreen();
     }
 
+    if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+    }
+
     if (elem.webkitRequestFullscreen) {
         elem.webkitRequestFullscreen((<any>Element).ALLOW_KEYBOARD_INPUT);
     }
@@ -37,7 +41,7 @@ const exitFullscreen = () => {
     }
 };
 
-export default function useFullscreen(elem): [boolean, () => void, () => void] {
+export default function useFullscreen(elem): [boolean, (() => void), (() => void)] {
     const [isFullscreen, setIsFullscreen] = useState(
         checkIsFullscreen(),
     );
@@ -52,7 +56,7 @@ export default function useFullscreen(elem): [boolean, () => void, () => void] {
         document.onfullscreenchange = () => setIsFullscreen(checkIsFullscreen());
 
         return () => {
-            document.onfullscreenchange = undefined;
+            document.onfullscreenchange = null;
         };
     });
 

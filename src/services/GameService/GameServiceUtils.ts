@@ -7,9 +7,11 @@ import { IGameEntitity } from './IGameService';
 
 export const getContext = (canvas: HTMLCanvasElement) => canvas.getContext('2d');
 
-export const clearCanvas = (canvas: HTMLCanvasElement) => {
-    const ctx = getContext(canvas);
-    ctx?.clearRect(0, 0, canvas.width, canvas.height);
+export const clearCanvas = (canvas: HTMLCanvasElement| undefined) => {
+    if (canvas) {
+        const ctx = getContext(canvas);
+        ctx?.clearRect(0, 0, canvas.width, canvas.height);
+    }
 };
 
 export const drawEntitity = (

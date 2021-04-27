@@ -2,11 +2,12 @@ name: Deploy
 
 on:
     push:
-        branches:
-            - main
+      branches: [ feature-51, main ]
+    pull_request:
+      branches: [ main ]
 
 jobs:
-    build:
+    build-heroku:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
@@ -17,3 +18,32 @@ jobs:
                   heroku_email: ${{secrets.HEROKU_EMAIL}}
                   branch: "main"
                   usedocker: true
+
+    build-yacloud:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Install SSH key
+              uses: shimataro/ssh-key-action@v2
+              with:
+                key: ${{ secrets.YACLOUD_SSH_PRIVATE }}
+                name: id_rsa
+                known_hosts: ${{ secrets.YACLOUD_KNOWN_HOST }}
+                if_key_exists: replace
+            - name: rsync over ssh
+              run: rsync -avz ./ $SSH_LOGIN@$SSH_IP:~/
+              env:
+                SSH_LOGIN: ${{secrets.YACLOUD_LOGIN}}
+                SSH_IP: ${{secrets.YACLOUD_IP}}
+            - name: run docker over ssh
+              run: |
+                ssh $SSH_LOGIN@$SSH_IP sudo docker-compose up -d
+              env:
+                SSH_LOGIN: ${{secrets.YACLOUD_LOGIN}}
+                SSH_IP: ${{secrets.YACLOUD_IP}}
+            - name: Check status code of production site
+              uses: lakuapik/gh-actions-http-status@v1
+              with:
+                sites: '["${{secrets.YACLOUD_IP}}"]'
+                expected: '[200]'
