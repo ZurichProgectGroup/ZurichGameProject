@@ -1,5 +1,5 @@
-import type UserInfo from 'Types/UserInfo';
-import type { Comment } from 'Types/Comment';
+import type UserInfo from 'types/UserInfo';
+import type { Comment } from 'types/Comment';
 
 export type Topic = {
     id?: number,

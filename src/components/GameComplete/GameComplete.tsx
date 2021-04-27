@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './GameComplete.css';
-import { Button, LinkButton } from 'Components';
-import { selectCurrentGameScore, selectUser } from 'Selectors';
-import LeaderboardApi from 'Api/LeaderboardApi';
-import ROUTES from 'Components/App/consts';
+import { Button, LinkButton } from 'components';
+import { selectCurrentGameScore, selectUser } from 'selectors';
+import LeaderboardApi from 'api/LeaderboardApi';
+import ROUTES from 'components/App/consts';
 import type { Props } from './types';
 
 const GameComplete = (props: Props) => {

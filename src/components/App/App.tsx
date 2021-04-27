@@ -3,19 +3,19 @@ import {
     Switch,
     Route,
 } from 'react-router-dom';
-import Home from 'Pages/Home';
-import Account from 'Pages/Account';
-import ErrorPage from 'Pages/ErrorPage';
-import ForumPage from 'Pages/ForumPage';
-import LeaderboardPage from 'Pages/LeaderboardPage';
-import Login from 'Pages/Login';
-import Register from 'Pages/Register';
+import Home from 'pages/Home';
+import Account from 'pages/Account';
+import ErrorPage from 'pages/ErrorPage';
+import ForumPage from 'pages/ForumPage';
+import LeaderboardPage from 'pages/LeaderboardPage';
+import Login from 'pages/Login';
+import Register from 'pages/Register';
 import { useDispatch } from 'react-redux';
-import { checkUserOnStart } from 'Store/account';
-import ErrorBoundary from 'Components/ErrorBoundary';
-import GamePage from 'Pages/GamePage';
-import PageMeta from 'Components/PageMeta';
-import { locationParams } from 'Utils/urlUtils';
+import { checkUserOnStart } from 'store/account';
+import ErrorBoundary from 'components/ErrorBoundary';
+import GamePage from 'pages/GamePage';
+import PageMeta from 'components/PageMeta';
+import { locationParams } from 'utils/urlUtils';
 import ROUTES from './consts';
 
 const App = () => {

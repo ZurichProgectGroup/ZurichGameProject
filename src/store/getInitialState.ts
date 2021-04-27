@@ -1,8 +1,8 @@
-import { initialState as account } from 'Store/account';
-import { initialState as leaderboard } from 'Store/leaderboard';
-import { initialState as game } from 'Store/game';
-import { initialState as topic } from 'Store/topic';
-import { initialState as topics } from 'Store/topics';
+import { initialState as account } from 'store/account';
+import { initialState as leaderboard } from 'store/leaderboard';
+import { initialState as game } from 'store/game';
+import { initialState as topic } from 'store/topic';
+import { initialState as topics } from 'store/topics';
 import { IStoreCTX } from './types';
 
 function getInitialState(): IStoreCTX {

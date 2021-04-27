@@ -1,5 +1,5 @@
 import React from 'react';
-import Avatar from 'Components/Avatar';
+import Avatar from 'components/Avatar';
 import type { OwnProps as Props } from './types';
 import './User.css';
 

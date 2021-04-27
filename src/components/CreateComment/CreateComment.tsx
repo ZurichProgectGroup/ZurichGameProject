@@ -1,10 +1,10 @@
 import React, { FormEvent, useCallback, useState } from 'react';
 import './CreateComment.css';
 import cn from 'classnames';
-import { Textarea, Button } from 'Components';
+import { Textarea, Button } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
-import { createComment } from 'Store/topic';
-import { selectTopic } from 'Selectors';
+import { createComment } from 'store/topic';
+import { selectTopic } from 'selectors';
 import 'emoji-mart/css/emoji-mart.css';
 import { Picker } from 'emoji-mart';
 import type { Props } from './types';

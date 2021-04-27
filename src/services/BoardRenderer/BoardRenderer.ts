@@ -1,5 +1,5 @@
-import Renderer from 'Services/Renderer';
-import BeatItemRenderer from 'Services/BeatItemRenderer';
+import Renderer from 'services/Renderer';
+import BeatItemRenderer from 'services/BeatItemRenderer';
 import {
     BG_COLOR,
     BLUE_COLOR,

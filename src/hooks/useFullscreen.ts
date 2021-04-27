@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { isServer } from 'Utils/_helpers';
+import { isServer } from 'utils/_helpers';
 
 const checkIsFullscreen = () => !!(!isServer
     && (document.fullscreenElement || document.mozFullScreenElement
@@ -12,10 +12,6 @@ const requestFullscreen = (elem) => {
 
     if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen();
-    }
-
-    if (elem.mozRequestFullScreen) {
-        elem.mozRequestFullScreen();
     }
 
     if (elem.webkitRequestFullscreen) {

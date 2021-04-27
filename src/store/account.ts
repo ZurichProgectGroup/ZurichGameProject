@@ -6,11 +6,11 @@ import {
     userApiInstance,
     yaOauthApiInstance,
     themeApiInstance,
-} from 'Api';
-import { StringKeyString } from 'Utils/custom_types';
-import { mapToUser } from 'Utils/mapUser';
-import { LoadingStatus } from 'Types/common';
-import { ThemeEnum } from 'Types/Theme';
+} from 'api';
+import { StringKeyString } from 'utils/custom_types';
+import { mapToUser } from 'utils/mapUser';
+import { LoadingStatus } from 'types/common';
+import { ThemeEnum } from 'types/Theme';
 import { IStoreCTX } from 'store/types';
 
 export const getUsersTheme = createAsyncThunk(

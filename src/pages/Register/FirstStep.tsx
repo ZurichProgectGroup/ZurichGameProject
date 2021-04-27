@@ -2,8 +2,8 @@ import React from 'react';
 import './Register.css';
 import {
     Button, LinkButton, Input,
-} from 'Components';
-import ROUTES from 'Components/App/consts';
+} from 'components';
+import ROUTES from 'components/App/consts';
 import type { FirstStepProps } from './types';
 
 const FirstStep = ({

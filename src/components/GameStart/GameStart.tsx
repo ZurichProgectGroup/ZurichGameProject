@@ -1,6 +1,6 @@
 import React from 'react';
 import './GameStart.css';
-import Button from 'Components/Button';
+import Button from 'components/Button';
 import type { Props } from './types';
 
 const GameStart = (props: Props) => {

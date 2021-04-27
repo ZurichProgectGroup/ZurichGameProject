@@ -1,17 +1,17 @@
 import React, { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Home.css';
-import logo from 'Images/logo.png';
+import logo from 'images/logo.png';
 import {
     Avatar, Button, LinkButton, DarkModeToggle, FullscreenButton,
-} from 'Components';
-import { ButtonSize, ButtonVariant } from 'Components/Button/types';
-import NavigationList from 'Components/NavigationList';
-import ROUTES from 'Components/App/consts';
+} from 'components';
+import { ButtonSize, ButtonVariant } from 'components/Button/types';
+import NavigationList from 'components/NavigationList';
+import ROUTES from 'components/App/consts';
 import { useSelector } from 'react-redux';
-import { selectUser } from 'Selectors';
-import useFullscreen from 'Hooks/useFullscreen';
-import { isServer } from 'Utils/_helpers';
+import { selectUser } from 'selectors';
+import useFullscreen from 'hooks/useFullscreen';
+import { isServer } from 'utils/_helpers';
 import RouteMap from './const';
 
 const Home = () => {

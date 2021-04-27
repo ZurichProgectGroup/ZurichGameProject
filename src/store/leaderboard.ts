@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import LeaderboardApi from 'Api/LeaderboardApi';
+import LeaderboardApi from 'api/LeaderboardApi';
 
 export const getLeaderboard = createAsyncThunk(
     'leaderboard/fetchByIdStatus',

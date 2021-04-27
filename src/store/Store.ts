@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import getInitialState from 'Store/getInitialState';
+import getInitialState from 'store/getInitialState';
 import leaderboardReducer from './leaderboard';
 import accountReducer from './account';
 import gameReducer from './game';

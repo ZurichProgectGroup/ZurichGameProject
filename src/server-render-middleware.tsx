@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import { Request, Response } from 'express';
 import { StaticRouter } from 'react-router-dom';
 import { StaticRouterContext } from 'react-router';
-import App from 'Components/App';
-import configureAppStore from 'Store';
-import getInitialState from 'Store/getInitialState';
+import App from 'components/App';
+import configureAppStore from 'store';
+import getInitialState from 'store/getInitialState';
 import Helmet, { HelmetData } from 'react-helmet';
 
 export default (req: Request, res: Response) => {

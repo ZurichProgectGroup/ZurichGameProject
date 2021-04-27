@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import ForumApi from 'Api/ForumApi';
+import ForumApi from 'api/ForumApi';
 import { CommentCreate } from 'types/Comment';
 import { IStoreCTX } from 'store/types';
 

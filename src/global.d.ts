@@ -1,4 +1,4 @@
-import { IStoreCTX } from 'Store';
+import { IStoreCTX } from 'store';
 
 declare global {
     interface Window {

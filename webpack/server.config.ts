@@ -26,21 +26,6 @@ const config: Configuration = {
     resolve: {
         modules: ['src', 'node_modules'],
         extensions: ['*', '.js', '.jsx', '.json', '.ts', '.tsx'],
-        alias: {
-            Api: path.resolve(SRC_DIR, 'api/'),
-            Audio: path.resolve(SRC_DIR, 'audio/'),
-            Images: path.resolve(SRC_DIR, 'images/'),
-            Components: path.resolve(SRC_DIR, 'components/'),
-            Configs: path.resolve(SRC_DIR, 'configs/'),
-            Utils: path.resolve(SRC_DIR, 'utils/'),
-            Pages: path.resolve(SRC_DIR, 'pages/'),
-            Store: path.resolve(SRC_DIR, 'store/'),
-            Mocks: path.resolve(SRC_DIR, 'mocks/'),
-            Types: path.resolve(SRC_DIR, 'types/'),
-            Services: path.resolve(SRC_DIR, 'services/'),
-            Selectors: path.resolve(SRC_DIR, 'selectors/'),
-            Hooks: path.resolve(SRC_DIR, 'hooks/'),
-        },
         // @ts-ignore
         plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
     },

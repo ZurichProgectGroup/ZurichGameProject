@@ -1,4 +1,4 @@
-import UserInfo from 'Types/UserInfo';
+import UserInfo from 'types/UserInfo';
 
 export type Comment = {
     id: number,

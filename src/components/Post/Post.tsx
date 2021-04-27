@@ -1,6 +1,6 @@
 import React from 'react';
-import InlineDotedList from 'Components/InlineDotedList';
-import User from 'Components/User';
+import InlineDotedList from 'components/InlineDotedList';
+import User from 'components/User';
 import './Post.css';
 import dayjs from 'dayjs';
 import { Props } from './types';

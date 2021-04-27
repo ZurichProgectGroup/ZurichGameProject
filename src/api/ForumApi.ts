@@ -1,6 +1,6 @@
-import { StringKeyString } from 'Utils/custom_types';
-import type { Topic, TopicWithComments } from 'Types/ForumTopic';
-import type { CommentCreate, Comment } from 'Types/Comment';
+import { StringKeyString } from 'utils/custom_types';
+import type { Topic, TopicWithComments } from 'types/ForumTopic';
+import type { CommentCreate, Comment } from 'types/Comment';
 import { topicsTransportInstance, commentsTransportInstance } from './TransportInstances';
 
 export default class ForumApi {

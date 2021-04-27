@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import './ForumTopics.css';
-import ForumTopic from 'Components/ForumTopic';
+import ForumTopic from 'components/ForumTopic';
 import { OwnProps as Props } from './types';
 
 const ForumTopics = ({ topics = [], onThemeClick }: Props) => {

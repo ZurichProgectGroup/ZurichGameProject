@@ -1,4 +1,4 @@
-import { INoteCtx } from 'Configs/SongConfig/ISongConfig';
+import { INoteCtx } from 'configs/SongConfig/ISongConfig';
 
 export interface IGameEntitity extends INoteCtx {
     visible: boolean;

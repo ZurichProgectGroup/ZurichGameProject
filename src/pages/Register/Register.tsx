@@ -3,13 +3,13 @@ import './Register.css';
 import {
     Card,
     Title,
-} from 'Components';
-import ROUTES from 'Components/App/consts';
-import { register } from 'Store/account';
+} from 'components';
+import ROUTES from 'components/App/consts';
+import { register } from 'store/account';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { selectUser } from 'Selectors';
-import { LoadingStatus } from 'Types/common';
+import { selectUser } from 'selectors';
+import { LoadingStatus } from 'types/common';
 import SecondStep from './SecondStep';
 import FirstStep from './FirstStep';
 

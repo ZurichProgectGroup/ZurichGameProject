@@ -1,6 +1,6 @@
 import React from 'react';
 import './ErrorPage.css';
-import LinkButton from 'Components/LinkButton';
+import LinkButton from 'components/LinkButton';
 import type { OwnProps as Props } from './types';
 import ErrorsData from './const';
 

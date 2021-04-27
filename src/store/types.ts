@@ -1,8 +1,8 @@
-import { TLeaderItemDTO } from 'Api/LeaderboardApi';
-import { Topic } from 'Types/ForumTopic';
-import type { Comment } from 'Types/Comment';
-import { LoadingStatus } from 'Types/common';
-import { Theme } from 'Types/Theme';
+import { TLeaderItemDTO } from 'api/LeaderboardApi';
+import { Topic } from 'types/ForumTopic';
+import type { Comment } from 'types/Comment';
+import { LoadingStatus } from 'types/common';
+import { Theme } from 'types/Theme';
 
 export interface IStoreCTX {
     readonly account:{

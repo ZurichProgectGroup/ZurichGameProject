@@ -2,14 +2,14 @@ import React, { useCallback, useState } from 'react';
 import './Login.css';
 import {
     Button, Card, Input, LinkButton, Title,
-} from 'Components';
-import ROUTES from 'Components/App/consts';
+} from 'components';
+import ROUTES from 'components/App/consts';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, yaLogin } from 'Store/account';
+import { login, yaLogin } from 'store/account';
 import { Redirect } from 'react-router-dom';
-import { selectUser } from 'Selectors';
-import { LinkButtonSize } from 'Components/LinkButton/types';
-import { LoadingStatus } from 'Types/common';
+import { selectUser } from 'selectors';
+import { LinkButtonSize } from 'components/LinkButton/types';
+import { LoadingStatus } from 'types/common';
 
 const Login = () => {
     const [userName, setUserName] = useState('');

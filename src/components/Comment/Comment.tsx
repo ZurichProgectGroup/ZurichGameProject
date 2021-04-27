@@ -1,15 +1,15 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import './Comment.css';
-import InlineDotedList from 'Components/InlineDotedList';
+import InlineDotedList from 'components/InlineDotedList';
 import cn from 'classnames';
-import User from 'Components/User';
-import LinkButton from 'Components/LinkButton';
-import CommentList from 'Components/CommentList';
-import CreateComment from 'Components/CreateComment';
-import ToggleButton from 'Components/ToggleButton';
+import User from 'components/User';
+import LinkButton from 'components/LinkButton';
+import CommentList from 'components/CommentList';
+import CreateComment from 'components/CreateComment';
+import ToggleButton from 'components/ToggleButton';
 import dayjs from 'dayjs';
 import { useDispatch } from 'react-redux';
-import { getReplies } from 'Store/topic';
+import { getReplies } from 'store/topic';
 import type { Props } from './types';
 
 const Comment = ({

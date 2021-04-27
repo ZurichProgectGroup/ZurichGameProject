@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect } from 'react';
 import Toggle from 'react-toggle';
-import { ThemeEnum } from 'Types/Theme';
+import { ThemeEnum } from 'types/Theme';
 import { useDispatch } from 'react-redux';
-import { setUsersTheme } from 'Store/account';
+import { setUsersTheme } from 'store/account';
 import type { Props } from './types';
 import './DarkModeToggle.css';
 

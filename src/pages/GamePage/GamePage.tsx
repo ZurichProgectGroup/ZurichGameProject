@@ -1,7 +1,7 @@
 import React from 'react';
 import './GamePage.css';
-import Game from 'Components/Game';
-import { isServer } from 'Utils/_helpers';
+import Game from 'components/Game';
+import { isServer } from 'utils/_helpers';
 
 const GamePage = () => {
     if (isServer) {

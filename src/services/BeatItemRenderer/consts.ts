@@ -1,7 +1,7 @@
-import upUrl from 'Images/beatItems/up.svg';
-import downUrl from 'Images/beatItems/down.svg';
-import leftUrl from 'Images/beatItems/left.svg';
-import rightUrl from 'Images/beatItems/right.svg';
+import upUrl from 'images/beatItems/up.svg';
+import downUrl from 'images/beatItems/down.svg';
+import leftUrl from 'images/beatItems/left.svg';
+import rightUrl from 'images/beatItems/right.svg';
 
 export const Directions = {
     right: 'right',
