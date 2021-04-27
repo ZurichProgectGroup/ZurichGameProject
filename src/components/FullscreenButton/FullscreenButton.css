@@ -4,10 +4,10 @@
     font-size: 0;
 
     &_open {
-        background: url('Images/open-full.svg') center/contain no-repeat;
+        background: url('images/open-full.svg') center/contain no-repeat;
     }
 
     &_close {
-        background: url('Images/close-full.svg') center/contain no-repeat;
+        background: url('images/close-full.svg') center/contain no-repeat;
     }
 }
