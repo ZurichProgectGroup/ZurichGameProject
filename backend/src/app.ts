@@ -10,7 +10,7 @@ import swaggerUi from 'swagger-ui-express';
 import yaml from 'yamljs';
 import router from './router';
 import { initMongoDB } from './db/mongo';
-import { initPostgreeDB } from './db/postgree';
+import { getSequelizeInstance } from './db/postgree';
 import { auth, errorHandler, makeApiInstance } from './middleware';
 
 const specPath = path.resolve('swagger.yaml');
@@ -23,8 +23,9 @@ const cert = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/cert.pem
 
 const app: Express = express();
 const PORT = process.env.BACKEND_PORT || 443;
+
 initMongoDB();
-const postgreedb = initPostgreeDB();
+const sequelize = getSequelizeInstance();
 
 app
     .disable('x-powered-by')
@@ -50,7 +51,6 @@ app
 const server = https.createServer({ key, cert }, app);
 
 (async () => {
-    await postgreedb.sync({ alter: true });
-
+    await sequelize.sync({ alter: true });
     server.listen(PORT, () => { console.log(`listening on ${PORT}`); });
 })();

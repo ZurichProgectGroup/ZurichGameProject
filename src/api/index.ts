@@ -1,6 +1,5 @@
-export { default as authApiInstance } from 'Api/AuthApi';
-export { default as chatApiInstance } from 'Api/ChatApi';
-export { default as chatUsersApiInstance } from 'Api/ChatUsersApi';
-export { default as userApiInstance } from 'Api/UserApi';
-export { default as forumApiInstance } from 'Api/ForumApi';
-export { default as yaOauthApiInstance } from 'Api/YaOAuthApi';
+export { default as authApiInstance } from 'api/AuthApi';
+export { default as userApiInstance } from 'api/UserApi';
+export { default as forumApiInstance } from 'api/ForumApi';
+export { default as yaOauthApiInstance } from 'api/YaOAuthApi';
+export { default as themeApiInstance } from 'api/ThemeApi';

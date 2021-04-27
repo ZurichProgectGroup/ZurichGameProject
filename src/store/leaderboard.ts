@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import LeaderboardApi, { TLeaderItemDTO } from 'Api/LeaderboardApi';
+import LeaderboardApi from 'api/LeaderboardApi';
 
 export const getLeaderboard = createAsyncThunk(
     'leaderboard/fetchByIdStatus',
@@ -7,19 +7,16 @@ export const getLeaderboard = createAsyncThunk(
         LeaderboardApi.getResults()
     ),
 );
-interface LeaderboardState {
-    list: TLeaderItemDTO[],
-    isLoading: boolean,
-}
 
-const leaderBoardInitialState: LeaderboardState = {
+export const initialState = {
     list: [],
     isLoading: false,
+    error: null,
 };
 
 const slice = createSlice({
     name: 'leaderboard',
-    initialState: leaderBoardInitialState,
+    initialState,
     reducers: {
         setList: (state, { payload }) => {
             // eslint-disable-next-line no-param-reassign
@@ -32,6 +29,8 @@ const slice = createSlice({
             state.isLoading = true;
             // eslint-disable-next-line no-param-reassign
             state.list = [];
+            // eslint-disable-next-line no-param-reassign
+            state.error = null;
         });
         builder.addCase(getLeaderboard.fulfilled, (state, { payload }) => {
             // eslint-disable-next-line no-param-reassign

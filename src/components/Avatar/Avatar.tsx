@@ -5,7 +5,7 @@ import React, {
     useEffect,
 } from 'react';
 import cn from 'classnames';
-import getInputImgUrl from 'Utils/getInputImageUrl';
+import getInputImgUrl from 'utils/getInputImageUrl';
 import type { Props } from './types';
 import './Avatar.css';
 

@@ -1,6 +1,6 @@
 import React, { createRef, useCallback, useEffect } from 'react';
-import gameService from 'Services/GameService/GameService';
-import { resetCurrentScore, addGamePoint } from 'Store/game';
+import gameService from 'services/GameService/GameService';
+import { resetCurrentScore, addGamePoint } from 'store/game';
 import { useDispatch } from 'react-redux';
 import type { Props } from '../../types';
 

@@ -1,21 +1,21 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import './Login.css';
 import {
-    Card, Button, Title, LinkButton, Input,
-} from 'Components';
-import ROUTES from 'Components/App/consts';
+    Button, Card, Input, LinkButton, Title,
+} from 'components';
+import ROUTES from 'components/App/consts';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, yaLogin } from 'Store/account';
-import { Redirect, useHistory } from 'react-router-dom';
-import { selectUser } from 'Selectors';
-import { LinkButtonSize } from 'Components/LinkButton/types';
+import { login, yaLogin } from 'store/account';
+import { Redirect } from 'react-router-dom';
+import { selectUser } from 'selectors';
+import { LinkButtonSize } from 'components/LinkButton/types';
+import { LoadingStatus } from 'types/common';
 
 const Login = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-    const userData = useSelector(selectUser);
-    const history = useHistory();
+    const { user, status } = useSelector(selectUser);
 
     const handleFormSubmit = useCallback((event: { preventDefault: () => void; }) => {
         event.preventDefault();
@@ -23,17 +23,16 @@ const Login = () => {
             login: userName,
             password,
         }));
-
-        history.push(ROUTES.main);
     }, [userName, password]);
 
     const handleYandexClick = useCallback(() => {
         dispatch(yaLogin());
     }, []);
 
-    if (userData) {
+    if (status === LoadingStatus.succeeded && user) {
         return (<Redirect to={ROUTES.main} />);
     }
+
     return (
         <div className="login-page">
             <Card className="login-page__card">

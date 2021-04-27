@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import LinkButton from 'Components/LinkButton';
+import LinkButton from 'components/LinkButton';
 import type { Props } from './types';
 import './NavigationList.css';
 
