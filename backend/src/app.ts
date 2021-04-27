@@ -18,8 +18,14 @@ const spec = yaml.load(specPath);
 
 dotenv.config();
 
-const key = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/key.pem'));
-const cert = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/cert.pem'));
+let key;
+let cert;
+try {
+    key = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/key.pem'));
+    cert = fs.readFileSync(path.resolve(process.cwd(), 'backend/certs/cert.pem'));
+} catch (e) {
+    console.log(`serts error ${e}`);
+}
 
 const app: Express = express();
 const PORT = process.env.BACKEND_PORT || 443;
@@ -35,7 +41,7 @@ app
         origin: true,
     }))
     .use(cookieParser())
-    .use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec))
+    .use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(spec))
     .use(
         OpenApiValidator.middleware({
             apiSpec: specPath,
@@ -46,11 +52,16 @@ app
     .use(auth)
     .use(router)
     .use(errorHandler);
-
-const server = https.createServer({ key, cert }, app);
+if (key) {
+    app = https.createServer({ key, cert }, app);
+}
 
 (async () => {
-    await postgreedb.sync({ alter: true });
+    try {
+        await postgreedb.sync({ alter: true });
+    } catch (e) {
+        console.log(`postgreedb error ${e}`);
+    }
 
-    server.listen(PORT, () => { console.log(`listening on ${PORT}`); });
+    app.listen(PORT, () => { console.log(`listening on ${PORT}`); });
 })();
