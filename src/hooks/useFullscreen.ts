@@ -5,18 +5,17 @@ const checkIsFullscreen = () => !!(!isServer
     && (document.fullscreenElement || document.mozFullScreenElement
     || document.webkitFullscreenElement || document.msFullscreenElement));
 
-const requestFullscreen = (elem: {
-    requestFullscreen: () => void;
-    msRequestFullscreen: () => void;
-    mozRequestFullScreen: () => void;
-    webkitRequestFullscreen: (arg0: any) => void;
-}) => {
+const requestFullscreen = (elem) => {
     if (elem.requestFullscreen) {
         elem.requestFullscreen();
     }
 
     if (elem.msRequestFullscreen) {
         elem.msRequestFullscreen();
+    }
+
+    if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
     }
 
     if (elem.webkitRequestFullscreen) {
@@ -42,14 +41,7 @@ const exitFullscreen = () => {
     }
 };
 
-export default function useFullscreen(elem: {
-    current:{
-        requestFullscreen: () => void;
-        msRequestFullscreen: () => void;
-        mozRequestFullScreen: () => void;
-        webkitRequestFullscreen: (arg0: any) => void;
-    }
-}): [boolean, () => void, () => void] {
+export default function useFullscreen(elem): [boolean, (() => void), (() => void)] {
     const [isFullscreen, setIsFullscreen] = useState(
         checkIsFullscreen(),
     );
