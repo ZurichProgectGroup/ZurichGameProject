@@ -118,3 +118,5 @@ dist
 # DBs
 backend/postgresdata
 postgresdata/
+
+nginx/ssl/
