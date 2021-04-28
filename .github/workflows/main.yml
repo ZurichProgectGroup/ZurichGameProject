@@ -2,7 +2,7 @@ name: Deploy
 
 on:
     push:
-      branches: [ feature-51, main ]
+      branches: [ ssl, main ]
     pull_request:
       branches: [ main ]
 
