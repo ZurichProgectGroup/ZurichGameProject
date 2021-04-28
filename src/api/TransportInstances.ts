@@ -1,6 +1,7 @@
 import HTTPTransport from 'utils/http_transport/http_transport';
+import { BASE_URL } from 'consts';
 
-const BASE_PATH = `${window.location.origin}/api`;
+const BASE_PATH = `${BASE_URL}/api`;
 
 export const authTransportInstance = new HTTPTransport('https://ya-praktikum.tech/api/v2/auth');
 export const leaderboardTransportInstance = new HTTPTransport('https://ya-praktikum.tech/api/v2/leaderboard');
