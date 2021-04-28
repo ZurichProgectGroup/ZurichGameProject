@@ -80,11 +80,14 @@ services:
         restart: unless-stopped
         ports:
             - "80:80"
+            - "443:443"
         links:
           - client:client
           - backend:backend
+#        command: nginx -V
         volumes:
           - ./nginx:/etc/nginx/conf.d:ro
+          - ./nginx/ssl:/etc/nginx/ssl
         depends_on:
           - client
           - backend
