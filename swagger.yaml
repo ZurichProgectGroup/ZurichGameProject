@@ -4,14 +4,14 @@ info:
     description: Api for game
     version: 1.0.0
 servers:
-    - url: ../../
+    - url: ../../api
 tags:
     - name: themes
     - name: user themes
     - name: topics
     - name: comments
 paths:
-    /api/feedback:
+    /feedback:
         get:
             tags:
                 - feedback
@@ -42,7 +42,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Feedback'
-    api/themes:
+    /themes:
         get:
             tags:
                 - themes
@@ -73,7 +73,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Theme'
-    api/themes/{id}:
+    /themes/{id}:
         delete:
             tags:
                 - themes
@@ -87,7 +87,7 @@ paths:
             responses:
                 '200':
                     description: Deleted
-    api/user-themes:
+    /user-themes:
         post:
             tags:
                 - user themes
@@ -105,7 +105,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/UserTheme'
-    api/user-themes/{userId}:
+    /user-themes/{userId}:
         get:
             tags:
                 - user themes
@@ -124,7 +124,7 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/Theme'
 
-    api/topics:
+    /topics:
         get:
             tags:
                 - topics
@@ -155,7 +155,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Topic'
-    api/topics/{id}:
+    /topics/{id}:
         get:
             tags:
                 - topics
@@ -187,7 +187,7 @@ paths:
                 '200':
                     description: Deleted
 
-    api/comments:
+    /comments:
         post:
             tags:
                 - comments
@@ -205,7 +205,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Comment'
-    api/comments/{id}:
+    /comments/{id}:
         get:
             tags:
                 - comments
