@@ -42,7 +42,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Feedback'
-    /themes:
+    api/themes:
         get:
             tags:
                 - themes
@@ -73,7 +73,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Theme'
-    /themes/{id}:
+    api/themes/{id}:
         delete:
             tags:
                 - themes
@@ -87,7 +87,7 @@ paths:
             responses:
                 '200':
                     description: Deleted
-    /user-themes:
+    api/user-themes:
         post:
             tags:
                 - user themes
@@ -105,7 +105,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/UserTheme'
-    /user-themes/{userId}:
+    api/user-themes/{userId}:
         get:
             tags:
                 - user themes
@@ -124,7 +124,7 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/Theme'
 
-    /topics:
+    api/topics:
         get:
             tags:
                 - topics
@@ -155,7 +155,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Topic'
-    /topics/{id}:
+    api/topics/{id}:
         get:
             tags:
                 - topics
@@ -187,7 +187,7 @@ paths:
                 '200':
                     description: Deleted
 
-    /comments:
+    api/comments:
         post:
             tags:
                 - comments
@@ -205,7 +205,7 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Comment'
-    /comments/{id}:
+    api/comments/{id}:
         get:
             tags:
                 - comments
