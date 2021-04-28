@@ -1,7 +1,7 @@
 import HTTPTransport from 'utils/http_transport/http_transport';
-import { BASE_URL } from 'consts';
+import { isServer } from 'utils/_helpers';
 
-const BASE_PATH = `${BASE_URL}/api`;
+const BASE_PATH = `${!isServer && window.location.origin}/api`;
 
 export const authTransportInstance = new HTTPTransport('https://ya-praktikum.tech/api/v2/auth');
 export const leaderboardTransportInstance = new HTTPTransport('https://ya-praktikum.tech/api/v2/leaderboard');
