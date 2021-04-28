@@ -5,7 +5,7 @@ export default class YaOAuthAPI {
     static async request(): Promise<void> {
         const URI = window.location.origin;
 
-        const serviceId = await oauthTransportInstance.get('/yandex/service-id', {
+        const { service_id: serviceId } = await oauthTransportInstance.get('/yandex/service-id', {
             data: {
                 redirect_uri: URI,
             },
