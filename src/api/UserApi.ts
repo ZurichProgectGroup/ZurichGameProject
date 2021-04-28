@@ -1,5 +1,5 @@
-import { userTransportInstance } from 'Api/TransportInstances';
-import { StringKeyString } from 'Utils/custom_types';
+import { userTransportInstance } from 'api/TransportInstances';
+import { StringKeyString } from 'utils/custom_types';
 
 export default class UserAPI {
     static async update(data?: StringKeyString): Promise<unknown> {

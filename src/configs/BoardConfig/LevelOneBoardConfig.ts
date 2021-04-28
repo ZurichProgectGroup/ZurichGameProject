@@ -1,4 +1,4 @@
-import { Directions } from 'Services/BeatItemRenderer/consts';
+import { Directions } from 'services/BeatItemRenderer/consts';
 import { IBoardCtx } from './IBoardConfig';
 
 const ARROW_LEFT_KEY_CODE = 37;

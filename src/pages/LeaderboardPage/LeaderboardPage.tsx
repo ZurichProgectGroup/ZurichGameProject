@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './LeaderboardPage.css';
-import LinkButton from 'Components/LinkButton';
-import Card from 'Components/Card';
-import Leaderboard from 'Components/Leaderboard';
-import { getLeaderboard } from 'Store/leaderboard';
-import { selectLeaderboardList, selectUser } from 'Selectors';
+import LinkButton from 'components/LinkButton';
+import Card from 'components/Card';
+import Leaderboard from 'components/Leaderboard';
+import { getLeaderboard } from 'store/leaderboard';
+import { selectLeaderboardList, selectUser } from 'selectors';
 
 const LeaderboardPage = () => {
     const dispatch = useDispatch();

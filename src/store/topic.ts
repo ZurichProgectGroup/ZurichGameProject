@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import ForumApi from 'Api/ForumApi';
+import ForumApi from 'api/ForumApi';
 import { CommentCreate } from 'types/Comment';
 import { IStoreCTX } from 'store/types';
 
@@ -24,14 +24,16 @@ export const getReplies = createAsyncThunk(
     (id: number) => ForumApi.getReplies(id),
 );
 
+export const initialState = {
+    topic: {},
+    comments: [],
+    isLoading: false,
+    error: null,
+};
+
 const slice = createSlice({
     name: 'topic',
-    initialState: {
-        topic: {},
-        comments: [],
-        isLoading: false,
-        error: null,
-    },
+    initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(getTopic.pending, (state: IStoreCTX['topic']) => {

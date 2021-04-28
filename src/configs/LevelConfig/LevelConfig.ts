@@ -1,5 +1,5 @@
-import levelOneSongConfig from 'Configs/SongConfig/LevelOneSongConfig';
-import levelOneBoardConfig from 'Configs/BoardConfig/LevelOneBoardConfig';
+import levelOneSongConfig from 'configs/SongConfig/LevelOneSongConfig';
+import levelOneBoardConfig from 'configs/BoardConfig/LevelOneBoardConfig';
 
 const getConfigForLevel = (level: number) => {
     switch (level) {

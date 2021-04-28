@@ -20,6 +20,10 @@ export default class UserThemeService implements BaseService {
     public static getUserTheme = async (userId: number) => {
         const userTheme = await UserTheme.findOne({ where: { userId } });
 
-        return userTheme && userTheme.$get('theme', { attributes: ['id', 'title'] });
+        if (userTheme) {
+            return userTheme.$get('theme', { attributes: ['id', 'title'] });
+        }
+
+        return { id: 1, title: 'dark' };
     };
 }

@@ -47,7 +47,7 @@ services:
         environment:
             PORT: 8000
         privileged: true
-        command: bash -c "cd app &&  npm i && npm run build  && npm run serve"
+        command: bash -c "cd app && npm i && npm run build && npm run start:server"
         volumes:
             - ./:/app
         networks:
@@ -67,8 +67,9 @@ services:
         depends_on:
             - mongo
             - postgres
+            - client
         privileged: true
-        command: bash -c "cd app && npm install -g typescript && npm i && npm run buildback && npm run serveback  && npm run migrate"
+        command: bash -c "cd app && ./wait-for-it.sh client:8000 -s -t 0 -- npm run buildback && npm run initDB && npm run serveback"
         volumes:
             - .:/app
         networks:

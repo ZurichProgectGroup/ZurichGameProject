@@ -2,7 +2,7 @@ import React from 'react';
 import './Register.css';
 import {
     Button, LinkButton, Input,
-} from 'Components';
+} from 'components';
 import type { SecondStepProps } from './types';
 
 const SecondStep = ({

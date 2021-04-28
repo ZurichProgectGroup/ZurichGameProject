@@ -1,19 +1,44 @@
+/* eslint-disable no-param-reassign */
+
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
     authApiInstance,
     userApiInstance,
     yaOauthApiInstance,
-} from 'Api';
-import { StringKeyString } from 'Utils/custom_types';
-import { mapToUser } from 'Utils/mapUser';
+    themeApiInstance,
+} from 'api';
+import { StringKeyString } from 'utils/custom_types';
+import { mapToUser } from 'utils/mapUser';
+import { LoadingStatus } from 'types/common';
+import { ThemeEnum } from 'types/Theme';
+import { IStoreCTX } from 'store/types';
+
+export const getUsersTheme = createAsyncThunk(
+    'account/getUsersTheme',
+    (userId: number) => themeApiInstance.getUsersTheme(userId),
+);
+
+export const getUser = createAsyncThunk(
+    'account/getUser',
+    async (_, { dispatch }) => {
+        const user = await authApiInstance.update();
+
+        if (user) {
+            const { id } = user;
+
+            dispatch(getUsersTheme(id));
+        }
+
+        return user;
+    },
+);
 
 export const login = createAsyncThunk(
     'account/login',
-    async (data: StringKeyString) => {
+    async (data: StringKeyString, { dispatch }) => {
         await authApiInstance.request(data);
-        const user = await authApiInstance.update();
 
-        return user;
+        dispatch(getUser());
     },
 );
 
@@ -26,10 +51,10 @@ export const yaLogin = createAsyncThunk(
 
 export const register = createAsyncThunk(
     'account/register',
-    async (data: StringKeyString) => {
+    async (data: StringKeyString, { dispatch }) => {
         await authApiInstance.create(data);
-        const user = await authApiInstance.update();
-        return user;
+
+        dispatch(getUser());
     },
 );
 
@@ -42,24 +67,28 @@ export const logout = createAsyncThunk(
     },
 );
 
-export const getUser = createAsyncThunk(
-    'account/getUser',
-    async () => {
-        const res = await authApiInstance.update();
-        return res;
+export const setUsersTheme = createAsyncThunk(
+    'account/setUsersTheme',
+    async (themeId: number, { getState }) => {
+        const { account: { user } } = getState() as IStoreCTX;
+
+        if (user) {
+            const { id } = user;
+            await themeApiInstance.setUsersTheme({ themeId, userId: id });
+        }
+
+        return themeId;
     },
 );
 
 export const checkUserOnStart = createAsyncThunk(
     'account/checkUserOnStart',
-    async (data: StringKeyString) => {
+    async (data: StringKeyString, { dispatch }) => {
         if (data.code) {
             await yaOauthApiInstance.update(data);
-            const user = await authApiInstance.update();
-
-            return user;
         }
-        return getUser();
+
+        dispatch(getUser());
     },
 );
 
@@ -89,96 +118,74 @@ export const updateProfile = createAsyncThunk(
     },
 );
 
-enum AccountStatus {
-    idle = 'idle',
-    loading = 'loading',
-    succeeded = 'succeeded',
-    failed = 'failed',
-}
-
-interface AccountState {
-    status: AccountStatus,
-    user?: User,
-}
-
-const accountInitialState: AccountState = {
-    status: AccountStatus.idle,
-    user: undefined,
+export const initialState = {
+    status: LoadingStatus.idle,
+    user: null,
+    theme: { id: ThemeEnum.dark },
 };
 
 const slice = createSlice({
     name: 'account',
-    initialState: accountInitialState,
+    initialState,
     reducers: {
-        loginSuccess: (state, action) => {
-            // eslint-disable-next-line no-param-reassign
-            state.user = mapToUser(action.payload);
-        },
         logoutSuccess: (state) => {
-            // eslint-disable-next-line no-param-reassign
             state.user = null;
         },
         loginError: (state) => {
-            // eslint-disable-next-line no-param-reassign
             state.user = null;
         },
     },
     extraReducers: (builder) => {
         builder.addCase(login.pending, (state/* , action */) => {
-            const newState = state;
-            newState.status = AccountStatus.loading;
+            state.status = LoadingStatus.loading;
         });
         builder.addCase(register.pending, (state/* , action */) => {
-            const newState = state;
-            newState.status = AccountStatus.loading;
+            state.status = LoadingStatus.loading;
         });
         builder.addCase(getUser.pending, (state/* , action */) => {
-            const newState = state;
-            newState.status = AccountStatus.loading;
+            state.status = LoadingStatus.loading;
         });
         builder.addCase(updateProfile.pending, (state/* , action */) => {
-            const newState = state;
-            newState.status = AccountStatus.loading;
+            state.status = LoadingStatus.loading;
         });
-        builder.addCase(login.fulfilled, (state, action) => {
-            const newState = state;
-            newState.status = AccountStatus.succeeded;
-            newState.user = mapToUser(action.payload as UserDTO);
+        builder.addCase(login.fulfilled, (state) => {
+            state.status = LoadingStatus.succeeded;
         });
-        builder.addCase(register.fulfilled, (state, action) => {
-            const newState = state;
-            newState.status = AccountStatus.succeeded;
-            newState.user = mapToUser(action.payload as UserDTO);
+        builder.addCase(logout.fulfilled, (state) => {
+            state.user = null;
+        });
+        builder.addCase(register.fulfilled, (state) => {
+            state.status = LoadingStatus.succeeded;
         });
         builder.addCase(getUser.fulfilled, (state, action) => {
-            const newState = state;
-            newState.status = AccountStatus.succeeded;
-            newState.user = mapToUser(action.payload as UserDTO);
+            state.status = LoadingStatus.succeeded;
+            state.user = mapToUser(action.payload);
+        });
+        builder.addCase(getUsersTheme.fulfilled, (state, action) => {
+            state.theme = action.payload;
+        });
+        builder.addCase(setUsersTheme.fulfilled, (state, action) => {
+            state.theme = { id: action.payload };
         });
         builder.addCase(updateProfile.fulfilled, (state, action) => {
-            const newState = state;
-            newState.status = AccountStatus.succeeded;
-            newState.user = mapToUser(action.payload as UserDTO);
+            state.status = LoadingStatus.succeeded;
+            state.user = mapToUser(action.payload);
         });
         builder.addCase(login.rejected, (state, action) => {
-            const newState = state;
-            newState.status = AccountStatus.failed;
-            newState.user = action.payload;
+            state.status = LoadingStatus.failed;
+            state.user = action.payload;
         });
         builder.addCase(register.rejected, (state, action) => {
-            const newState = state;
-            newState.status = AccountStatus.failed;
-            newState.user = action.payload;
+            state.status = LoadingStatus.failed;
+            state.user = action.payload;
         });
         builder.addCase(getUser.rejected, (state, action) => {
-            const newState = state;
-            newState.status = AccountStatus.failed;
-            newState.user = action.payload;
+            state.status = LoadingStatus.failed;
+            state.user = action.payload;
         });
         builder.addCase(updateProfile.rejected, (state, action) => {
-            const newState = state;
-            newState.status = AccountStatus.failed;
-            newState.user = action.payload;
+            state.status = LoadingStatus.failed;
+            state.user = action.payload;
         });
     },
 });

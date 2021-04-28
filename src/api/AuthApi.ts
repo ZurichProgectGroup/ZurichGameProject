@@ -1,4 +1,4 @@
-import { StringKeyString } from 'Utils/custom_types';
+import { StringKeyString } from 'utils/custom_types';
 import { authTransportInstance } from './TransportInstances';
 
 export default class AuthAPI {
@@ -10,7 +10,7 @@ export default class AuthAPI {
         return authTransportInstance.post('/signin', { data });
     }
 
-    static async update(): Promise<unknown> {
+    static async update(): Promise<User> {
         return authTransportInstance.get('/user');
     }
 
