@@ -6,6 +6,7 @@ import type { Props } from '../../types';
 
 const Board = ({ onComplete, onError }: Props) => {
     const canvas = createRef<HTMLCanvasElement>();
+
     const dispatch = useDispatch();
 
     const handleHit = useCallback(() => {
@@ -22,8 +23,11 @@ const Board = ({ onComplete, onError }: Props) => {
             handleHit,
         );
 
+        canvas!.current!.requestPointerLock();
+
         return () => {
             gameService.stop();
+            document.exitPointerLock();
         };
     });
 
