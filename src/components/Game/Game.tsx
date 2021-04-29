@@ -2,12 +2,14 @@ import React, { useState, useCallback } from 'react';
 import GameStart from 'components/GameStart';
 import GameComplete from 'components/GameComplete';
 import GameBoard from 'components/GameBoard';
+import GameService from 'services/GameService';
 import GameState from './types';
 
 const Game = () => {
     const [gameState, setGameState] = useState(GameState.start);
 
     const onStart = useCallback(() => {
+        GameService.init();
         setGameState(GameState.board);
     }, []);
 
