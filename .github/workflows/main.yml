@@ -31,18 +31,8 @@ jobs:
                 name: id_rsa
                 known_hosts: ${{ secrets.YACLOUD_KNOWN_HOST }}
                 if_key_exists: replace
-            - name: Get SSL keys
-              run: |
-                mkdir -p nginx/ssl
-                echo "$SSL_CRT" > ./nginx/ssl/domain.crt \
-                echo "$SSL_KEY" > ./nginx/ssl/domain.key \
-                echo "$SSL_DH_PEM" > ./nginx/ssl/dhparam.key \
-              env:
-                SSL_CRT: ${{secrets.SSL_CRT}}
-                SSL_KEY: ${{secrets.SSL_KEY}}
-                SSL_DH_PEM: ${{secrets.SSL_DH_PEM}}
             - name: rsync over ssh
-              run: rsync -avz ./ $SSH_LOGIN@$SSH_IP:~/
+              run: rsync -avz --exclude nginx/ssl  --exclude nginx/ssl1 ./ $SSH_LOGIN@$SSH_IP:~/
               env:
                 SSH_LOGIN: ${{secrets.YACLOUD_LOGIN}}
                 SSH_IP: ${{secrets.YACLOUD_IP}}
