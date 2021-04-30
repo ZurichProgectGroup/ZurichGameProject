@@ -18,9 +18,9 @@ const DarkModeToggle = ({ theme }: Props) => {
 
     useEffect(() => {
         if (isLightTheme) {
-            document.documentElement.style.setProperty('filter', 'invert(1) hue-rotate(180deg)');
+            document.documentElement.classList.add('inverted');
         } else {
-            document.documentElement.style.removeProperty('filter');
+            document.documentElement.classList.remove('inverted');
         }
     }, [isLightTheme]);
 
