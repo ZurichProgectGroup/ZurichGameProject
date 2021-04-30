@@ -6,7 +6,7 @@ export const mapToUser = (user: UserDTO): User => ({
     email: user.email,
     phone: user.phone,
     login: user.login,
-    avatar: user.avatar && `https://ya-praktikum.tech${user.avatar}`,
+    avatar: user.avatar && `https://ya-praktikum.tech/api/v2/resources${user.avatar}`,
 });
 
 export const toDTO = (user: User): UserDTO => ({
