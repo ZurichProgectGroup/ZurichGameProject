@@ -74,6 +74,7 @@ services:
             - .:/app
         networks:
           - app-network
+
     nginx:
         image: nginx:mainline-alpine
         container_name: nginx
@@ -84,10 +85,11 @@ services:
         links:
           - client:client
           - backend:backend
-#        command: nginx -V
         volumes:
           - ./nginx:/etc/nginx/conf.d:ro
           - ./nginx/ssl:/etc/nginx/ssl
+          - ./nginx/ssl1:/etc/nginx/ssl1
+          - ./nginx/validation/validation:/etc/nginx/validation
         depends_on:
           - client
           - backend
