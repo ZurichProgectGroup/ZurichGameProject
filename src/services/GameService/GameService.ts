@@ -48,6 +48,13 @@ class GameService {
 
     private audio: HTMLAudioElement | undefined;
 
+    init() {
+        // Safari for MacOs only allows play audio on user click
+        this.audio = new Audio('');
+        this.audio.play();
+        this.audio.pause();
+    }
+
     async start(
         canvas: HTMLCanvasElement,
         onComplete:()=>void,
@@ -104,8 +111,11 @@ class GameService {
             }
         };
         document.addEventListener('keydown', this.keyListener);
-
-        await this.playMusic();
+        try {
+            await this.playMusic();
+        } catch (e) {
+            console.log('not allowed audio');
+        }
         this.loop();
     }
 
