@@ -10,5 +10,5 @@ export default (router: Router) => {
         .get('/:id', [protectedRoute], CommentsController.getReplies)
         .delete('/:id', [protectedRoute], CommentsController.delete);
 
-    router.use('/comments', commentsRouter);
+    router.use('/api/comments', commentsRouter);
 };
